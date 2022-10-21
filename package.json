@@ -4,6 +4,9 @@
   "main": "index.js",
   "license": "MIT",
   "dependencies": {
-    "gini-ss": "^0.2.1"
+    "figures": "^5.0.0",
+    "gini-ss": "^0.2.1",
+    "hyperswarm": "^4.3.5",
+    "random-tree-names": "^3.0.5"
   }
 }
