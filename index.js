@@ -75,7 +75,7 @@ function join(topic){
         `)
         // // check if length of scooters <= 7
         // if(scooters < 7 ){
-          const peerName = ob.patp(String(Math.floor(rand() * 2**32)))
+          const peerName = ob.patp(String(Math.floor(Math.random() * 2**32)))
         //   console.log(`Planting a flower from peer: ${peerName}`)
         //   scooters ++
         // } else {
@@ -88,7 +88,7 @@ function join(topic){
         conn.on('close', () => {
             // clearInterval(timer)
             const idx = connections.indexOf(conn)
-            console.log(`closing connection: {idx}`)
+            console.log(`closing connection: ${idx}`)
             if (idx === -1) return
             connections.splice(idx, 1)
         })
@@ -106,16 +106,18 @@ function join(topic){
 
 function removePeers(){
     // Randomly destroy connections during the chaos period.
-    const REMOVAL_NUM = Math.min(10 - connections.length, Math.floor(Math.random() * 10))
-
+    const REMOVAL_NUM = Math.min(connections.length, Math.floor(Math.random() * 2))
+    console.log(`Removing Peers: ${REMOVAL_NUM}`)
     for (let i = 0; i < REMOVAL_NUM; i++) {
         const timeout = Math.floor(rand() * 12600) // Leave a lot of room at the end for reestablishing connections (timeouts)
         setTimeout(() => {
           if (!connections.length) return
           const idx = Math.floor(rand() * connections.length)
           const conn = connections[idx]
-          conn.destroy()
-          scooters--;
+          connections.splice(idx, 1)
+
+          // conn.destroy()
+          // scooters--;
         }, timeout)
     }
 }
@@ -123,7 +125,6 @@ function addPeers(){
     const ADD_NUM = Math.min(10 - connections.length, Math.floor(Math.random() * 10))
     console.log(`Adding ${ADD_NUM} peers`)
     for(let i = 0; i < ADD_NUM; i++){
-        console.log('adding a peer')
         join(k)
     }
 }
@@ -164,7 +165,7 @@ function discount(population_, connections, max){
     }
 }
 
-// createSwarm()
+addPeers()
 
 setInterval(async () => {
   console.log(`Connections ${connections.length}`)
@@ -173,7 +174,7 @@ setInterval(async () => {
   // const connections = bots + scooters
   // 
   addPeers()
-  // removePeers()
+  removePeers()
 
   jiggle(population)
   discount(population, connections.length, 2**4)
@@ -197,4 +198,4 @@ setInterval(async () => {
   }
 
   process.stdout.write(giniSS(Object.values(population)) + '\n');
-}, 17000);
+}, 22000);
