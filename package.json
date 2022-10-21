@@ -4,6 +4,8 @@
   "main": "index.js",
   "license": "MIT",
   "dependencies": {
+    "@fluencelabs/fluence": "^0.23.4",
+    "@fluencelabs/fluence-network-environment": "^1.0.13",
     "@hyperswarm/testnet": "^3.1.0",
     "figures": "^5.0.0",
     "gini-ss": "^0.2.1",
