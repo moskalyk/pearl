@@ -2,7 +2,7 @@
 # yarn lockfile v1
 
 
-"@hyperswarm/dht@^6.0.1":
+"@hyperswarm/dht@^6.0.0", "@hyperswarm/dht@^6.0.1":
   version "6.3.0"
   resolved "https://registry.yarnpkg.com/@hyperswarm/dht/-/dht-6.3.0.tgz#6ca5220f9be630bc302372c07114be9b868b2a1f"
   integrity sha512-3gUSSV/iBLIzFZ8O7fiEM+ABB0rb9GH6o5HyabQIK39+0SGOkGPbnrcmqH9aq+GuLTgp3CnnHsXo775NFY/W0Q==
@@ -38,6 +38,13 @@
     streamx "^2.10.2"
     timeout-refresh "^2.0.0"
 
+"@hyperswarm/testnet@^3.1.0":
+  version "3.1.0"
+  resolved "https://registry.yarnpkg.com/@hyperswarm/testnet/-/testnet-3.1.0.tgz#ed5a7f120f2c1e96c4843f0c39898a19322a4b04"
+  integrity sha512-2xI5eV4DNYrArpzMVibMGV8lxmG347084kqnkjcqgFDM+TECOwqZnPxvKd/m8gxWAAYWLoZuObtQUuLn1VQp6w==
+  dependencies:
+    "@hyperswarm/dht" "^6.0.0"
+
 ansi-regex@^2.0.0:
   version "2.1.1"
   resolved "https://registry.yarnpkg.com/ansi-regex/-/ansi-regex-2.1.1.tgz#c3b33ab5ee360d86e0e628f0468ae7ef27d654df"
@@ -63,6 +70,11 @@ blake2b@^2.1.1:
   dependencies:
     blake2b-wasm "^2.4.0"
     nanoassert "^2.0.0"
+
+bn.js@^4.11.8:
+  version "4.12.0"
+  resolved "https://registry.yarnpkg.com/bn.js/-/bn.js-4.12.0.tgz#775b3f278efbb9718eec7361f483fb36fbbfea88"
+  integrity sha512-c98Bf3tPniI+scsdk237ku1Dc3ujXQTSgyiPUDEOe7tRkhrqridvh8klBv0HCEso1OLOYcHuCv/cS6DNxKH+ZA==
 
 bogon@^1.0.0:
   version "1.1.0"
@@ -318,6 +330,23 @@ load-json-file@^1.0.0:
     pinkie-promise "^2.0.0"
     strip-bom "^2.0.0"
 
+lodash.chunk@^4.2.0:
+  version "4.2.0"
+  resolved "https://registry.yarnpkg.com/lodash.chunk/-/lodash.chunk-4.2.0.tgz#66e5ce1f76ed27b4303d8c6512e8d1216e8106bc"
+  integrity sha512-ZzydJKfUHJwHa+hF5X66zLFCBrWn5GeF28OHEr4WVWtNDXlQ/IjWKPBiikqKo2ne0+v6JgCgJ0GzJp8k8bHC7w==
+
+lodash.isequal@^4.5.0:
+  version "4.5.0"
+  resolved "https://registry.yarnpkg.com/lodash.isequal/-/lodash.isequal-4.5.0.tgz#415c4478f2bcc30120c22ce10ed3226f7d3e18e0"
+  integrity sha512-pDo3lu8Jhfjqls6GkMgpahsF9kCyayhgykjyLMNFTKWrpVdAQtYyB4muAMWozBB4ig/dtWAmsMxLEI8wuz+DYQ==
+
+math-random-seed@^2.0.0:
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/math-random-seed/-/math-random-seed-2.0.0.tgz#2c5dabb9d477162bf321d42e485da0704ad90e2e"
+  integrity sha512-QJ7/oqB5MExXjyJCUC8tQGIHo9GL2vB9YY3i16qZCige9SQBJrQTtF/eBG8rFZU/xQxLKIbzeYeOuRYuzFrncg==
+  dependencies:
+    random-bytes-seed "^1.0.3"
+
 nanoassert@^1.1.0:
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/nanoassert/-/nanoassert-1.1.0.tgz#4f3152e09540fde28c76f44b19bbcd1d5a42478d"
@@ -433,6 +462,11 @@ queue-tick@^1.0.0:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/queue-tick/-/queue-tick-1.0.1.tgz#f6f07ac82c1fd60f82e098b417a80e52f1f4c142"
   integrity sha512-kJt5qhMxoszgU/62PLP1CJytzd2NKetjSRnyuj31fDd3Rlcz3fzlFdFLD1SItunPwyqEOkca6GbV612BWfaBag==
+
+random-bytes-seed@^1.0.3:
+  version "1.0.3"
+  resolved "https://registry.yarnpkg.com/random-bytes-seed/-/random-bytes-seed-1.0.3.tgz#126f1201dba2ec70cd0784f94a810396cad24a15"
+  integrity sha512-O+eniMt8Sj2iAn2q1x5VEirS/XvbtwYcXNDbOAcRtGN+OhC48cmzS5ksf9qEHRVKC1I8A4qzjucNVElddofB0A==
 
 random-tree-names@^3.0.5:
   version "3.0.5"
@@ -700,6 +734,15 @@ unordered-set@^2.0.1:
   version "2.0.1"
   resolved "https://registry.yarnpkg.com/unordered-set/-/unordered-set-2.0.1.tgz#4cd0fe27b8814bcf5d6073e5f0966ec7a50841e6"
   integrity sha512-eUmNTPzdx+q/WvOHW0bgGYLWvWHNT3PTKEQLg0MAQhc0AHASHVHoP/9YytYd4RBVariqno/mEUhVZN98CmD7bg==
+
+urbit-ob@^5.0.1:
+  version "5.0.1"
+  resolved "https://registry.yarnpkg.com/urbit-ob/-/urbit-ob-5.0.1.tgz#4338580e883bcf80af91777890572f8e5001ceda"
+  integrity sha512-qGNAwu87XNkW3g8ah4fUwmh2EKXtsdhEbyEiE5qX4Op17rhLH3HSkvu8g9z+MhqX51Uz9sf8ktvqJj/IRwETIQ==
+  dependencies:
+    bn.js "^4.11.8"
+    lodash.chunk "^4.2.0"
+    lodash.isequal "^4.5.0"
 
 validate-npm-package-license@^3.0.1:
   version "3.0.4"

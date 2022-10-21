@@ -4,21 +4,23 @@ const treeNames = require('random-tree-names')
 
 let connections = 0;
 const swarm = new hyperswarm()
-const topic = 'birch'
+const INTERSECTION = 'PEARL_STREET'
 
 const k = crypto.createHash('sha256')
-  .update(topic)
+  .update(INTERSECTION)
   .digest()
 
-console.log(`Joining hyperswarm under the sha256(${topic}) topic`, k.toString('hex'))
+console.log(`Joining hyperswarm under the sha256(${INTERSECTION}) topic`, k.toString('hex'))
 
 swarm.on('peer', function (peer) {
   console.log('New peer!', Peer(peer))
   connections++
 })
 
-for(let i = 0; i < 17; i++ ){
+for(let i = 0; i < 10; i++ ){
 	swarm.join(k, {
+	  client: true, 
+	  server: false,
 	  announce: true,
 	  lookup: true
 	}, (err) => {
