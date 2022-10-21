@@ -64,7 +64,7 @@ setInterval(function() {
   const connections = 2**8
 
   jiggle(population)
-  discount(population, connections, 2**8)
+  // discount(population, connections, 2**8)
 
   // get gini
   const gini = giniSS(Object.values(population))
