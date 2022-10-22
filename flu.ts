@@ -13,8 +13,9 @@ async function randomShutdown(connections: FluencePeer[], connectionShutdowns: n
 	return connections
 }
 
-(async () => {
-	console.log(krasnodar.length)
+export async function returnsConnectionsSourcedFromMatterDirectRan(){
+	// const angularVelocity = BravaisGroup * velocityOfChangeOfAlgorithm / --> taking fromRatiedSetsOfNumeric --> FractalLukso
+	// timerRate -> transacationSpeed in variance
 	const connections = []
 
 	for(let i = 0; i < 10; i++) {
@@ -27,5 +28,23 @@ async function randomShutdown(connections: FluencePeer[], connectionShutdowns: n
 	}
 
 	await randomShutdown(connections, Math.floor(connections.length)*.2)
-	console.log(`Connected with ${connections.length} # of peers`)
+
+	return connections
+}
+
+(async () => {
+	// console.log(krasnodar.length)
+	// const connections = []
+
+	// for(let i = 0; i < 10; i++) {
+	// 	const flu = new FluencePeer()
+	// 	await flu.start({
+	// 		connectTo: krasnodar[i]
+	// 	})
+	// 	console.log(`PeerId: ${flu.getStatus().peerId}`)
+	// 	connections.push(flu)
+	// }
+
+	// await randomShutdown(connections, Math.floor(connections.length)*.2)
+	// console.log(`Connected with ${connections.length} # of peers`)
 })()
