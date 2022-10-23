@@ -106,6 +106,20 @@ function App() {
   const [chironCircle, setChironCircle] = useState('lightgrey')
   const [nibiruCircle, setNibiruCircle] = useState('lightgrey')
 
+  // planetUnits
+  const [mercuryUnit, setMercuryUnit] = useState(null)
+  const [venusUnit, setVenusUnit] = useState(null)
+  const [earthUnit, setEarthUnit] = useState(null)
+  const [marsUnit, setMarsUnit] = useState(null)
+  const [maldekUnit, setMaldekUnit] = useState(null)
+  const [jupiterUnit, setJupiterUnit] = useState(null)
+  const [saturnUnit, setSaturnUnit] = useState(null)
+  const [uranusUnit, setUranusUnit] = useState(null)
+  const [neptuneUnit, setNeptuneUnit] = useState(null)
+  const [plutoUnit, setPlutoUnit] = useState(null)
+  const [chironUnit, setChironUnit] = useState(null)
+  const [nibiruUnit, setNibiruUnit] = useState(null)
+
   function clear() {
     setMercury('white')
     setVenus('white')
@@ -132,12 +146,27 @@ function App() {
     setPlutoCircle('lightgrey')
     setChironCircle('lightgrey')
     setNibiruCircle('lightgrey')
+
+    setMercuryUnit(null)
+    setVenusUnit(null)
+    setEarthUnit(null)
+    setMarsUnit(null)
+    setMaldekUnit(null)
+    setJupiterUnit(null)
+    setSaturnUnit(null)
+    setUranusUnit(null)
+    setNeptuneUnit(null)
+    setPlutoUnit(null)
+    setChironUnit(null)
+    setNibiruUnit(null)
   }
+  const COUNTER = 2000
   useEffect(() => {
     setInterval(() => {
       let ran = Math.floor(Math.random() * 6)
       setNode(ran)
       counter++
+      // ran = 5
       if(counter % 2 == 0){
         clear()
 
@@ -149,78 +178,214 @@ function App() {
             setDeity(`${direction[2].deity} ↔ ${direction[3].deity}`)
             setActivity(`${direction[2].activity} ↔ ${direction[3].activity}`)
 
+            setEarthUnit(
+              <text x="50" y="420" class="small" fill="#ffffff">
+                <animate attributeType="XML" attributeName="fill" values="#ffffff00;#ffffff00;#ffffff00;#000000;#000000;#000000;#000000;#000000;#ffffff00;#ffffff00;" dur="10s" repeatCount="indefinite"/>
+                𓉢 ♁
+              </text>
+            )
+            setMarsUnit(
+              <text x="255" y="420" class="small" fill="#ffffff">
+                <animate attributeType="XML" attributeName="fill" values="#ffffff00;#ffffff00;#ffffff00;#000000;#000000;#000000;#000000;#000000;#ffffff00;#ffffff00;" dur="10s" repeatCount="indefinite"/>
+                𓆣 ♂
+              </text>
+            )
+
             setEarth('yellow')
             setEarthCircle('white')
             setMars('green')
             setMarsCircle('white')
-            setEdge(<rect x="25" y="360" width="290" height="110" rx="50" style={{fill: "rgb(0,0,0)", strokeWidth:"3", stroke: "rgb(0,0,0)"}} />)
+
+            setEdge(
+              <rect x="25" y="360" width="290" height="110" style={{fill: "rgb(0,0,0)", strokeWidth:"3", stroke: "rgb(0,0,0)"}} >
+                <animate
+                attributeName="rx"
+                values="0;50;0"
+                dur="10s"
+                repeatCount="indefinite" />
+              </rect>
+              )
           break;
           case 1:
             setPlanet(`${direction[4].planet} ↔ ${direction[5].planet}`)
             setDeity(`${direction[4].deity} ↔ ${direction[5].deity}`)
             setActivity(`${direction[4].activity} ↔ ${direction[5].activity}`)
 
+            setMaldekUnit(
+              <text x="155" y="345" class="small" fill="#ffffff">
+                <animate attributeType="XML" attributeName="fill" values="#ffffff00;#ffffff00;#ffffff00;#ffffffff;#ffffffff;#ffffffff;#ffffffff;#ffffffff;#ffffff00;#ffffff00;" dur="10s" repeatCount="indefinite"/>
+                𓊝 ◌
+              </text>
+            )
+            setJupiterUnit(
+              <text x="55" y="300" class="small" fill="#ffffff">
+                <animate attributeType="XML" attributeName="fill" values="#ffffff00;#ffffff00;#ffffff00;#ffffffff;#ffffffff;#ffffffff;#ffffffff;#ffffffff;#ffffff00;#ffffff00;" dur="10s" repeatCount="indefinite"/>
+                𓋘 ♃
+              </text>
+            )
+
             setMaldek('blue')
             setMaldekCircle('white')
             setJupiter('black')
             setJupiterCircle('white')
-            setEdge(<rect x="140" y="185" transform="rotate(25 0 0)" rx="50" width="220" height="100" style={{fill: "rgb(0,0,0)", strokeWidth:"3", stroke: "rgb(0,0,0)"}} />)
+
+            setEdge(
+              <rect x="140" y="185" transform="rotate(25 0 0)" rx="50" width="220" height="100" style={{fill: "rgb(0,0,0)", strokeWidth:"3", stroke: "rgb(0,0,0)"}}>
+              <animate
+                attributeName="rx"
+                values="0;50;0"
+                dur="10s"
+                repeatCount="indefinite" />
+              </rect>
+            )
           break;
           case 2:
             setPlanet(`${direction[0].planet} ↔ ${direction[1].planet}`)
             setDeity(`${direction[0].deity} ↔ ${direction[1].deity}`)
             setActivity(`${direction[0].activity} ↔ ${direction[1].activity}`)
 
+            setMercuryUnit(
+              <text x="155" y="535" class="small" fill="#ffffff">
+                <animate attributeType="XML" attributeName="fill" values="#ffffff00;#ffffff00;#ffffff00;#000000;#000000;#000000;#000000;#000000;#ffffff00;#ffffff00;" dur="10s" repeatCount="indefinite"/>
+                𓅠 ☿
+              </text>
+            )
+            setVenusUnit(
+              <text x="155" y="445" class="small" fill="#ffffff">
+                <animate attributeType="XML" attributeName="fill" values="#ffffff00;#ffffff00;#ffffff00;#000000;#000000;#000000;#000000;#000000;#ffffff00;#ffffff00;" dur="10s" repeatCount="indefinite"/>
+                𓋟 ♀
+              </text>
+            )
+
             setMercury('red')
             setMercuryCircle('white')
             setVenus('wheat')
             setVenusCircle('white')
-            setEdge(<rect x="115" y="400" width="110" height="180" rx="50" style={{fill: "rgb(0,0,0)", strokeWidth:"3", stroke: "rgb(0,0,0)"}} />)
+
+            setEdge(
+              <rect x="115" y="400" width="110" height="180" rx="50" style={{fill: "rgb(0,0,0)", strokeWidth:"3", stroke: "rgb(0,0,0)"}}>
+              <animate
+                attributeName="rx"
+                values="0;50;0"
+                dur="10s"
+                repeatCount="indefinite" />
+              </rect>
+            )
           break;
           case 3:
             setPlanet(`${direction[6].planet} ↔ ${direction[7].planet}`)
             setDeity(`${direction[6].deity} ↔ ${direction[7].deity}`)
             setActivity(`${direction[6].activity} ↔ ${direction[7].activity}`)
 
+            setUranusUnit(
+              <text x="155" y="240" class="small" fill="#ffffff">
+                <animate attributeType="XML" attributeName="fill" values="#ffffff00;#ffffff00;#ffffff00;#000000;#000000;#000000;#000000;#000000;#ffffff00;#ffffff00;" dur="10s" repeatCount="indefinite"/>
+                𓆃 ♅
+              </text>
+            )
+            setSaturnUnit(
+              <text x="255" y="295" class="small" fill="#ffffff">
+                <animate attributeType="XML" attributeName="fill" values="#ffffff00;#ffffff00;#ffffff00;#ffffff;#ffffff;#ffffff;#ffffff;#ffffff;#ffffff00;#ffffff00;" dur="10s" repeatCount="indefinite"/>
+                𓇵 ♄
+              </text>
+            )
+
             setUranus('orange')
             setUranusCircle('white')
             setSaturn('purple')
             setSaturnCircle('white')
-            setEdge(<rect x="190" y="100" transform="rotate(25 0 0)" rx="50" width="220" height="100" style={{fill: "rgb(0,0,0)", strokeWidth:"3", stroke: "rgb(0,0,0)"}} />)
+
+            setEdge(
+              <rect x="190" y="100" transform="rotate(25 0 0)" rx="50" width="220" height="100" style={{fill: "rgb(0,0,0)", strokeWidth:"3", stroke: "rgb(0,0,0)"}}>
+              <animate
+                attributeName="rx"
+                values="0;50;0"
+                dur="10s"
+                repeatCount="indefinite" />
+              </rect>
+            )
           break;
           case 4:
             setPlanet(`${direction[8].planet} ↔ ${direction[9].planet}`)
             setDeity(`${direction[8].deity} ↔ ${direction[9].deity}`)
             setActivity(`${direction[8].activity} ↔ ${direction[9].activity}`)
 
+            setNeptuneUnit(
+              <text x="55" y="180" class="small" fill="#ffffff">
+                <animate attributeType="XML" attributeName="fill" values="#ffffff00;#ffffff00;#ffffff00;#000000;#000000;#000000;#000000;#000000;#ffffff00;#ffffff00;" dur="10s" repeatCount="indefinite"/>
+                𓏁 ♆
+              </text>
+            )
+            setPlutoUnit(
+              <text x="255" y="180" class="small" fill="#ffffff">
+                <animate attributeType="XML" attributeName="fill" values="#ffffff00;#ffffff00;#ffffff00;#ffffff;#ffffff;#ffffff;#ffffff;#ffffff;#ffffff00;#ffffff00;" dur="10s" repeatCount="indefinite"/>
+                𓉧 ♇
+              </text>
+            )
+
             setNeptune('lightgrey')
             setNeptuneCircle('white')
             setPluto('darkblue')
             setPlutoCircle('white')
-            setEdge(<rect x="25" y="110" width="290" height="110" rx="50" style={{fill: "rgb(0,0,0)", strokeWidth:"3", stroke: "rgb(0,0,0)"}} />)
+
+            setEdge(
+              <rect x="25" y="110" width="290" height="110" rx="50" style={{fill: "rgb(0,0,0)", strokeWidth:"3", stroke: "rgb(0,0,0)"}}>
+              <animate
+                attributeName="rx"
+                values="0;50;0"
+                dur="10s"
+                repeatCount="indefinite" />
+              </rect>
+            )
           break;
           case 5:
             setPlanet(`${direction[10].planet} ↔ ${direction[11].planet}`)
             setDeity(`${direction[10].deity} ↔ ${direction[11].deity}`)
             setActivity(`${direction[10].activity} ↔ ${direction[11].activity}`)
 
+            setNibiruUnit(
+              <text x="155" y="55" class="small" fill="#ffffff">
+                <animate attributeType="XML" attributeName="fill" values="#ffffff00;#ffffff00;#ffffff00;#000000;#000000;#000000;#000000;#000000;#ffffff00;#ffffff00;" dur="10s" repeatCount="indefinite"/>
+                𓇽 ☄
+              </text>
+            )
+            setChironUnit(
+              <text x="155" y="145" class="small" fill="#ffffff">
+                <animate attributeType="XML" attributeName="fill" values="#ffffff00;#ffffff00;#ffffff00;#000000;#000000;#000000;#000000;#000000;#ffffff00;#ffffff00;" dur="10s" repeatCount="indefinite"/>
+                𓋇 🗝
+              </text>
+            )
+
             setChiron('paleturquoise')
             setChironCircle('white')
             setNibiru('white')
             setNibiruCircle('white')
-            setEdge(<rect x="115" y="5" width="110" height="180" rx="50" style={{fill: "rgb(0,0,0)", strokeWidth:"3", stroke: "rgb(0,0,0)"}} />)
+
+            setEdge(
+              <rect x="115" y="5" width="110" height="180" rx="50" style={{fill: "rgb(0,0,0)", strokeWidth:"3", stroke: "rgb(0,0,0)"}}>
+              <animate
+                attributeName="rx"
+                values="0;50;0"
+                dur="10s"
+                repeatCount="indefinite" />
+              </rect>
+              )
           break;
         }
       }
-    }, 1000)
+    }, COUNTER)
   }, [])
 
   return (
     <div className="App">
       <div style={{marginLeft: "337px"}}>
         <svg x="40" y="0" width="1000" height="600">
-                {edge}
+          {/**/}
+          {edge}
+
+          {/**/}
           <circle cx="170" cy="50" r="40" stroke={nibiruCircle} strokeWidth="4" fill={nibiru} />
+          
           <circle cx="170" cy="140" r="40" stroke={chironCircle} strokeWidth="4" fill={chiron} />
           
            <circle cx="70" cy="170" r="40" stroke={neptuneCircle} strokeWidth="4" fill={neptune} />
@@ -238,9 +403,22 @@ function App() {
            
            <circle cx="170" cy="445" r="40" stroke={venusCircle} strokeWidth="4" fill={venus} />
           <circle cx="170" cy="535" r="40" stroke={mercuryCircle} strokeWidth="4" fill={mercury} />
+
+                    {/**/}
+          {mercuryUnit}
+          {venusUnit}
+          {earthUnit}
+          {marsUnit}
+          {maldekUnit}
+          {jupiterUnit}
+          {saturnUnit}
+          {uranusUnit}
+          {neptuneUnit}
+          {plutoUnit}
+          {chironUnit}
+          {nibiruUnit}
         </svg> 
       </div>
-      {node}
       <br/>
       {planet}
       <br/>
