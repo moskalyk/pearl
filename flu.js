@@ -1,7 +1,10 @@
-import { FluencePeer } from "@fluencelabs/fluence";
-import { krasnodar } from "@fluencelabs/fluence-network-environment";
+const flu =  require("./node_modules/@fluencelabs/fluence/dist/index.js");
+const env =  require("./node_modules/@fluencelabs/fluence-network-environment/dist/index.js")
 
-async function randomShutdown(connections: FluencePeer[], connectionShutdowns: number) {
+const FluencePeer = flu.FluencePeer
+const krasnodar = env.krasnodar
+
+async function randomShutdown(connections, connectionShutdowns) {
 	console.log(`Before Slice: ${connections.length}`)
 	for(let i = 0; i < connectionShutdowns; i++){
 		const rand = Math.floor(Math.random() * connections.length)
@@ -13,7 +16,7 @@ async function randomShutdown(connections: FluencePeer[], connectionShutdowns: n
 	return connections
 }
 
-export async function returnsConnectionsSourcedFromMatterDirectRan(){
+async function returnsConnectionsSourcedFromMatterDirectRan(){
 	// const angularVelocity = BravaisGroup * velocityOfChangeOfAlgorithm / --> taking fromRatiedSetsOfNumeric --> FractalLukso
 	// timerRate -> transacationSpeed in variance
 	const connections = []
@@ -32,19 +35,4 @@ export async function returnsConnectionsSourcedFromMatterDirectRan(){
 	return connections
 }
 
-(async () => {
-	// console.log(krasnodar.length)
-	// const connections = []
-
-	// for(let i = 0; i < 10; i++) {
-	// 	const flu = new FluencePeer()
-	// 	await flu.start({
-	// 		connectTo: krasnodar[i]
-	// 	})
-	// 	console.log(`PeerId: ${flu.getStatus().peerId}`)
-	// 	connections.push(flu)
-	// }
-
-	// await randomShutdown(connections, Math.floor(connections.length)*.2)
-	// console.log(`Connected with ${connections.length} # of peers`)
-})()
+module.exports = returnsConnectionsSourcedFromMatterDirectRan;

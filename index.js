@@ -32,7 +32,7 @@ let scooters = 0
 // reverse
 // import { returnsConnectionsSourcedFromMatterDirectRan } from './flu'
 let i = 0;
-const swarm = new hyperswarm()
+// const swarm = new hyperswarm()
 const INTERSECTION = 'PEARL_STREET'
 
 const k = crypto.createHash('sha256')

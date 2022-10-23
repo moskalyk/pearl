@@ -2,9 +2,9 @@ const giniSS = require('gini-ss');
 const treeNames = require('random-tree-names')
 const ob = require('urbit-ob')
 const hyperswarm = require('hyperswarm')
-const crypto = require('crypto')
 const random = require('math-random-seed')
 const rand = random('6')
+const returnsConnectionsSourcedFromMatterDirectRan = require('./flu');
 const population = {
     1: 100,
     2: 100,
@@ -30,109 +30,11 @@ let connections = []
 let bots = 0
 let scooters = 0
 // reverse
-import { returnsConnectionsSourcedFromMatterDirectRan } from './flu'
 let i = 0;
-// const swarm = new hyperswarm()
+
 const INTERSECTION = 'PEARL_STREET'
 
-// const k = crypto.createHash('sha256')
-//   .update(INTERSECTION)
-//   .digest()
-
-// function Peer (peer) {
-//   return peer && `${peer.host}:${peer.port}`
-// }
-
-function join(){
-    returnsConnectionsSourcedFromMatterDirectRan()
-
-    // swarm.join(topic, {
-    //   announce: true,
-    //   lookup: true
-    // }, (err) => {
-    //   if (err) console.error(figures.warning, 'Error while testing for connectivity', err)
-
-    //   var holepunchable = swarm.holepunchable()
-    //   if (holepunchable) console.log('Your network is hole-punchable!')
-
-    //   console.log('Waiting for connections...')
-    // })
-    // swarm.on('connection', function (conn, info) {
-    //   connections.push(conn)
-    //     // connections++
-    //     const {
-    //         priority,
-    //         status,
-    //         retries,
-    //         peer,
-    //         client
-    //     } = info
-    //         console.log('new connection!', `
-    //         priority: ${priority}
-    //         status: ${status}
-    //         retries: ${retries}
-    //         client: ${client}
-    //         peer: ${!peer ? peer : `
-    //           ${inspect(peer, { indentationLvl: 4 }).slice(2, -2)}
-    //           `}
-    //     `)
-    //     // // check if length of scooters <= 7
-    //     // if(scooters < 7 ){
-    //       const peerName = ob.patp(String(Math.floor(Math.random() * 2**32)))
-    //     //   console.log(`Planting a flower from peer: ${peerName}`)
-    //     //   scooters ++
-    //     // } else {
-    //     // // check if length of bots <= 3
-    //     //   const treeSprouting = treeNames.random('en')
-    //     //   console.log(`Sprouting a robo-tree from peer: ${treeSprouting}`)
-    //     conn.write(peerName)
-    //     // }
-    //     conn.on('data', (data) => console.log(data.toString()))
-    //     conn.on('close', () => {
-    //         // clearInterval(timer)
-    //         const idx = connections.indexOf(conn)
-    //         console.log(`closing connection: ${idx}`)
-    //         if (idx === -1) return
-    //         connections.splice(idx, 1)
-    //     })
-    // })
-}
-// function createSwarm(){
-//     swarm.on('peer', function (peer) {
-//       console.log('New peer!', Peer(peer))
-//     })
-    
-//     swarm.on('disconnection', function (socket, info) {
-//       console.log('Connection has been dropped', Peer(info.peer))
-//     })
-// }
-
-// function removePeers(){
-//     // Randomly destroy connections during the chaos period.
-//     const REMOVAL_NUM = Math.min(connections.length, Math.floor(Math.random() * 2))
-//     console.log(`Removing Peers: ${REMOVAL_NUM}`)
-//     for (let i = 0; i < REMOVAL_NUM; i++) {
-//         const timeout = Math.floor(rand() * 12600) // Leave a lot of room at the end for reestablishing connections (timeouts)
-//         setTimeout(() => {
-//           if (!connections.length) return
-//           const idx = Math.floor(rand() * connections.length)
-//           const conn = connections[idx]
-//           connections.splice(idx, 1)
-
-//           // conn.destroy()
-//           // scooters--;
-//         }, timeout)
-//     }
-// }
-// function addPeers(){
-//     const ADD_NUM = Math.min(10 - connections.length, Math.floor(Math.random() * 10))
-//     console.log(`Adding ${ADD_NUM} peers`)
-//     for(let i = 0; i < ADD_NUM; i++){
-//         join(k)
-//     }
-// }
-
-function jiggle(population_: any){
+function wiggle(population_: any){
     for(let i = 1; i <= Object.values(population_).length; i++){
         if(Math.random() > 0.5) {
             population_[i] = population_[i] * 1.034
@@ -168,39 +70,49 @@ function discount(population_: any, connections: any, max: number){
     }
 }
 
-// addPeers()
-// let connections = []
-
 setInterval(async () => {
-  console.log(`Connections ${connections.length}`)
-  // get number of connections from flu
-  // const connections = 2**8
-  // const connections = bots + scooters
-  // 
-  // addPeers()
-  connections = await returnsConnectionsSourcedFromMatterDirectRan()
-  // removePeers()
+    console.log(`Connections ${connections.length}`)
+    let bls = (await import("./node_modules/@chainsafe/bls/lib/blst-native/index.js")).default
+    console.log(bls)
+    // get number of connections from flu
+    // const connections = 2**8
+    // const connections = bots + scooters
+    const secretKey = bls.SecretKey.fromKeygen();
+    const publicKey = secretKey.toPublicKey();
+    const message = new Uint8Array(32);
 
-  jiggle(population)
-  discount(population, connections.length, 2**4)
+    const signature = secretKey.sign(message);
+    console.log("Is valid: ", signature.verify(publicKey, message));
 
-  // get gini
-  const gini = giniSS(Object.values(population))
-  const tresh = .002
+    // functional interface
+    const sk = secretKey.toBytes();
+    const pk = bls.secretKeyToPublicKey(sk);
+    const sig = bls.sign(sk, message);
+    console.log("Is valid: ", bls.verify(pk, message, sig)); 
+  
+    connections = await returnsConnectionsSourcedFromMatterDirectRan()
 
-  if(gini > 0.001 && gini < tresh){
+
+    wiggle(population)
+    discount(population, connections.length, 2**4)
+
+    // get gini
+    const gini = giniSS(Object.values(population))
+    const tresh = .002
+
+    if(gini > 0.001 && gini < tresh){
       console.log(discounts[0])
-  }else if(gini > tresh && gini < tresh*2){
+    }else if(gini > tresh && gini < tresh*2){
       console.log(discounts[1])
-  }else if(gini > tresh*2 && gini < tresh*3){
+    }else if(gini > tresh*2 && gini < tresh*3){
       console.log(discounts[2])
-  }else if(gini > tresh*3&& gini < tresh*4){
+    }else if(gini > tresh*3&& gini < tresh*4){
       console.log(discounts[3])
-  }else if(gini > tresh*4 && gini < tresh*5){
+    }else if(gini > tresh*4 && gini < tresh*5){
       console.log(discounts[4])
-  }else if(gini > tresh*5){
+    }else if(gini > tresh*5){
       console.log(discounts[5])
-  }
+    }
 
-  process.stdout.write(giniSS(Object.values(population)) + '\n');
+    process.stdout.write(giniSS(Object.values(population)) + '\n');
 }, 12600);
