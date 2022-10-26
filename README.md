@@ -155,4 +155,79 @@ var vectors = [
 0xad0f68c511d4408be8236f3604b6744f84f0b477a34ea1f2a73711ab9c5d87b26d2b96f1d9209ddbfa6e6f46e8d738aa14274807c7060022a8b978ec00379679f4b442f71427e898b7aa67d9d1263d369482ec96e3d9278c4567b73de6f0fd1b
 ```
 
+## horo
+
+```js
+const {useState, useEffect} from 'reaction'
+const horo = {
+  1: 'yellow',
+  6: 'pink',
+  11: 'black',
+  4: 'red',
+  9: 'orange',
+  2: 'green',
+  7: 'paleblue',
+  12: 'red',
+  5: 'white',
+  10: 'pink',
+  3: 'maroon',
+  8: 'darkblue',
+}
+
+let tik = 12
+let counter = 0;
+
+setInterval(() => {
+    const pearlTaken = pk.getValue(getDataPearl().fromTreeHash().digest())
+    counter++
+    sections.push(<span class="section", id={`block-${nonce}'}></span>)
+        if(counter %  60*1000*5*12 == 0){
+           tik++
+           sections.push(<span class="section forked">
+              <span class="lane" style={{color: horo[tik]}}></span>
+              <span class="lane" style={{color: horo[counter]}}></span>
+            </span>
+           )
+           if(tike % 2 == 0) tik = 0
+    })
+    document.getElementById('section').css.color = pearlTaken
+}, 60*1000*5)
+
+const Chain = () => {
+const [sections, setSections] = useState([])
+
+return(
+<div class="path" id="path">
+    {sections}
+  <span class="section"></span>
+  <span class="section"></span>
+  <span class="section forked">
+    <span class="lane"></span>
+    <span class="lane"></span>
+  </span>
+  <span class="section"></span>
+</div>
+)
+```
+
+## visuals
+- kathara
+- clock
+- p2p congestion
+- stream
+
+## lukso erc725
+
+// work in progress
+const vectors = [
+  {
+    name: 'SupportedStandards:LSP3UniversalProfile',
+    key: await tree.update().digest(),
+    keyType: 'Mapping',
+    valueContent: 'false',
+    valueType: 'bytes',
+    IType: 'bool'
+  }
+]
+
 ☼
