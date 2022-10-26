@@ -65,6 +65,7 @@ Connect to a non-invasive brain computer interface, so that notifications can be
 ### Fluence data particle type from memory space fluence nodes as off-chain compute, V.0
 Considering each block of change of the gini coefficent, we produce and alteration to localized matching of spirit.
 
+```rust
 /// Encode an `IType` into a string.
 // TODO: consider change to impl Display
 impl ToString for &IType {
@@ -94,6 +95,7 @@ impl ToString for &IType {
         }
     }
 }
+```
 
 - Phone Device Design
 - Eink 
@@ -130,5 +132,6 @@ bls.sign(a0).sign(b0) =-> {3..n}
 0xad0f68c511d4408be8236f3604b6744f84f0b477a34ea1f2a73711ab9c5d87b26d2b96f1d9209ddbfa6e6f46e8d738aa14274807c7060022a8b978ec00379679f4b442f71427e898b7aa67d9d1263d369482ec96e3d9278c4567b73de6f0fd1b
 
 ```
-
 why do these equal?
+
+☼
