@@ -106,32 +106,53 @@ impl ToString for &IType {
 
 
 ## question
-Context: converted treehash project from node crypto signing to bls signing for signature public aggregation
+Context: converted @socketsupply/treehash project from node crypto signing to @chainsafe/bls signing for signature public aggregation
+TODO: complete a verification step, and a fluence service to forward to an aggregator rust service to write to evm based rpc chain.. Polygon for now
 
 Why do these bls signatures match?
 
 ```js
 
-{
+var vectors = [
+  {
     input: '9',
-},
-{
+  },
+  {
     //on a short input, the result is just the sha256 hash
     input: '1',
-},{
+  },{
     //on a short input, the result is just the sha256 hash
     input: '4',
-},
+  }
+]
 
-bls.sign(a0).sign(b0) =-> {3..n}
+(async () => {
+
+  let bls = (await import("../node_modules/@chainsafe/bls/lib/blst-native/index.js")).default
+  const secretKey = bls.SecretKey.fromKeygen()
+  const trees = []
+  for(var i = 0 ; i < vectors.length; i++) {
+    const tree = new TH(1024*1024, secretKey)
+    const update = await tree.update(vectors[i].input)
+    const digest = await tree.digest()
+    trees.push(digest)
+    if(digest != undefined) console.log(digest.toBytes().toString())
+  }
+  console.log('why arent these different? naive.')
+  console.log(trees[0].toHex() )
+  console.log(trees[1].toHex() )
+  console.log(trees[2].toHex() )
+  console.log(trees[0].toHex() == trees[1].toHex())
+  console.log(trees[1].toHex() == trees[2].toHex())
+})()
+
+::>
 
 0xad0f68c511d4408be8236f3604b6744f84f0b477a34ea1f2a73711ab9c5d87b26d2b96f1d9209ddbfa6e6f46e8d738aa14274807c7060022a8b978ec00379679f4b442f71427e898b7aa67d9d1263d369482ec96e3d9278c4567b73de6f0fd1b
 
 0xad0f68c511d4408be8236f3604b6744f84f0b477a34ea1f2a73711ab9c5d87b26d2b96f1d9209ddbfa6e6f46e8d738aa14274807c7060022a8b978ec00379679f4b442f71427e898b7aa67d9d1263d369482ec96e3d9278c4567b73de6f0fd1b
 
 0xad0f68c511d4408be8236f3604b6744f84f0b477a34ea1f2a73711ab9c5d87b26d2b96f1d9209ddbfa6e6f46e8d738aa14274807c7060022a8b978ec00379679f4b442f71427e898b7aa67d9d1263d369482ec96e3d9278c4567b73de6f0fd1b
-
 ```
-why do these equal?
 
 ☼
