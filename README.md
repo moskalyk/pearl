@@ -65,6 +65,7 @@ Connect to a non-invasive brain computer interface, so that notifications can be
 ### Fluence data particle type from memory space fluence nodes as off-chain compute, V.0
 Considering each block of change of the gini coefficent, we produce and alteration to localized matching of spirit.
 
+```rust
 /// Encode an `IType` into a string.
 // TODO: consider change to impl Display
 impl ToString for &IType {
@@ -94,6 +95,7 @@ impl ToString for &IType {
         }
     }
 }
+```
 
 - Phone Device Design
 - Eink 
