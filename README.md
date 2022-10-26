@@ -103,11 +103,11 @@ impl ToString for &IType {
 - Morse code mapping --> Emojis, making the blind feel again
 - eye scanners for emojis
 - process.std.input(peripheral |= =/ x=(@ list) ++index-f  |-  ?:  (gth @p.wallet reserve) ~& =%  $  reserve (x  snag  tik) ==)
-
+- $100 square footage for quartz crystal window in quad 4 unit, include timber estimation & floorplan. build an integrated user flow.
 
 ## question
-Context: converted @socketsupply/treehash project from node crypto signing to @chainsafe/bls signing for signature public aggregation
-TODO: complete a verification step, and a fluence service to forward to an aggregator rust service to write to evm based rpc chain.. Polygon for now
+* Context: converted @socketsupply/treehash project from node crypto signing to @chainsafe/bls signing for signature public aggregation
+* TODO: complete a verification step with an aqua fluence service to forward to an aggregator rust service to write to evm based rpc chain, Polygon for now
 
 Why do these bls signatures match?
 
