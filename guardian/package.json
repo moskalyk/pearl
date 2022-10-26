@@ -1,0 +1,17 @@
+{
+  "name": "@socketsupply/treehash",
+  "version": "1.0.0",
+  "description": "compute tree hash of a large file / stream",
+  "main": "index.js",
+  "scripts": {
+    "test": "ts-node test/index.ts"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@chainsafe/bls": "^7.1.1"
+  },
+  "devDependencies": {
+    "tape": "^5.6.1"
+  }
+}
