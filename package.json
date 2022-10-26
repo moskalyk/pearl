@@ -9,11 +9,16 @@
     "@fluencelabs/fluence": "^0.23.4",
     "@fluencelabs/fluence-network-environment": "^1.0.13",
     "@hyperswarm/testnet": "^3.1.0",
+    "@solana/buffer-layout": "^4.0.0",
+    "assert": "^2.0.0",
+    "d3": "^7.6.1",
     "figures": "^5.0.0",
     "gini-ss": "^0.2.1",
     "hyperswarm": "^4.3.5",
     "math-random-seed": "^2.0.0",
     "random-tree-names": "^3.0.5",
-    "urbit-ob": "^5.0.1"
+    "react-d3-library": "^1.1.8",
+    "urbit-ob": "^5.0.1",
+    "util": "^0.12.5"
   }
 }
