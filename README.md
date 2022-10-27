@@ -230,4 +230,16 @@ const vectors = [
   }
 ]
 
+![](https://pbs.twimg.com/profile_images/1585260628356243459/TnO0MPEF_400x400.jpg)
+```js
+[
+  'unib8nk','horo',
+  'arbr','pearl'
+]
+```
+# explainer: TODO
+1.
+2. 
+3.
+4.
 ☼
