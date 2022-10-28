@@ -1,0 +1,10 @@
+{
+  "name": "roller",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "dependencies": {
+    "@erc725/erc725.js": "^0.15.0",
+    "web3-utils": "^1.8.0"
+  }
+}
