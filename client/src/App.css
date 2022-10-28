@@ -221,3 +221,73 @@ label {
   aspect-ratio: 1;
   width: 40vw;
 }
+
+.path {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  white-space: nowrap;
+  transform: translate(-50%, -50%);
+}
+.path .section {
+  position: relative;
+  display: inline-block;
+  background: #39c;
+  width: 120px;
+  height: 10px;
+  margin-left: -10px;
+  vertical-align: middle;
+}
+.path .section:before, .path .section:after {
+  width: 20px;
+  height: 20px;
+  border-radius: 100%;
+  position: absolute;
+  top: 50%;
+  margin-top: -10px;
+  z-index: 1;
+  background: #335;
+  box-sizing: border-box;
+  border: 3px solid #bce;
+}
+.path .section:before {
+  content: "";
+  left: -10px;
+}
+.path .section:last-child:after {
+  content: "";
+  right: -10px;
+}
+.path .section.forked {
+  height: 80px;
+  border: none;
+  background: none;
+}
+.path .section.forked:before {
+  left: -5px;
+}
+.path .section.forked .lane {
+  position: relative;
+  display: block;
+  height: 50%;
+  overflow: hidden;
+}
+.path .section.forked .lane:before {
+  content: "";
+  box-sizing: border-box;
+  display: block;
+  position: absolute;
+  left: 0;
+  width: 100%;
+  height: 160px;
+  border: 10px solid white;
+  border-radius: 48px;
+}
+.path .section.forked .lane:first-child:before {
+  border-color: #009587;
+  top: 0;
+}
+.path .section.forked .lane:last-child:before {
+  border-color: #C41061;
+  bottom: 0;
+}

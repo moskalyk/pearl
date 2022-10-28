@@ -768,9 +768,24 @@ function App() {
     setChironUnit(null)
     setNibiruUnit(null)
   }
+  const [sections, setSections] = useState([])
+
   const COUNTER = 2000
   useEffect(() => {
     const exchangeChart = new ExchangeChart('#chart', ExchangeChart.generateSampleData(defaults.numberGeneratorOptions));
+
+    setInterval(() => {
+      // document.getElementById('path').append(<span class="section"></span>)
+      sections.push(<span class="section"></span>)
+      if(counter % 2 == 0){
+        
+      sections.push(<span class="section forked">
+    <span class="lane"></span>
+    <span class="lane"></span>
+  </span>)
+      }
+      setSections([...sections])
+    }, 2000)
 
     setInterval(() => {
       let ran = Math.floor(Math.random() * 6)
@@ -1024,7 +1039,7 @@ function App() {
            <circle cx="170" cy="445" r="40" stroke={venusCircle} strokeWidth="4" fill={venus} />
           <circle cx="170" cy="535" r="40" stroke={mercuryCircle} strokeWidth="4" fill={mercury} />
 
-                    {/**/}
+          {/**/}
           {mercuryUnit}
           {venusUnit}
           {earthUnit}
@@ -1083,6 +1098,16 @@ function App() {
       <button id="generate">Generate New Data</button>
     </div>
     <svg id="app" viewBox="0 0 1000 1000"></svg>
+    <div class="path" id="path">
+    {sections}
+  <span class="section"></span>
+  <span class="section"></span>
+  <span class="section forked">
+    <span class="lane"></span>
+    <span class="lane"></span>
+  </span>
+  <span class="section"></span>
+</div>
     </div>
   );
 }
