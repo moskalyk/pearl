@@ -1,0 +1,1 @@
+{"rustc":1514607520798689563,"features":"[]","target":14995765391736463133,"profile":15155709024791400979,"path":9047368469707895794,"deps":[[11635584824226142660,"rand",false,9406706748965506147]],"local":[{"CheckDepInfo":{"dep_info":"debug/.fingerprint/shamir-309d6a74a623ed4b/dep-lib-shamir"}}],"rustflags":[],"metadata":3215353401940444377,"config":0,"compile_kind":0}
