@@ -17,7 +17,8 @@ fn unilead<'a>(secret_data: &'a SecretData, val: &'a Vec<u8>) -> Result<&'a Vec<
 
 fn main() {
     // let readFromChainValue => shamir secrets with bls signatures.
-    let secret_data = SecretData::with_secret("1,1,0,0,0,0,0,0,0,0,0,0", 5);
+    // let secret_data = SecretData::with_secret("1,1,0,0,0,0,0,0,0,0,0,0", 5);
+    let secret_data = SecretData::with_secret("5☘,2🂡,3🂡,K♥,3◆,6♥,J◆,9◆,Q🂡,K🂡,K☘,10🂡", 5);
 
     let share1 = secret_data.get_share(1);
     let share2 = secret_data.get_share(2);
