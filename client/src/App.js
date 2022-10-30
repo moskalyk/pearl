@@ -2,7 +2,8 @@ import {useEffect, useState} from 'react'
 import logo from './logo.svg';
 import './App.css';
 import * as d3 from 'd3'
-import Blueberry from './blueberry/index.js'
+import Blueberry from './Blueberry/index.js'
+import Aura from './Aura/index.js'
 const giniSS = require('gini-ss');
 let counter = 0
 
@@ -308,11 +309,13 @@ const Kathara = (props) => {
         draw();
       }
 
-      window.addEventListener("resize", function() {
-        (w = canvas.width = window.innerWidth),
-          (h = canvas.height = window.innerHeight);
-        loop();
-      });
+      // window.addEventListener("resize", function() {
+      //   w = canvas.width 
+      //   w = window.innerWidth
+      //   h = canvas.height 
+      //   h = window.innerHeight;
+      //   loop();
+      // });
 
       loop();
       setInterval(loop, 2000 / 60);
@@ -1287,7 +1290,48 @@ function App() {
       {deity}
       <br/>
       {activity}
-      <div style={{marginLeft: "337px", width: '70vw', position: 'absolute'}}>
+      <div style={{marginLeft: "437px", width: '70vw', position: 'absolute'}}>
+        <svg x="40" y="0" width="1200" height="600">
+          {/**/}
+          {edge}
+
+          {/**/}
+          <circle cx="170" cy="50" r="40" stroke={nibiruCircle} strokeWidth="4" fill={nibiru} />
+          
+          <circle cx="170" cy="140" r="40" stroke={chironCircle} strokeWidth="4" fill={chiron} />
+          
+           <circle cx="70" cy="170" r="40" stroke={neptuneCircle} strokeWidth="4" fill={neptune} />
+           <circle cx="270" cy="170" r="40" stroke={plutoCircle} strokeWidth="4" fill={pluto} />
+           
+           <circle cx="170" cy="240" r="40" stroke={uranusCircle} strokeWidth="4" fill={uranus} />
+           <circle cx="265" cy="290" r="40" stroke={saturnCircle} strokeWidth="4" fill={saturn} />
+           
+           <circle cx="70" cy="290" r="40" stroke={jupiterCircle} strokeWidth="4" fill={jupiter} />
+           <circle cx="170" cy="340" r="40" stroke={maldekCircle} strokeWidth="4" fill={maldek} />
+           
+           <circle cx="70" cy="410" r="40" stroke={earthCircle} strokeWidth="4" fill={earth} />
+           <circle cx="270" cy="410" r="40" stroke={marsCircle} strokeWidth="4" fill={mars} />
+           
+           
+           <circle cx="170" cy="445" r="40" stroke={venusCircle} strokeWidth="4" fill={venus} />
+          <circle cx="170" cy="535" r="40" stroke={mercuryCircle} strokeWidth="4" fill={mercury} />
+
+          {/**/}
+          {mercuryUnit}
+          {venusUnit}
+          {earthUnit}
+          {marsUnit}
+          {maldekUnit}
+          {jupiterUnit}
+          {saturnUnit}
+          {uranusUnit}
+          {neptuneUnit}
+          {plutoUnit}
+          {chironUnit}
+          {nibiruUnit}
+        </svg> 
+      </div>
+      <div style={{marginLeft: "637px", width: '70vw', position: 'absolute'}}>
         <svg x="40" y="0" width="1200" height="600">
           {/**/}
           {edge}
@@ -1383,6 +1427,9 @@ function App() {
   <span class="section"></span>
 </div>
   {/*<Blueberry/>*/}
+  {/*<Aura/>*/}
+  <article class="luminous animated" role="img" aria-label="Cartoon of lighted candle" style={{marginLeft: '60px'}}></article>
+  <article class="luminous animated-2" role="img" aria-label="Cartoon of lighted candle" style={{marginLeft: '200px'}}></article>
     </div>
   );
 }
