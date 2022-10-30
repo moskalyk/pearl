@@ -240,6 +240,7 @@ const vectors = [
 ## guardians: galactic tree stewards (gts)
 ![alts](setting_sun.png)
 ![fault tolerance](polarization_hawthorn.png)
+![oak](oak_candles_chains.png)
 
 I'll be home ::> I'll be the wind that pushes me west;
 
