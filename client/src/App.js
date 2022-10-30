@@ -2,6 +2,7 @@ import {useEffect, useState} from 'react'
 import logo from './logo.svg';
 import './App.css';
 import * as d3 from 'd3'
+import Blueberry from './blueberry/index.js'
 const giniSS = require('gini-ss');
 let counter = 0
 
@@ -19,7 +20,7 @@ const population = {
 }
 
 let gini = 0
-let connections = 0
+let connections = 3
 let path=0;
 
 const discounts = {
@@ -34,7 +35,7 @@ const discounts = {
 const defaults = {
   numberGeneratorOptions: {
     dataPoints: 100, // Number of data points to generate
-    interval: 500, // Number of ms between each data point
+    interval: 100, // Number of ms between each data point
     initialValue: 100, // Initial data value
     volatility: .2, // Maximum percent change that can occur
   },
@@ -59,6 +60,276 @@ const defaults = {
   },
 };
 
+const Kathara = (props) => {
+  const [rendered, setRendered] = useState(false)
+  useEffect(() => {
+    if(!rendered){
+    setInterval(() => {
+
+      // window.onload = function() {
+      let c = init("kathara").c,
+        canvas = init("kathara").canvas,
+        w = (canvas.width = window.innerWidth),
+        h = (canvas.height = window.innerHeight);
+      c.fillStyle = "rgba(30,30,30,1)";
+      // c.fillRect(0, 0, w, h);
+      //initiation
+
+      function calcMass(obj) {
+        return 5 * Math.PI * obj.s * obj.s * obj.s / 3;
+      }
+
+      class body {
+        constructor(x, y, s, v, a) {
+          this.a0 = a;
+          this.x = x;
+          this.y = y;
+          this.tail = [{
+            x: this.x,
+            y: this.y
+          }];
+          this.s = s;
+          this.v0 = v;
+          this.v = this.v0;
+          this.ang = this.a0;
+          this.ax = this.v * Math.cos(this.ang);
+          this.ay = this.v * Math.sin(this.ang);
+          this.vx = this.ax;
+          this.vy = this.ay;
+          this.tomove = true;
+        }
+        reset() {
+          // this.x = w/2;
+          // this.y = h/2;
+          // this.tail = [{
+          //   x: this.x,
+          //   y: this.y
+          // }];
+          // this.s = 2;
+          // this.v = this.v0;
+          // this.ang = this.a0;
+          // this.ax = this.v * Math.cos(this.ang);
+          // this.ay = this.v * Math.sin(this.ang);
+          // this.vx = this.ax;
+          // this.vy = this.ay;
+          this.tomove = false;
+        }
+        attract(o) {
+          this.dist = Math.sqrt(
+            Math.pow(o.x - this.x, 2) + Math.pow(o.y - this.y, 2)
+          );
+          if (this.dist > this.s + o.s) {
+            this.f =
+              G *
+              calcMass(this) *
+              calcMass(o) /
+              (Math.pow(o.x - this.x, 2) + Math.pow(o.y - this.y, 2));
+            this.ang = Math.atan2(o.y - this.y, o.x - this.x);
+          } else {
+            this.reset();
+          }
+          this.addForce(this.f, this.ang);
+        }
+        move() {
+          this.ax *= 0.9991;
+          this.ay *= 0.9991;
+
+          this.vx += this.ax * t;
+          this.vy += this.ay * t;
+
+          this.vx *= 0.9991;
+          this.vy *= 0.9991;
+
+          this.x += this.vx * t;
+          this.y += this.vy * t;
+
+          this.tail.push({
+            x: this.x,
+            y: this.y
+          });
+
+          // if (this.tail.length > 400) {
+          //   this.tail.splice(0, 1);
+          // }
+
+          this.ax = 0;
+          this.ay = 0;
+
+          // if (this.x > w || this.x < 0 || this.y > h || this.y < 0) {
+          //   this.reset();
+          // }
+        }
+        addForce(f, a) {
+
+          this.ax += f * Math.cos(a);
+          this.ay += f * Math.sin(a);
+        }
+        show() {
+          if(this.tomove){
+            this.move();
+            c.beginPath();
+            c.arc(this.x, this.y, this.s, 0, 2*Math.PI);
+            c.fillStyle = "rgba(255,255,255,0.75)";
+            c.fill();
+          }
+          this.len = this.tail.length;
+          c.beginPath();
+          for (let k = 0; k < this.len; k++) {
+            c.lineTo(this.tail[k].x, this.tail[k].y);
+          }
+          c.lineWidth = 0.2;
+          c.strokeStyle = "rgba(0,0,0,0.75)";
+          c.stroke();
+        }
+      }
+
+      let universe = [],
+        i = 0,
+        G = 6.7 * Math.pow(10,1),
+        t = 0.01,
+        atractors = [],
+        n = connections,
+        num = 20,
+        r0 = 100;
+
+      // for (let j = 0; j < 0; j++) {
+      //   atractors.push({
+      //     x: Math.random() * w,
+      //     y: Math.random() * h,
+      //     s: Math.random() * 10 + 5
+      //   });
+      // }
+      
+      for (let j = 0; j < n; j++) {
+        atractors.push({
+          x: w/2+r0*Math.cos(j*2*Math.PI/n),
+          y: h/2+r0*Math.sin(j*2*Math.PI/n),
+          s: 10.2
+        });
+      }
+
+      // for (i = 0; i < num; i++) {
+      //   universe.push(new body(1, i * h / num+h/(2*num), 2, 300, 0));
+      // }
+      
+      for (i = 0; i < num; i++) {
+        universe.push(new body(w/2, h/2, 2, 300, i*2*Math.PI/num+Math.PI/num));
+      }
+      const horo = {
+        1: 'yellow',
+        6: 'pink',
+        11: 'black',
+        4: 'red',
+        9: 'orange',
+        2: 'green',
+        7: 'paleblue',
+        12: 'red',
+        5: 'grey',
+        10: 'pink',
+        3: 'maroon',
+        8: 'darkblue',
+      }
+      
+      function draw() {
+        //animation
+        
+        for(let k = 0; k < 1; k++){
+        
+        for (let i = 0; i < num; i++) {
+          for (let j = 0; j < atractors.length; j++) {
+            universe[i].attract(atractors[j]);
+          }
+        }
+
+        for (let j = 0; j < atractors.length; j++) {
+          c.beginPath();
+          c.arc(atractors[j].x, atractors[j].y, atractors[j].s, 0, 2 * Math.PI);
+          c.fillStyle = Object.values(horo)[j];
+          c.fill();
+        }
+
+        for (let i = 0; i < num; i++) {
+          if (atractors.length == 0) {
+            universe[i].move();
+          }
+          universe[i].show();
+        }
+          
+        }
+        
+      }
+
+      let mouse = {};
+      let last_mouse = {};
+
+      canvas.addEventListener(
+        "mousemove",
+        function(e) {
+          last_mouse.x = mouse.x;
+          last_mouse.y = mouse.y;
+
+          mouse.x = e.pageX - this.offsetLeft;
+          mouse.y = e.pageY - this.offsetTop;
+        },
+        false
+      );
+
+      canvas.addEventListener(
+        "click",
+        function(e) {
+          atractors.push({ x: mouse.x, y: mouse.y, s: Math.random() * 10 + 5 });
+        },
+        false
+      );
+
+      function init(elemid) {
+        let canvas = document.getElementById(elemid),
+          c = canvas.getContext("2d");
+        return { c: c, canvas: canvas };
+      }
+
+      window.requestAnimFrame = function() {
+        return (
+          window.requestAnimationFrame ||
+          window.webkitRequestAnimationFrame ||
+          window.mozRequestAnimationFrame ||
+          window.oRequestAnimationFrame ||
+          window.msRequestAnimationFrame ||
+          function(callback) {
+            window.setTimeout(callback);
+          }
+        );
+      };
+
+      function loop() {
+        window.requestAnimFrame(loop);
+        c.fillStyle = "rgba(255,255,255,1)";
+        c.fillRect(0, 0, w, h);
+        draw();
+      }
+
+      window.addEventListener("resize", function() {
+        (w = canvas.width = window.innerWidth),
+          (h = canvas.height = window.innerHeight);
+        loop();
+      });
+
+      loop();
+      setInterval(loop, 2000 / 60);
+    // };
+
+      // setRendered(true)
+      if(rendered == false){
+        setRendered(true)
+      } else{
+        setRendered(false)
+        document.getElementById('kathara').remove()
+      }
+    }, 4000)
+    }
+  }, [rendered])
+  return(<canvas id="kathara"></canvas>)
+}
 // Exchange Rate Line Chart class
 // @param {string} [el] ID selector for chart
 // @param {arr} [data] Sample data
@@ -356,7 +627,7 @@ class ExchangeChart {
       this.tickerInterval = setInterval(() => {
         this.tickData(this.data);
       }, this.numberGeneratorOptions.interval);
-    }, 1000);
+    }, 6000);
   }
 
   // Progresses data and updates chart
@@ -431,7 +702,6 @@ class ExchangeChart {
   // @param {obj} [options] Generator options
   // @returns {float} Next value
   static progressValue(data, options) {
-    connections = Math.floor(Math.random() * 16);
     console.log(`connections: ${connections}`)
     const max = 2**12
     const total = options.dataPoints;
@@ -775,9 +1045,12 @@ function App() {
     const exchangeChart = new ExchangeChart('#chart', ExchangeChart.generateSampleData(defaults.numberGeneratorOptions));
 
     setInterval(() => {
+      connections = Math.floor(Math.random() * 16);
+
       // document.getElementById('path').append(<span class="section"></span>)
       sections.push(<span class="section"></span>)
       if(counter % 2 == 0){
+        console.log('HELLO?')
         
       sections.push(<span class="section forked">
     <span class="lane"></span>
@@ -1006,6 +1279,7 @@ function App() {
 
   return (
     <div className="App">
+      <Kathara connections={connections}/>
             <br/>
       <br/>
       {planet}
@@ -1108,6 +1382,7 @@ function App() {
   </span>
   <span class="section"></span>
 </div>
+  {/*<Blueberry/>*/}
     </div>
   );
 }
