@@ -230,6 +230,8 @@ const vectors = [
   }
 ]
 
+![bay](bayesian.png)
+
 ![](https://pbs.twimg.com/profile_images/1585260628356243459/TnO0MPEF_400x400.jpg)
 ```js
 [
@@ -237,6 +239,8 @@ const vectors = [
   'arbr','pearl'
 ]
 ```
+
+![assemble](assemble.png)
 ## guardians: galactic tree stewards (gts)
 ![alts](setting_sun.png)
 ![fault tolerance](polarization_hawthorn.png)
