@@ -246,7 +246,7 @@ const vectors = [
 ![fault tolerance](polarization_hawthorn.png)
 ![oak](oak_candles_chains.png)
 
-I'll be home ::> I'll be the wind that pushes me west;
+I'll be home ::> It'll be the wind that pushes us west, from pure reads;
 
 # explainer: TODO
 1.
