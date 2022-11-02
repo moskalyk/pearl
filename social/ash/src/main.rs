@@ -5,6 +5,8 @@
 //   +Add<Output=Self>+Div<Output=Self> {}
 
 use random::{Source,default as rand};
+use tensor_rs::tensor_impl::gen_tensor::*;
+use std::process::Command;
 
 // use serde_json::{Result, Value};
 
@@ -253,6 +255,7 @@ impl fmt::Display for Data {
     }
 }
 enum Version { Version1, Version2 }
+pub const PI: f64 = 3.14159265358979323846264338327950288f64;
 
 struct Point {
     x: f64,
@@ -275,6 +278,11 @@ impl Point {
         Point { x: x, y: y }
     }
 
+    // fn to_orbit(degrees: u32) -> {
+    //     // var degrees = 45;
+    //     let radians = degrees * (PI / 180);
+
+    // }
 }
 
 impl fmt::Display for Point {
@@ -304,20 +312,33 @@ fn main() {
 
     println!("{}", n);
     println!("{}", s);
-    let mut r = rand().seed([13,12]);
-    let size = 4;
+    let mut r = rand().seed([6,20]);
+    // println!("{:?}", orbit::apply_rotation(1.0,2.0,3.0));
+
+    let m1 = GenTensor::<f64>::new_raw(&vec![0.; 3*5*2], &vec![3,5,2]);
+    let m1 = GenTensor::<f64>::new_raw(&vec![0.; 3*5*2], &vec![3,5,2]);
+    // print!("{:?}", m1.stride());
+    let size = 20;
     // let mut inserts: Vec<u8> = (0..size).map(|_| {
 
     for i in 0..size {
+        let mut child = Command::new("sleep").arg("5").spawn().unwrap();
+        let _result = child.wait().unwrap();
     // for(i in ..size){
         // let db = DB::new()
-        println!("{}", Point::new(3.0, 4.0));
+        // println!("{}", Point::new(3.0, 4.0));
     // }/
         let xmin: f32 = r.read::<f32>()*2.0-1.0;
         let xmax: f32 = xmin + r.read::<f32>().powf(64.0)*(1.0-xmin);
-        let ymin: f64 = r.read::<f64>()*2.0-1.0;
-        let ymax: f64 = ymin + r.read::<f64>().powf(64.0)*(1.0-ymin);
+        let ymin: f32 = r.read::<f32>()*2.0-1.0;
+        let ymax: f32 = ymin + r.read::<f32>().powf(64.0)*(1.0-ymin);
         let time: f32 = r.read::<f32>()*1000.0;
+
+        let orbit = tensor_rs::quaternion::Quaternion::new(xmin,xmax,ymin,ymax);
+        println!("{:?}", orbit);
+        println!("{:?}", tensor_rs::quaternion::Quaternion::new(time,time,time,time));
+
+        println!("{:?}", tensor_rs::quaternion::Quaternion::dot(&orbit, &tensor_rs::quaternion::Quaternion::new(time,time,time,time)));
         // let value: u32 = r.read::<f32>()*1000.0;
         // println!("{:?}, {:?}, {:?}, {:?}, {:?}, ", xmin, xmax, ymin, ymax, time);
         // let point = (

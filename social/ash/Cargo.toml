@@ -7,3 +7,4 @@ edition = "2021"
 
 [dependencies]
 random = "0.12.2"
+tensor-rs="0.5.9"
