@@ -1426,7 +1426,7 @@ function App() {
   </span>
   <span class="section"></span>
 </div>
-  {/*<Blueberry/>*/}
+  {<Blueberry/>}
   {/*<Aura/>*/}
   <article class="luminous animated" role="img" aria-label="Cartoon of lighted candle" style={{marginLeft: '60px'}}></article>
   <article class="luminous animated-2" role="img" aria-label="Cartoon of lighted candle" style={{marginLeft: '200px'}}></article>

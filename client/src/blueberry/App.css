@@ -1,0 +1,60 @@
+.app {
+  text-align: left;
+}
+
+.app-logo {
+  height: 42px;
+  margin-left: 10px;
+  margin-top: 12px;
+  margin-right: 10px;
+}
+
+.row {
+  align-items: left;
+}
+
+.redButton {
+  background-color:#F74343;
+  border-radius:28px;
+  border:1px solid #F74343;
+  cursor:pointer;
+  color:#ffffff;
+  font-family: HelveticaNeue-Light;
+  font-size:17px;
+  padding:16px 31px;
+  margin: 5px;
+  marker-left: 10px;
+  text-decoration:none;
+}
+
+.blueButton {
+  background-color:#43B8F7;
+  border-radius:28px;
+  border:1px solid #43B8F7;
+  cursor:pointer;
+  color:#ffffff;
+  font-family: HelveticaNeue-Light;
+  font-size:17px;
+  padding:16px 31px;
+  margin: 5px;
+  marker-left: 10px;
+  text-decoration:none;
+}
+
+.greenButton {
+  background-color:#7FE683;
+  border-radius:28px;
+  border:1px solid #7FE683;
+  cursor:pointer;
+  color:#ffffff;
+  font-family: HelveticaNeue-Light;
+  font-size:17px;
+  padding:16px 31px;
+  margin: 5px;
+  marker-left: 10px;
+  text-decoration:none;
+}
+
+.blueButton:hover {
+  background-color:#53BEF7;
+}

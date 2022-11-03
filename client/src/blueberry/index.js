@@ -915,60 +915,7 @@ function Blueberry() {
           <button className="blueButton" onClick={set_Blue}>Blue LED</button>
       </div>
       <div>
-          <Line data={chartData10mm} width={400} height={80} options={{
-            responsive: true,
-            spanGaps: true, 
-            animation: false,
-            hover: false,
-            elements: {
-                  point:{
-                      radius: 0
-                  }
-            },
-            scales: {
-              yAxes: [
-                {
-                  gridLines: {
-                    display: true
-                  }
-                }
-              ],
-              xAxes: [
-                {
-                  gridLines: {
-                    display: true
-                  }
-                }
-              ]
-            }
-          }} />
-          <Line data={chartData27mm} width={400} height={80} options={{
-            responsive: true,
-            spanGaps: true,
-            animation: false,
-            hover: false,
-            elements: {
-                  point:{
-                      radius: 0
-                  }
-            }, 
-            scales: {
-              yAxes: [
-                {
-                  gridLines: {
-                    display: true
-                  }
-                }
-              ],
-              xAxes: [
-                {
-                  gridLines: {
-                    display: true
-                  }
-                }
-              ]
-            }
-          }} />
+
       </div>
       {!supportsBluetooth &&
         <p>This browser doesn't support the Web Bluetooth API</p>
