@@ -4,6 +4,7 @@ import './App.css';
 import * as d3 from 'd3'
 import Blueberry from './Blueberry/index.js'
 import Aura from './Aura/index.js'
+import { observer, inject } from "mobx-react";
 const giniSS = require('gini-ss');
 let counter = 0
 
@@ -64,6 +65,9 @@ const defaults = {
 const Kathara = (props) => {
   const [rendered, setRendered] = useState(false)
   useEffect(() => {
+    // refreshChart10mm();
+    // refreshChart27mm();
+
     if(!rendered){
     setInterval(() => {
 
@@ -948,8 +952,11 @@ function renderPoints(numOfPoints = 16, size = 1000) {
   })
 }
 
-function App() {
+// @inject( "store" )
+// @observer
+function App () {
 
+  const [led, setLed] = useState(null)
   // visual
   const [node, setNode] = useState(null)
   const [edge, setEdge] = useState(null)
@@ -1048,6 +1055,9 @@ function App() {
     const exchangeChart = new ExchangeChart('#chart', ExchangeChart.generateSampleData(defaults.numberGeneratorOptions));
 
     setInterval(() => {
+      // const e_x = Math.random()
+      
+
       connections = Math.floor(Math.random() * 16);
 
       // document.getElementById('path').append(<span class="section"></span>)
@@ -1081,7 +1091,7 @@ function App() {
             setPlanet(`${direction[2].planet} ↔ ${direction[3].planet}`)
             setDeity(`${direction[2].deity} ↔ ${direction[3].deity}`)
             setActivity(`${direction[2].activity} ↔ ${direction[3].activity}`)
-
+            setLed(0.25)
             setEarthUnit(
               <text x="50" y="420" class="small" fill="#ffffff">
                 <animate attributeType="XML" attributeName="fill" values="#ffffff00;#ffffff00;#ffffff00;#000000;#000000;#000000;#000000;#000000;#ffffff00;#ffffff00;" dur="10s" repeatCount="indefinite"/>
@@ -1114,7 +1124,7 @@ function App() {
             setPlanet(`${direction[4].planet} ↔ ${direction[5].planet}`)
             setDeity(`${direction[4].deity} ↔ ${direction[5].deity}`)
             setActivity(`${direction[4].activity} ↔ ${direction[5].activity}`)
-
+            setLed(0.8)
             setMaldekUnit(
               <text x="155" y="345" class="small" fill="#ffffff">
                 <animate attributeType="XML" attributeName="fill" values="#ffffff00;#ffffff00;#ffffff00;#ffffffff;#ffffffff;#ffffffff;#ffffffff;#ffffffff;#ffffff00;#ffffff00;" dur="10s" repeatCount="indefinite"/>
@@ -1147,6 +1157,7 @@ function App() {
             setPlanet(`${direction[0].planet} ↔ ${direction[1].planet}`)
             setDeity(`${direction[0].deity} ↔ ${direction[1].deity}`)
             setActivity(`${direction[0].activity} ↔ ${direction[1].activity}`)
+            setLed(0.1)
 
             setMercuryUnit(
               <text x="155" y="535" class="small" fill="#ffffff">
@@ -1180,6 +1191,7 @@ function App() {
             setPlanet(`${direction[6].planet} ↔ ${direction[7].planet}`)
             setDeity(`${direction[6].deity} ↔ ${direction[7].deity}`)
             setActivity(`${direction[6].activity} ↔ ${direction[7].activity}`)
+            setLed(1)
 
             setUranusUnit(
               <text x="155" y="240" class="small" fill="#ffffff">
@@ -1213,6 +1225,7 @@ function App() {
             setPlanet(`${direction[8].planet} ↔ ${direction[9].planet}`)
             setDeity(`${direction[8].deity} ↔ ${direction[9].deity}`)
             setActivity(`${direction[8].activity} ↔ ${direction[9].activity}`)
+            setLed(1)
 
             setNeptuneUnit(
               <text x="55" y="180" class="small" fill="#ffffff">
@@ -1246,7 +1259,8 @@ function App() {
             setPlanet(`${direction[10].planet} ↔ ${direction[11].planet}`)
             setDeity(`${direction[10].deity} ↔ ${direction[11].deity}`)
             setActivity(`${direction[10].activity} ↔ ${direction[11].activity}`)
-
+            setLed(1)
+            
             setNibiruUnit(
               <text x="155" y="55" class="small" fill="#ffffff">
                 <animate attributeType="XML" attributeName="fill" values="#ffffff00;#ffffff00;#ffffff00;#000000;#000000;#000000;#000000;#000000;#ffffff00;#ffffff00;" dur="10s" repeatCount="indefinite"/>
@@ -1426,7 +1440,7 @@ function App() {
   </span>
   <span class="section"></span>
 </div>
-  {<Blueberry/>}
+  <Blueberry led={led} setLed={setLed}/>
   {/*<Aura/>*/}
   <article class="luminous animated" role="img" aria-label="Cartoon of lighted candle" style={{marginLeft: '60px'}}></article>
   <article class="luminous animated-2" role="img" aria-label="Cartoon of lighted candle" style={{marginLeft: '200px'}}></article>

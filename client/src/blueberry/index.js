@@ -49,7 +49,7 @@ let arrayData27mm = [];
 var windowLength = 102;
 var writeCharacteristic = ""; 
 
-function Blueberry() {
+function Blueberry(props) {
 
   var labelsData = [];
   var labelsData10mm = [];
@@ -893,9 +893,16 @@ function Blueberry() {
     if (navigator.bluetooth) {
       setSupportsBluetooth(true);
     }
+    if(props.led < 0.3 && props.led > 0){
+      set_Red()
+    }else if(props.led > 0.3 && props.led < .60){
+      set_Green()
+    } else {
+      set_Blue()
+    }
     refreshChart10mm();
     refreshChart27mm();
-  }, []);
+  }, [props.led]);
 
   return (
     <div className="app">
