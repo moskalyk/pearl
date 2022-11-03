@@ -248,11 +248,11 @@ const vectors = [
 
 I'll be home ::> It'll be the wind that pushes us west, from pure reads;
 
-## resistance
+## pearl resistance
 ![resistance](resistance.png)
-Voltage = # of pearl operators navigating with a quaterion dot product applied by: Resistance{0..3} X Current{0..3} from 4 people operating 
-Resistance = Applied Kathara Node {1..12}
-Current = Superfluid money stream {0..1} where payment is a function of joy over time.
+* Voltage = # of pearl operators navigating with a quaterion dot product applied by: Resistance{0..3} X Current{0..3} from 4 people operating 
+* Resistance = Applied Kathara Node {1..12}
+* Current = Superfluid money stream {0..1} where payment is a function of joy over time.
 
 Each resistance capacitor can be claimed as an NFT on the pearl diagram, to show not only on pearl, what binry system they're operating on, but a windowed time slice into their recent checkins.
 
