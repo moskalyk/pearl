@@ -1,10 +1,19 @@
 const giniSS = require('gini-ss');
 const treeNames = require('random-tree-names')
 const ob = require('urbit-ob')
-const hyperswarm = require('hyperswarm')
+// const hyperswarm = require('hyperswarm')
 const crypto = require('crypto')
 const random = require('math-random-seed')
 const rand = random('6')
+const ethglobal = { 
+  1: 111,
+  2: 333,
+  3: 77,
+  4: 77,
+  5: 77,
+  6: 77,
+  7: 77,
+}
 const population = {
     1: 100,
     2: 100,
@@ -17,6 +26,8 @@ const population = {
     9: 100,
     10: 100,
 }
+
+
 const discounts = {
       0: '🃟_COFFEE_MEAL',
       1: '⚚_TAXIS_MEDECINE_GROCERIES',
@@ -35,66 +46,66 @@ let i = 0;
 // const swarm = new hyperswarm()
 const INTERSECTION = 'PEARL_STREET'
 
-const k = crypto.createHash('sha256')
-  .update(INTERSECTION)
-  .digest()
+// const k = crypto.createHash('sha256')
+//   .update(INTERSECTION)
+//   .digest()
 
 function Peer (peer) {
   return peer && `${peer.host}:${peer.port}`
 }
 
-function join(topic){
-    swarm.join(topic, {
-      announce: true,
-      lookup: true
-    }, (err) => {
-      if (err) console.error(figures.warning, 'Error while testing for connectivity', err)
+// function join(topic){
+//     swarm.join(topic, {
+//       announce: true,
+//       lookup: true
+//     }, (err) => {
+//       if (err) console.error(figures.warning, 'Error while testing for connectivity', err)
 
-      var holepunchable = swarm.holepunchable()
-      if (holepunchable) console.log('Your network is hole-punchable!')
+//       var holepunchable = swarm.holepunchable()
+//       if (holepunchable) console.log('Your network is hole-punchable!')
 
-      console.log('Waiting for connections...')
-    })
-    swarm.on('connection', function (conn, info) {
-      connections.push(conn)
-        // connections++
-        const {
-            priority,
-            status,
-            retries,
-            peer,
-            client
-        } = info
-            console.log('new connection!', `
-            priority: ${priority}
-            status: ${status}
-            retries: ${retries}
-            client: ${client}
-            peer: ${!peer ? peer : `
-              ${inspect(peer, { indentationLvl: 4 }).slice(2, -2)}
-              `}
-        `)
-        // // check if length of scooters <= 7
-        // if(scooters < 7 ){
-          const peerName = ob.patp(String(Math.floor(Math.random() * 2**32)))
-        //   console.log(`Planting a flower from peer: ${peerName}`)
-        //   scooters ++
-        // } else {
-        // // check if length of bots <= 3
-        //   const treeSprouting = treeNames.random('en')
-        //   console.log(`Sprouting a robo-tree from peer: ${treeSprouting}`)
-        conn.write(peerName)
-        // }
-        conn.on('data', (data) => console.log(data.toString()))
-        conn.on('close', () => {
-            // clearInterval(timer)
-            const idx = connections.indexOf(conn)
-            console.log(`closing connection: ${idx}`)
-            if (idx === -1) return
-            connections.splice(idx, 1)
-        })
-    })
-}
+//       console.log('Waiting for connections...')
+//     })
+//     swarm.on('connection', function (conn, info) {
+//       connections.push(conn)
+//         // connections++
+//         const {
+//             priority,
+//             status,
+//             retries,
+//             peer,
+//             client
+//         } = info
+//             console.log('new connection!', `
+//             priority: ${priority}
+//             status: ${status}
+//             retries: ${retries}
+//             client: ${client}
+//             peer: ${!peer ? peer : `
+//               ${inspect(peer, { indentationLvl: 4 }).slice(2, -2)}
+//               `}
+//         `)
+//         // // check if length of scooters <= 7
+//         // if(scooters < 7 ){
+//           const peerName = ob.patp(String(Math.floor(Math.random() * 2**32)))
+//         //   console.log(`Planting a flower from peer: ${peerName}`)
+//         //   scooters ++
+//         // } else {
+//         // // check if length of bots <= 3
+//         //   const treeSprouting = treeNames.random('en')
+//         //   console.log(`Sprouting a robo-tree from peer: ${treeSprouting}`)
+//         conn.write(peerName)
+//         // }
+//         conn.on('data', (data) => console.log(data.toString()))
+//         conn.on('close', () => {
+//             // clearInterval(timer)
+//             const idx = connections.indexOf(conn)
+//             console.log(`closing connection: ${idx}`)
+//             if (idx === -1) return
+//             connections.splice(idx, 1)
+//         })
+//     })
+// }
 // function createSwarm(){
 //     swarm.on('peer', function (peer) {
 //       console.log('New peer!', Peer(peer))
@@ -105,30 +116,30 @@ function join(topic){
 //     })
 // }
 
-function removePeers(){
-    // Randomly destroy connections during the chaos period.
-    const REMOVAL_NUM = Math.min(connections.length, Math.floor(Math.random() * 2))
-    console.log(`Removing Peers: ${REMOVAL_NUM}`)
-    for (let i = 0; i < REMOVAL_NUM; i++) {
-        const timeout = Math.floor(rand() * 12600) // Leave a lot of room at the end for reestablishing connections (timeouts)
-        setTimeout(() => {
-          if (!connections.length) return
-          const idx = Math.floor(rand() * connections.length)
-          const conn = connections[idx]
-          connections.splice(idx, 1)
+// function removePeers(){
+//     // Randomly destroy connections during the chaos period.
+//     const REMOVAL_NUM = Math.min(connections.length, Math.floor(Math.random() * 2))
+//     console.log(`Removing Peers: ${REMOVAL_NUM}`)
+//     for (let i = 0; i < REMOVAL_NUM; i++) {
+//         const timeout = Math.floor(rand() * 12600) // Leave a lot of room at the end for reestablishing connections (timeouts)
+//         setTimeout(() => {
+//           if (!connections.length) return
+//           const idx = Math.floor(rand() * connections.length)
+//           const conn = connections[idx]
+//           connections.splice(idx, 1)
 
-          // conn.destroy()
-          // scooters--;
-        }, timeout)
-    }
-}
-function addPeers(){
-    const ADD_NUM = Math.min(10 - connections.length, Math.floor(Math.random() * 10))
-    console.log(`Adding ${ADD_NUM} peers`)
-    for(let i = 0; i < ADD_NUM; i++){
-        join(k)
-    }
-}
+//           // conn.destroy()
+//           // scooters--;
+//         }, timeout)
+//     }
+// }
+// function addPeers(){
+//     const ADD_NUM = Math.min(10 - connections.length, Math.floor(Math.random() * 10))
+//     console.log(`Adding ${ADD_NUM} peers`)
+//     for(let i = 0; i < ADD_NUM; i++){
+//         join(k)
+//     }
+// }
 
 function jiggle(population_){
     for(let i = 1; i <= Object.values(population_).length; i++){
@@ -166,7 +177,7 @@ function discount(population_, connections, max){
     }
 }
 
-addPeers()
+// addPeers()
 
 setInterval(async () => {
   console.log(`Connections ${connections.length}`)
@@ -174,14 +185,16 @@ setInterval(async () => {
   // const connections = 2**8
   // const connections = bots + scooters
   // 
-  addPeers()
-  removePeers()
+  // addPeers()
+  // removePeers()
 
-  jiggle(population)
-  discount(population, connections.length, 2**4)
+  // jiggle(population)
+  // discount(population, connections.length, 2**4)
 
   // get gini
   const gini = giniSS(Object.values(population))
+  const giniEthglobal = giniSS(Object.values(ethglobal))
+  console.log(giniEthglobal)
   const tresh = .002
 
   if(gini > 0.001 && gini < tresh){
