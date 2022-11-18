@@ -1,12 +1,10 @@
 // SPDX-License-Identifier: UNLICENSED
 pragma solidity ^0.8.9;
-import '@chainlink/contracts/src/v0.8/ChainlinkClient.sol';
-import '@chainlink/contracts/src/v0.8/ConfirmedOwner.sol';
 
 // Uncomment this line to use console.log
 // import "hardhat/console.sol";
 
-contract Pearl is ChainlinkClient {
+contract Pearl {
 
     uint public unlockTime;
     address payable public owner;
@@ -94,7 +92,8 @@ contract Pearl is ChainlinkClient {
 
         // nullifierHashes[nullifierHash] = true;
 
-        return msg.value * pearl
+        //P = VI current = reed, current = eth, resistance = levels
+        return reed * msg.value * pearl
     }
 
     function withdraw() public {

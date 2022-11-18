@@ -1,5 +1,5 @@
 import { observable, action, configure, computed, runInAction, extendObservable, flow } from "mobx";
-
+import {StreamStore} from './StreamStore.js'
 
 export default class RootStore {
     config;
