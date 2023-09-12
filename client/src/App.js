@@ -963,145 +963,142 @@ function App () {
   const [init, setInit] = useState(false)
 
   const COUNTER = 1000
-  useEffect(() => {
-    let interval;
-      interval = async () => {
-        console.log(treeState)
-        counter++
-        // ran = 5
-        if(counter){
-          clear()
-          console.log('timer', counter)
-          // operator[(21).toString()]()
-          const res = await fetch(`${'http://216.128.185.237:4000'}/live`)
-          const json = await res.json()
-          const tvls = Object.values(json.tvl).sort().filter((el) => el > 0)
-          // Sort the object by values
-          const sortedObject = Object.fromEntries(
-            Object.entries(json.tvl)
-              .filter(([key, value]) => value !== 0) // Remove elements with a value of 0
-              .filter(([key, value]) => value > 0)
-              .sort((a, b) => b[1] - a[1]) // Sort in descending order of values
-          );
+  const interval = async () => {
+    console.log(treeState)
+    counter++
+    // ran = 5
+      clear()
+      console.log('timer', counter)
+      const res = await fetch(`${'http://216.128.185.237:4000'}/live`)
+      const json = await res.json()
+      const tvls = Object.values(json.tvl).sort().filter((el) => el > 0)
+      // Sort the object by values
+      const sortedObject = Object.fromEntries(
+        Object.entries(json.tvl)
+          .filter(([key, value]) => value !== 0) // Remove elements with a value of 0
+          .filter(([key, value]) => value > 0)
+          .sort((a, b) => b[1] - a[1]) // Sort in descending order of values
+      );
 
-          console.log(sortedObject);
-          const topKey = Object.keys(sortedObject)[0]
-          
-          if(treeState == 'PRISM'){
-            switch(topKey){
-              case 'str':
-                operator[(18).toString()]()
-                break;
-              case 'agi':
-                operator[(9).toString()]()
-                break;
-              case 'wis':
-                operator[(12).toString()]()
-                break;
-              case 'hrt':
-                operator[(21).toString()]()
-                break;
-              case 'int':
-                operator[(5).toString()]()
-                break;
-            }
-          } else if(treeState == 'DUAL') {
-            const maxCombination = findMaxTVLCombination(json.tvl);
-            console.log(maxCombination); // Output: "int_hrt"
-            switch(maxCombination){
-              case 'agi_str':
-                operator[(13).toString()]()
-                break;
-              case 'wis_str':
-                operator[(19).toString()]()
-                break;
-              case 'hrt_str':
-                operator[(7).toString()]()
-                break;
-              case 'int_str':
-                operator[(14).toString()]()
-                break;
-              case 'agi_wis':
-                operator[(20).toString()]()
-                break;
-              case 'agi_hrt':
-                operator[(17).toString()]()
-                break;
-              case 'agi_int':
-                operator[(11).toString()]()
-                break;
-              case 'hrt_wis':
-                operator[(6).toString()]()
-                break;
-              case 'int_wis':
-                operator[(10).toString()]()
-                break;
-              case 'hrt_int':
-                operator[(15).toString()]()
-                break;
-            }
-          } else {
-            const sortedObject = Object.fromEntries(
-              Object.entries(json.tvl_elements)
-                .filter(([key, value]) => value !== 0) // Remove elements with a value of 0
-                .filter(([key, value]) => value > 0)
-                .sort((a, b) => b[1] - a[1]) // Sort in descending order of values
-            );
+      console.log(sortedObject);
+      const topKey = Object.keys(sortedObject)[0]
+      
+      if(treeState == 'PRISM'){
+        switch(topKey){
+          case 'str':
+            operator[(18).toString()]()
+            break;
+          case 'agi':
+            operator[(9).toString()]()
+            break;
+          case 'wis':
+            operator[(12).toString()]()
+            break;
+          case 'hrt':
+            operator[(21).toString()]()
+            break;
+          case 'int':
+            operator[(5).toString()]()
+            break;
+        }
+      } else if(treeState == 'DUAL') {
+        const maxCombination = findMaxTVLCombination(json.tvl);
+        console.log(maxCombination); // Output: "int_hrt"
+        switch(maxCombination){
+          case 'agi_str':
+            operator[(13).toString()]()
+            break;
+          case 'wis_str':
+            operator[(19).toString()]()
+            break;
+          case 'hrt_str':
+            operator[(7).toString()]()
+            break;
+          case 'int_str':
+            operator[(14).toString()]()
+            break;
+          case 'agi_wis':
+            operator[(20).toString()]()
+            break;
+          case 'agi_hrt':
+            operator[(17).toString()]()
+            break;
+          case 'agi_int':
+            operator[(11).toString()]()
+            break;
+          case 'hrt_wis':
+            operator[(6).toString()]()
+            break;
+          case 'int_wis':
+            operator[(10).toString()]()
+            break;
+          case 'hrt_int':
+            operator[(15).toString()]()
+            break;
+        }
+      } else {
+        const sortedObject = Object.fromEntries(
+          Object.entries(json.tvl_elements)
+            .filter(([key, value]) => value !== 0) // Remove elements with a value of 0
+            .filter(([key, value]) => value > 0)
+            .sort((a, b) => b[1] - a[1]) // Sort in descending order of values
+        );
 
-            const topKey = Object.keys(sortedObject)[0]
-            switch(topKey){
-              case 'air':
-                operator[(1).toString()]()
-                break;
-              case 'dark':
-                operator[(16).toString()]()
-                break;
-              case 'earth':
-                operator[(2).toString()]()
-                break;
-              case 'fire':
-                operator[(1).toString()]()
-                break;
-              case 'light':
-                operator[(4).toString()]()
-                break;
-              case 'metal':
-                operator[(3).toString()]()
-                break;
-              case 'mind':
-                operator[(8).toString()]()
-                break;
-              case 'water':
-                operator[(0).toString()]()
-                break;
-            }
-          }
-
-          function findMaxTVLCombination(tvlObject) {
-            let maxCombination = "";
-            let maxValue = -Infinity;
-          
-            const keys = Object.keys(tvlObject);
-          
-            for (let i = 0; i < keys.length; i++) {
-              for (let j = i + 1; j < keys.length; j++) {
-                const key1 = keys[i];
-                const key2 = keys[j];
-                const combinationKeys = [key1, key2].sort(); // Sort keys alphabetically
-                const combinationValue = tvlObject[combinationKeys[0]] + tvlObject[combinationKeys[1]];
-          
-                if (combinationValue > maxValue) {
-                  maxValue = combinationValue;
-                  maxCombination = combinationKeys.join("_");
-                }
-              }
-            }
-          
-            return maxCombination;
-          } 
+        const topKey = Object.keys(sortedObject)[0]
+        switch(topKey){
+          case 'air':
+            operator[(1).toString()]()
+            break;
+          case 'dark':
+            operator[(16).toString()]()
+            break;
+          case 'earth':
+            operator[(2).toString()]()
+            break;
+          case 'fire':
+            operator[(1).toString()]()
+            break;
+          case 'light':
+            operator[(4).toString()]()
+            break;
+          case 'metal':
+            operator[(3).toString()]()
+            break;
+          case 'mind':
+            operator[(8).toString()]()
+            break;
+          case 'water':
+            operator[(0).toString()]()
+            break;
         }
       }
-    return () => {interval()}
+
+      function findMaxTVLCombination(tvlObject) {
+        let maxCombination = "";
+        let maxValue = -Infinity;
+      
+        const keys = Object.keys(tvlObject);
+      
+        for (let i = 0; i < keys.length; i++) {
+          for (let j = i + 1; j < keys.length; j++) {
+            const key1 = keys[i];
+            const key2 = keys[j];
+            const combinationKeys = [key1, key2].sort(); // Sort keys alphabetically
+            const combinationValue = tvlObject[combinationKeys[0]] + tvlObject[combinationKeys[1]];
+      
+            if (combinationValue > maxValue) {
+              maxValue = combinationValue;
+              maxCombination = combinationKeys.join("_");
+            }
+          }
+        }
+      
+        return maxCombination;
+      } 
+  }
+  useEffect(() => {
+      interval()
+    // return () => {interval()}
   }, [init, treeState, led])
 
   return (
