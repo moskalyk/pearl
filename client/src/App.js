@@ -2,10 +2,10 @@ import {useEffect, useState} from 'react'
 import logo from './logo.svg';
 import './App.css';
 import * as d3 from 'd3'
-import Blueberry from './Blueberry/index.js'
+// import Blueberry from './Blueberry/index.js'
 import Aura from './Aura/index.js'
 import { observer, inject } from "mobx-react";
-const giniSS = require('gini-ss');
+// const giniSS = require('gini-ss');
 let counter = 0
 
 const population = {
@@ -337,589 +337,6 @@ const Kathara = (props) => {
   }, [rendered])
   return(<canvas id="kathara"></canvas>)
 }
-// Exchange Rate Line Chart class
-// @param {string} [el] ID selector for chart
-// @param {arr} [data] Sample data
-class ExchangeChart {
-  constructor(
-    selector = '',
-    data = [100,1000,100]
-  ) {
-    Object.assign(this, defaults);
-
-    this.selector = selector;
-    this.el = document.getElementById(this.selector.replace('#', ''));
-    this.data = data;
-    this.resizeTimer = null
-
-    if (
-      !this.selector.length ||
-      !this.data.length ||
-      !this.el
-    ) {
-      if (!this.selector.length) {
-        console.log('Error: No target element specified');
-      }
-
-      if (!this.el) {
-        console.log('Error: Target element not found');
-      }
-
-      if (!this.data.length) {
-        console.log('Error: No data provided');
-      }
-
-      return;
-    }
-
-    this.ranges = {};
-
-    this.buildChart();
-  }
-
-  buildChart() {
-    this.setEvents();
-    this.setChartDimensions();
-    this.setRanges();
-    this.defineLine();
-    this.initialiseChart();
-    this.renderData(this.data);
-
-    if (this.ticker.enable) {
-      this.startTicker();
-    }
-  }
-
-  setEvents() {
-    window.addEventListener('resize', (e) => {
-      e.preventDefault();
-      
-      clearTimeout(this.resizeTimer);
-
-      this.resizeTimer = setTimeout(() => {
-        clearInterval(this.tickerInterval);
-        clearTimeout(this.tickerTimeout);
-
-        this.setChartDimensions();
-
-        if (this.ticker.enable) {
-          this.startTicker();
-        }
-      }, 200);
-    });
-    
-    this.button = document.getElementById('generate');
-
-    this.button.addEventListener('click', (e) => {
-      e.preventDefault();
-
-      clearInterval(this.tickerInterval);
-      clearTimeout(this.tickerTimeout);
-
-      this.renderData(ExchangeChart.generateSampleData(defaults.numberGeneratorOptions));
-
-      if (this.ticker.enable) {
-        this.startTicker();
-      }
-
-      return false;
-    });
-  }
-  
-  setChartDimensions() {
-    this.dimensions = {
-      width: this.el.clientWidth,
-      height: this.el.clientHeight,
-    };
-    
-    if (this.svg) {
-      this.svg
-        .attr('width', this.dimensions.width)
-        .attr('height', this.dimensions.height);
-      
-      this.wrapper
-        .attr('width', this.dimensions.width)
-        .attr('height', this.dimensions.height);
-    }
-  }
-
-  // Set ranges based on SVG canvas dimensions
-  setRanges() {
-    this.ranges.x = d3.scaleTime()
-      .range([0, this.dimensions.width - this.margins.x]);
-
-    this.ranges.y = d3.scaleLinear()
-      .range([this.dimensions.height - (2 * this.margins.y), 0]);
-  }
-
-  // Define line function
-  defineLine() {
-    this.line = d3.line()
-      .curve(d3.curveBasis)
-      .x((data) => {
-        return this.ranges.x(data.date);
-      })
-      .y((data) => {
-        return this.ranges.y(data.value);
-      });
-  }
-
-  // Set up SVG canvas
-  initialiseChart() {
-    this.svg = d3.select(this.selector)
-      .append('svg')
-        .attr('width', this.dimensions.width)
-        .attr('height', this.dimensions.height);
-
-    this.wrapper = this.svg
-      .append('g')
-        .attr('width', this.dimensions.width - this.margins.x)
-        .attr('height', this.dimensions.height - (2 * this.margins.y))
-        .attr('class', 'wrapper')
-        .attr('transform', `translate(0, ${this.margins.y})`);
-
-    // this.buildFilter();
-    this.buildGuide();
-    this.buildLine();
-    this.buildEndCircle();
-  }
-
-  buildGuide() {
-    // Create inspector guide
-    this.wrapper
-      .append('line')
-        .attr('class', 'guide');
-  }
-
-  buildLine() {
-    // Create chart line group
-    this.wrapper
-      .append('g')
-        .attr('class', 'data');
-
-    // Create chart line
-    this.svg.select('.data')
-      .append('path')
-        .attr('class', 'line');
-  }
-
-  buildEndCircle() {
-    // Create circle group
-    this.wrapper
-      .append('g')
-        .attr('class', 'circle');
-
-    // Create inspector circle shadow
-    this.svg.select('.circle')
-      .append('circle')
-        .attr('class', 'circle-shadow')
-        .attr('r', `${this.blur.radius}px`);
-
-    // Create inspector circle
-    this.svg.select('.circle')
-      .append('circle')
-        .attr('class', 'circle');
-  }
-
-  // Build SVG filters
-  buildFilter() {
-    this.svg
-      .append('defs')
-      .append('filter')
-        .attr('id', 'shadow')
-        .attr('x', '-100%')
-        .attr('y', '-100%')
-        .attr('width', '300%')
-        .attr('height', '300%');
-
-    this.svg.select('#shadow')
-      .append('feGaussianBlur')
-        .attr('in', 'SourceAlpha')
-        .attr('stdDeviation', this.blur.amount);
-
-    this.svg.select('#shadow')
-      .append('feOffset')
-        .attr('dx', this.blur.offset.x)
-        .attr('dy', this.blur.offset.y)
-        .attr('result', 'offsetblur');
-
-    this.svg.select('#shadow')
-      .append('feComponentTransfer')
-      .append('feFuncA')
-        .attr('type', 'linear')
-        .attr('slope', this.blur.opacity);
-
-    this.svg.select('#shadow')
-      .append('feMerge')
-      .attr('class', 'merge')
-      .append('feMergeNode');
-
-    this.svg.select('.merge')
-      .append('feMergeNode')
-      .attr('in', 'SourceGraphic');
-  }
-
-  // Renders all chart components and populates stats
-  // @param {arr} [data] Sample data
-  renderData(data) {
-    this.data = data;
-
-    // Set domains based on sample data
-    this.ranges.x.domain(d3.extent(data, (data) => {
-        return data.date;
-      })
-    );
-
-    this.ranges.y.domain(d3.extent(data, (data) => {
-        return data.value;
-      })
-    );
-
-    this.renderGuide(data);
-    this.renderLine(data);
-    this.renderCircle(data);
-    this.populateStats(data);
-  }
-
-  // Renders chart line
-  renderLine() {
-    this.svg.select('.line')
-      .data([this.data])
-      .interrupt()
-      .transition()
-        .duration(this.numberGeneratorOptions.interval * 2.5)
-        .attr('d', this.line);
-  }
-
-  // Renders circle on latest value
-  renderCircle() {
-    const x = this.ranges.x(this.data[this.data.length - 1].date);
-    const y = this.ranges.y(this.data[this.data.length - 1].value);
-
-    this.point = this.svg.select('.circle')
-      .interrupt()
-      .transition()
-        .duration(this.numberGeneratorOptions.interval * 2.5)
-        .attr('transform', `translate(${x}, ${y})`);
-  }
-
-  // Renders horizontal guide for latest value
-  renderGuide() {
-    const y = this.ranges.y(this.data[this.data.length - 1].value);
-
-    this.svg.select('.guide')
-      .interrupt()
-      .transition()
-        .duration(this.numberGeneratorOptions.interval * 2.5)
-        .attr('x1', 0)
-        .attr('y1', y)
-        .attr('x2', this.dimensions.width * 2)
-        .attr('y2', y);
-  }
-
-  renderInspector() {
-    // const posX = d3.mouse()[];
-  }
-
-  // Populates stats based on chart data
-  populateStats() {
-    const rate = document.getElementsByClassName('rate');
-    const value = this.data[this.data.length - 1].value;
-
-    rate[0].innerHTML = value + ` - ${gini.toFixed(3)}`
-  }
-
-  startTicker() {
-    this.tickerTimeout = setTimeout(() => {
-      this.tickerInterval = setInterval(() => {
-        this.tickData(this.data);
-      }, this.numberGeneratorOptions.interval);
-    }, 6000);
-  }
-
-  // Progresses data and updates chart
-  tickData() {
-    this.data.shift();
-    this.data.push({
-      date: ExchangeChart.progressDate(this.data, this.numberGeneratorOptions),
-      value: ExchangeChart.progressValue(this.data, this.numberGeneratorOptions),
-    });
-
-    this.renderData(this.data);
-  }
-
-  // Generate a random data set, accounts for volatility which allows for some nice trend simulation
-  // @param {obj} [options] Generator options (see defaults)
-  // @returns {arr} [data] Sample data
-  //
-  // data = [
-  //   {
-  //     date: {dateObject},
-  //     value: {float}
-  //   },
-  //   ...
-  // ]
-  static generateSampleData(options) {
-    const data = [];
-    let n = options.dataPoints;
-
-    // Set first data point
-    data.push({
-      date: new Date(Date.now()),
-      value: options.initialValue,
-    });
-
-    n--;
-
-    // Loop and create remaining data points
-    while (n > 0) {
-      data.push({
-        date: ExchangeChart.progressDate(data, options),
-        value: ExchangeChart.progressValue(data, options),
-      });
-
-      n--;
-    }
-
-    return data;
-  }
-
-  // Calculates next date in data set
-  // @param {arr} [data] Sample data
-  // @param {obj} [options] Generator options
-  // @returns {obj} Next date
-  static progressDate(data, options) {
-    return new Date(new Date(data[data.length - 1].date.getTime() + options.interval));
-  }
-
-  static arrayAverage(arr){
-    //Find the sum
-    arr = Object.values(arr)
-      var sum = 0;
-      for(var i in arr) {
-          sum += arr[i];
-      }
-      //Get the length of the array
-      var numbersCnt = arr.length;
-      //Return the average / mean.
-      return (sum / numbersCnt);
-  }
-  // Calculates next value in data set
-  // @param {arr} [data] Sample data
-  // @param {obj} [options] Generator options
-  // @returns {float} Next value
-  static progressValue(data, options) {
-    console.log(`connections: ${connections}`)
-    const max = 2**12
-    const total = options.dataPoints;
-    const volatility = options.volatility / 100;
-    const average = this.arrayAverage(population)
-    // console.log(average)
-    let totalVals = Object.values(population).map((value, i) => {
-
-    let random = 0;
-    if(Math.random() > 0.5) {
-        random = 17.034
-    } else {
-        random = 2.964
-    }
-    // const random = ExchangeChart.getRandomNumber(0, 10, 3);
-    // console.log(random)
-    // console.log(volatility)
-    // console.log(population[i] <= average)
-    // console.log((1 - path / 325))
-    // if(population[i] <= ((1 - path / 314) * average)){
-    if(population[i] <= average){
-      // console.log('HERE')
-      const multiplier = .7 * connections / max
-      // console.log(multiplier)
-      // console.log(connections)
-      let percentChange = 2 * volatility * random * multiplier
-
-
-      // if (percentChange > volatility * 2) {
-      //   percentChange = -2 * volatility;
-      // }
-
-
-        population[i] = value * (1+percentChange)
-        // console.log(percentChange)
-      }else {
-        console.log('SKIP')
-
-        population[i] = value
-      }
-      return population[i]
-    }).reduce((total, value) => {
-      return total + value
-    })
-
-    data[data.length - 1] = {value: totalVals, date: Date.now()}
-
-    let calc = Object.values(population).map((val) => val)
-
-    // console.log(calc)
-    gini = giniSS(calc)
-    const tresh = .002
-
-    if(gini > 0.001 && gini < tresh){
-      // path = 0
-      console.log(discounts[0])
-    }else if(gini > tresh && gini < tresh*2){
-      // path = 1
-      console.log(discounts[1])
-    }else if(gini > tresh*2 && gini < tresh*3){
-      // path = 2
-      console.log(discounts[2])
-    }else if(gini > tresh*3&& gini < tresh*4){
-      // path = 3
-      console.log(discounts[3])
-    }else if(gini > tresh*4 && gini < tresh*5){
-      // path = 4
-      console.log(discounts[4])
-    }else if(gini > tresh*5){
-      // path = 5
-      console.log(discounts[5])
-    }
-
-    // console.log(gini)
-    // console.log(population)
-
-    // const changeValue = data[data.length - 1].value * percentChange;
-    return data[data.length - 1].value.toFixed(3)
-  }
-
-  // Generates a random number
-  // @param {int} [min] Minimum number
-  // @param {int} [max] Maximum number
-  // @param {int} [decimalPlaces] Number of decimal places
-  // @returns {float} Random float
-  static getRandomNumber(min, max, decimalPlaces) {
-    return parseFloat((Math.random() * (max - min) + min).toFixed(decimalPlaces));
-  }
-
-  // Rounds a number to specified decimal places
-  // @param {float} [n] Number to be rounded
-  // @param {int} [decimalPlaces] Number of decimal places
-  // @param {bool} [pad] Pad output string with trailing zeroes if required
-  // @returns {string} Rounded number string
-  static roundNumber(n, decimalPlaces, pad) {
-    let rounded = n.toFixed(3).toString()
-    // let rounded = (Math.round(n * Math.pow(10, decimalPlaces)) / Math.pow(10, decimalPlaces)).toString();
-
-    // if (pad) {
-      let integerLength = rounded.indexOf('.') > -1 ? rounded.indexOf('.') : rounded.length;
-
-      if (rounded.indexOf('-') > -1) {
-        integerLength--;
-      }
-
-      // if (rounded.indexOf('.') === -1) {
-      //   rounded = `${rounded}.`;
-      // }
-
-      const targetLength = decimalPlaces + integerLength + 1;
-
-    //   if (rounded.length < targetLength) {
-    //     for (let i = rounded.length; i < targetLength; i++) {
-    //       rounded = `${rounded}0`;
-    //     }
-    //   }
-    // }
-
-    // return `${gini}`;
-    console.log(rounded)
-    return rounded + `${gini}`;
-  }
-
-  static loadJSON(url, success, error) {
-    const xhr = new XMLHttpRequest();
-
-    xhr.onreadystatechange = () => {
-      if (xhr.readyState === XMLHttpRequest.DONE) {
-        if (xhr.status === 200) {
-          if (success) {
-            success(JSON.parse(xhr.responseText));
-          } else {
-            if (error) {
-              error(xhr);
-            }
-          }
-        } else {
-          error(xhr.status);
-        }
-      }
-    };
-
-    xhr.open('GET', url, true);
-    xhr.send();
-  }
-}
-
-const direction = [
-// 2
-{
-  planet: 'Mercury',
-  deity: 'Thoth',
-  activity: ['Library', 'Dance']
-},{
-  planet: 'Venus',
-  deity: 'Isis',
-  activity: ['Park','Music']
-},
-// 0
-{
-  planet: 'Earth',
-  deity: 'Nephthys',
-  activity: ['Coffee']
-},
-{
-  planet: 'Mars',
-  deity: 'Horus',
-  activity: ['Meal']
-},
-// 1
-{
-  planet: 'Maldek',
-  deity: 'Hapi',
-  activity: ['Swimming']
-},{
-  planet: 'Jupiter',
-  deity: 'Osirus',
-  activity: ['Wellness', 'Sports']
-},
-// 3
-{
-  planet: 'Saturn',
-  deity: 'Ra',
-  activity: ['Local Market', 'Fashion']
-},{
-  planet: 'Uranus',
-  deity: 'Shu',
-  activity: ['Art Gallery']
-},
-// 4
-{
-  planet: 'Neptune',
-  deity: 'Tutu',
-  activity: ['Education']
-},{
-  planet: 'Pluto',
-  deity: 'Anubis',
-  activity: ['Drive']
-},
-// 5
-{
-  planet: 'Chiron',
-  deity: 'Seshat',
-  activity: ['Travel']
-},{
-  planet: 'Nibiru',
-  deity: 'Seth',
-  activity: ['Home Improvement']
-},
-]
-
 
 function renderPoints(numOfPoints = 16, size = 1000) {
   const polarToCartesian = (r, degrees) => {
@@ -946,24 +363,27 @@ function renderPoints(numOfPoints = 16, size = 1000) {
     return polarToCartesian(radius, radian)
   })
 
-  document.getElementById('app').innerHTML = data.map(entry => {
-    const [x,y] = entry;
-    return renderLines(x,y).join('');
-  })
+  // document.getElementById('app').innerHTML = data.map(entry => {
+  //   const [x,y] = entry;
+  //   return renderLines(x,y).join('');
+  // })
 }
 
 // @inject( "store" )
 // @observer
+let ran = 0;
+let treeState = 'PRISM'
 function App () {
 
-  const [led, setLed] = useState(null)
+  const [led, setLed] = useState(0)
+
   // visual
   const [node, setNode] = useState(null)
   const [edge, setEdge] = useState(null)
 
   // info
   const [planet, setPlanet] = useState(null)
-  const [deity, setDeity] = useState(null)
+  const [deity, setDeity] = useState('null')
   const [activity, setActivity] = useState([])
 
   // planets
@@ -1008,6 +428,496 @@ function App () {
   const [chironUnit, setChironUnit] = useState(null)
   const [nibiruUnit, setNibiruUnit] = useState(null)
 
+  let operator = {
+    0: () => {
+      setEarthUnit(
+        <text x="50" y="420" class="small" fill="#ffffff" >
+          𓉢 ♁
+        </text>
+      )
+      setMarsUnit(
+        <text x="255" y="420" class="small" fill="#ffffff">
+          𓆣 ♂
+        </text>
+      )
+
+      setEarth('yellow')
+      setEarthCircle('white')
+      setMars('green')
+      setMarsCircle('white')
+
+      setEdge(
+        <rect x="25" y="360" rx="50" width="290" height="110" style={{fill: "rgb(0,0,0)", strokeWidth:"3", stroke: "rgb(0,0,0)"}} >
+        </rect>
+        )
+    },
+    1: () => {
+      setMaldekUnit(
+        <text x="155" y="345" class="small" fill="#ffffff">
+          𓊝 ◌
+        </text>
+      )
+      setJupiterUnit(
+        <text x="55" y="300" class="small" fill="#ffffff">
+          𓋘 ♃
+        </text>
+      )
+
+      setMaldek('blue')
+      setMaldekCircle('white')
+      setJupiter('black')
+      setJupiterCircle('white')
+
+      setEdge(
+        <rect x="140" y="185" transform="rotate(25 0 0)" rx="50" width="220" height="100" style={{fill: "rgb(0,0,0)", strokeWidth:"3", stroke: "rgb(0,0,0)"}}>
+        </rect>
+      )
+    },
+    2: () => {
+      setMercuryUnit(
+        <text x="155" y="555" class="small" fill="#000">
+          𓅠 ☿
+        </text>
+      )
+      setVenusUnit(
+        <text x="155" y="445" class="small" fill="#000">
+          𓋟 ♀
+        </text>
+      )
+
+      setMercury('red')
+      setMercuryCircle('white')
+      setVenus('wheat')
+      setVenusCircle('white')
+
+      setEdge(
+        <rect x="115" y="400" width="110" height="200" rx="50" style={{fill: "rgb(0,0,0)", strokeWidth:"3", stroke: "rgb(0,0,0)"}}>
+        </rect>
+      )
+    },
+    3: () => {
+      setVenusUnit(
+        <text x="155" y="445" class="small" fill="#000">
+          𓋟 ♀
+        </text>
+      )
+      setMarsUnit(
+        <text x="255" y="420" class="small" fill="#000">
+          𓆣 ♂
+        </text>
+      )
+
+      setMars('green')
+      setMarsCircle('white')
+      setVenus('wheat')
+      setVenusCircle('white')
+
+      setEdge(
+        <rect x="425" y="-149" width="110" transform="rotate(67 0 0)" height="220" rx="50" style={{fill: "rgb(0,0,0)", strokeWidth:"3", stroke: "rgb(0,0,0)"}}>
+        </rect>
+        )
+    },
+    4: () => {
+
+      setNeptuneUnit(
+        <text x="55" y="180" class="small" fill="#ffffff">
+          𓏁 ♆
+        </text>
+      )
+      setPlutoUnit(
+        <text x="255" y="180" class="small" fill="#ffffff">
+          𓉧 ♇
+        </text>
+      )
+
+      setNeptune('lightgrey')
+      setNeptuneCircle('white')
+      setPluto('darkblue')
+      setPlutoCircle('white')
+
+      setEdge(
+        <rect x="25" y="110" width="290" height="110" rx="50" style={{fill: "rgb(0,0,0)", strokeWidth:"3", stroke: "rgb(0,0,0)"}}>
+        </rect>
+      )
+    },
+    5: () => {
+      
+      setNibiruUnit(
+        <text x="155" y="55" class="small" fill="#00000">
+          𓇽 ☄
+        </text>
+      )
+      setChironUnit(
+        <text x="155" y="345" class="small" fill="#000000">
+          𓋇 🗝
+        </text>
+      )
+
+      setChiron('turquoise')
+      setChironCircle('white')
+      setNibiru('white')
+      setNibiruCircle('white')
+
+      setEdge(
+        <rect x="115" y="5" width="110" height="390" rx="50" style={{fill: "rgb(0,0,0)", strokeWidth:"3", stroke: "rgb(0,0,0)"}}>
+        </rect>
+        )
+    },
+    6: () => {
+      setUranusUnit(
+        <text x="58" y="416" class="small" fill="#000">
+          test
+        </text>
+      )
+      setSaturnUnit(
+        <text x="161" y="450" class="small" fill="#000">
+          test
+        </text>
+      )
+
+      setVenus('wheat')
+      setVenusCircle('white')
+      setEarth('yellow')
+      setEarthCircle('white')
+
+      setEdge(
+        <rect x="180" y="287" transform="rotate(25 0 0)" rx="50" width="220" height="100" style={{fill: "rgb(0,0,0)", strokeWidth:"3", stroke: "rgb(0,0,0)"}}>
+        </rect>
+      )
+    },
+    7: () => {
+      setNibiruUnit(
+        <text x="160" y="50" class="small" fill="#000">
+          test
+        </text>
+      )
+      setChironUnit(
+        <text x="262" y="180" class="small" fill="#FFF">
+          test
+        </text>
+      )
+
+      setNibiru('white')
+      setNibiruCircle('white')
+      setPluto('navy')
+      setPlutoCircle('white')
+
+      setEdge(
+        <rect x="48" y="100" width="110" height="250" rx="50" transform="rotate(-38 0 0)" style={{fill: "rgb(0,0,0)", strokeWidth:"3", stroke: "rgb(0,0,0)"}}>
+        </rect>
+        )
+    },
+    8: () => {
+      setNibiruUnit(
+        <text x="255" y="297" class="small" fill="#FFFFFF">
+          test
+        </text>
+      )
+      setChironUnit(
+        <text x="255" y="175" class="small" fill="#FFFFFF">
+          test
+        </text>
+      )
+
+      setSaturn('purple')
+      setSaturnCircle('white')
+      setPluto('darkblue')
+      setPlutoCircle('white')
+
+      setEdge(
+        <rect x="215" y="115" width="110" height="230" rx="50" style={{fill: "rgb(0,0,0)", strokeWidth:"3", stroke: "rgb(0,0,0)"}}>
+        </rect>
+        )
+    
+    },
+    9: () => {
+      setNibiruUnit(
+        <text x="255" y="297" class="small" fill="#FFFFFF">
+          test
+        </text>
+      )
+      setChironUnit(
+        <text x="259.99" y="416" class="small" fill="#FFFFFF">
+          test
+        </text>
+      )
+
+      setSaturn('orange')
+      setSaturnCircle('white')
+      setMars('green')
+      setMarsCircle('white')
+
+      setEdge(
+        <rect x="215" y="235" width="110" height="230" rx="50" style={{fill: "rgb(0,0,0)", strokeWidth:"3", stroke: "rgb(0,0,0)"}}>
+        </rect>
+        )
+    },
+    10: () => {
+      setMarsUnit(
+        <text x="255" y="420" class="small" fill="#ffffff">
+          𓆣 ♂
+        </text>
+      )
+      setMaldekUnit(
+        <text x="155" y="555" class="small" fill="#ffffff">
+          𓊝 ◌
+        </text>
+      )
+
+      setMars('green')
+      setMarsCircle('white')
+      setMercury('red')
+      setMercuryCircle('white')
+
+      setEdge(
+        <rect x="390" y="150" width="110" transform="rotate(33 0 0)" height="270" rx="50" style={{fill: "rgb(0,0,0)", strokeWidth:"3", stroke: "rgb(0,0,0)"}}>
+        </rect>
+        )
+    },
+    11: () => {
+      setNibiruUnit(
+        <text x="160" y="560" class="small" fill="#000">
+          test
+        </text>
+      )
+
+      setChironUnit(
+        <text x="60" y="410" class="small" fill="#000">
+          test
+        </text>
+      )
+
+      setEarth('yellow')
+      setEarthCircle('white')
+      setMercury('red')
+      setMercuryCircle('white')
+
+      setEdge(
+        <rect x="-258" y="320" width="110" height="270" rx="50" transform="rotate(-38 0 0)" style={{fill: "rgb(0,0,0)", strokeWidth:"3", stroke: "rgb(0,0,0)"}}>
+        </rect>
+        )
+    },
+    12: () => {
+      setNibiruUnit(
+        <text x="60" y="297" class="small" fill="#FFFFFF">
+          test
+        </text>
+      )
+      setChironUnit(
+        <text x="60" y="416" class="small" fill="#000000">
+          test
+        </text>
+      )
+
+      setJupiter('black')
+      setJupiterCircle('white')
+      setEarth('yellow')
+      setEarthCircle('white')
+
+      setEdge(
+        <rect x="15" y="235" width="110" height="230" rx="50" style={{fill: "rgb(0,0,0)", strokeWidth:"3", stroke: "rgb(0,0,0)"}}>
+        </rect>
+        )
+    },
+    13: () => {
+      setNibiruUnit(
+        <text x="60" y="297" class="small" fill="#FFFFFF">
+          test
+        </text>
+      )
+      setChironUnit(
+        <text x="60" y="175" class="small" fill="#000000">
+          test
+        </text>
+      )
+
+      setNeptune('lightgrey')
+      setNeptuneCircle('white')
+      setJupiter('black')
+      setJupiterCircle('white')
+
+      setEdge(
+        <rect x="15" y="115" width="110" height="230" rx="50" style={{fill: "rgb(0,0,0)", strokeWidth:"3", stroke: "rgb(0,0,0)"}}>
+        </rect>
+        )
+    },
+    14: () => {
+      setNibiruUnit(
+        <text x="160" y="55" class="small" fill="#00000">
+          test
+        </text>
+      )
+      setChironUnit(
+        <text x="60" y="175" class="small" fill="#000000">
+          test
+        </text>
+      )
+
+      setNeptune('lightgrey')
+      setNeptuneCircle('white')
+      setNibiru('white')
+      setNibiruCircle('lightgrey')
+
+      setEdge(
+        <rect x="110" y="-110" width="110" transform="rotate(38 0 0)" height="250" rx="50" style={{fill: "rgb(0,0,0)", strokeWidth:"3", stroke: "rgb(0,0,0)"}}>
+        </rect>
+        )
+    },
+    15: () => {
+      setMaldekUnit(
+        <text x="155" y="345" class="small" fill="#ffffff">
+          𓊝 ◌
+        </text>
+      )
+      setVenusUnit(
+        <text x="155" y="445" class="small" fill="#000">
+          𓋟 ♀
+        </text>
+      )
+
+      setVenus('wheat')
+      setVenusCircle('white')
+      setMaldek('blue')
+      setMaldekCircle('white')
+
+      setEdge(
+        <rect x="115" y="290" width="110" height="210" rx="50" style={{fill: "rgb(0,0,0)", strokeWidth:"3", stroke: "rgb(0,0,0)"}}>
+        </rect>
+        )
+    },
+    17: () => {
+      setMaldekUnit(
+        <text x="155" y="345" class="small" fill="#ffffff">
+          𓊝 ◌
+        </text>
+      )
+      setMarsUnit(
+        <text x="255" y="420" class="small" fill="#ffffff">
+          𓆣 ♂
+        </text>
+      )
+
+      setMars('green')
+      setMarsCircle('white')
+      setMaldek('blue')
+      setMaldekCircle('white')
+
+      setEdge(
+        <rect x="270" y="163" transform="rotate(31 0 0)" rx="50" width="220" height="100" style={{fill: "rgb(0,0,0)", strokeWidth:"3", stroke: "rgb(0,0,0)"}}>
+        </rect>
+      )
+    },
+    18: () => {
+      setNeptuneUnit(
+        <text x="55" y="295" class="small" fill="#ffffff">
+          𓏁 ♆
+        </text>
+      )
+      setPlutoUnit(
+        <text x="255" y="295" class="small" fill="#ffffff">
+          𓉧 ♇
+        </text>
+      )
+
+      setJupiter('black')
+      setJupiterCircle('white')
+      setSaturn('purple')
+      setSaturnCircle('white')
+
+      setEdge(
+        <rect x="25" y="235" width="290" height="110" rx="50" style={{fill: "rgb(0,0,0)", strokeWidth:"3", stroke: "rgb(0,0,0)"}}>
+        </rect>
+      )
+    },
+    19: () => {
+      setSaturnUnit(
+        <text x="257" y="290" class="small" fill="#000">
+          test
+        </text>
+      )
+      setMaldekUnit(
+        <text x="155" y="345" class="small" fill="#ffffff">
+          𓊝 ◌
+        </text>
+      )
+
+      setSaturn('purple')
+      setSaturnCircle('white')
+      setMaldek('blue')
+      setMaldekCircle('white')
+
+      setEdge(
+        <rect x="335" y="-79" width="110" transform="rotate(51 0 0)" height="220" rx="50" style={{fill: "rgb(0,0,0)", strokeWidth:"3", stroke: "rgb(0,0,0)"}}>
+        </rect>
+        )
+    },
+    20: () => {
+      setEarthUnit(
+        <text x="50" y="420" class="small" fill="#000" >
+          𓉢 ♁
+        </text>
+      )
+      setMaldekUnit(
+        <text x="155" y="345" class="small" fill="#ffffff">
+          𓊝 ◌
+        </text>
+      )
+
+      setEarth('yellow')
+      setEarthCircle('white')
+      setMaldek('blue')
+      setMaldekCircle('white')
+
+      setEdge(
+        <rect x="315" y="34" width="110" transform="rotate(51 0 0)" height="220" rx="50" style={{fill: "rgb(0,0,0)", strokeWidth:"3", stroke: "rgb(0,0,0)"}}>
+        </rect>
+        )
+    },
+    21: () => {
+      setNeptuneUnit(
+        <text x="55" y="180" class="small" fill="#ffffff">
+          𓏁 ♆
+        </text>
+      )
+      setMaldekUnit(
+        <text x="155" y="345" class="small" fill="#ffffff">
+          𓊝 ◌
+        </text>
+      )
+
+      setNeptune('lightgrey')
+      setNeptuneCircle('white')
+      setMaldek('blue')
+      setMaldekCircle('white')
+      setEdge(
+        <rect x="134" y="-19" transform="rotate(59 0 0)" rx="50" width="310" height="100" style={{fill: "rgb(0,0,0)", strokeWidth:"3", stroke: "rgb(0,0,0)"}}>
+        </rect>
+      )
+    },
+    16: () => {
+      setPlutoUnit(
+        <text x="255" y="180" class="small" fill="#ffffff">
+          𓉧 ♇
+        </text>
+      )
+      setMaldekUnit(
+        <text x="155" y="355" class="small" fill="#ffffff">
+          𓊝 ◌
+        </text>
+      )
+
+      setMaldek('blue')
+      setMaldekCircle('white')
+      setPluto('navy')
+      setPlutoCircle('white')
+
+      setEdge(
+        <rect x="270" y="-55" width="110" transform="rotate(33 0 0)" height="300" rx="50" style={{fill: "rgb(0,0,0)", strokeWidth:"3", stroke: "rgb(0,0,0)"}}>
+        </rect>
+        )
+    },
+  }
+
   function clear() {
     setMercury('white')
     setVenus('white')
@@ -1047,288 +957,181 @@ function App () {
     setPlutoUnit(null)
     setChironUnit(null)
     setNibiruUnit(null)
+    setEdge(null)
   }
   const [sections, setSections] = useState([])
+  const [init, setInit] = useState(false)
 
-  const COUNTER = 2000
+  const COUNTER = 1000
   useEffect(() => {
-    const exchangeChart = new ExchangeChart('#chart', ExchangeChart.generateSampleData(defaults.numberGeneratorOptions));
+    let interval;
+      interval = async () => {
+        console.log(treeState)
+        counter++
+        // ran = 5
+        if(counter){
+          clear()
+          console.log('timer', counter)
+          // operator[(21).toString()]()
+          const res = await fetch(`${'http://216.128.185.237:4000'}/live`)
+          const json = await res.json()
+          const tvls = Object.values(json.tvl).sort().filter((el) => el > 0)
+          // Sort the object by values
+          const sortedObject = Object.fromEntries(
+            Object.entries(json.tvl)
+              .filter(([key, value]) => value !== 0) // Remove elements with a value of 0
+              .filter(([key, value]) => value > 0)
+              .sort((a, b) => b[1] - a[1]) // Sort in descending order of values
+          );
 
-    setInterval(() => {
-      // const e_x = Math.random()
-      
+          console.log(sortedObject);
+          const topKey = Object.keys(sortedObject)[0]
+          
+          if(treeState == 'PRISM'){
+            switch(topKey){
+              case 'str':
+                operator[(18).toString()]()
+                break;
+              case 'agi':
+                operator[(9).toString()]()
+                break;
+              case 'wis':
+                operator[(12).toString()]()
+                break;
+              case 'hrt':
+                operator[(21).toString()]()
+                break;
+              case 'int':
+                operator[(5).toString()]()
+                break;
+            }
+          } else if(treeState == 'DUAL') {
+            const maxCombination = findMaxTVLCombination(json.tvl);
+            console.log(maxCombination); // Output: "int_hrt"
+            switch(maxCombination){
+              case 'agi_str':
+                operator[(13).toString()]()
+                break;
+              case 'wis_str':
+                operator[(19).toString()]()
+                break;
+              case 'hrt_str':
+                operator[(7).toString()]()
+                break;
+              case 'int_str':
+                operator[(14).toString()]()
+                break;
+              case 'agi_wis':
+                operator[(20).toString()]()
+                break;
+              case 'agi_hrt':
+                operator[(17).toString()]()
+                break;
+              case 'agi_int':
+                operator[(11).toString()]()
+                break;
+              case 'hrt_wis':
+                operator[(6).toString()]()
+                break;
+              case 'int_wis':
+                operator[(10).toString()]()
+                break;
+              case 'hrt_int':
+                operator[(15).toString()]()
+                break;
+            }
+          } else {
+            const sortedObject = Object.fromEntries(
+              Object.entries(json.tvl_elements)
+                .filter(([key, value]) => value !== 0) // Remove elements with a value of 0
+                .filter(([key, value]) => value > 0)
+                .sort((a, b) => b[1] - a[1]) // Sort in descending order of values
+            );
 
-      connections = Math.floor(Math.random() * 16);
+            const topKey = Object.keys(sortedObject)[0]
+            switch(topKey){
+              case 'air':
+                operator[(1).toString()]()
+                break;
+              case 'dark':
+                operator[(16).toString()]()
+                break;
+              case 'earth':
+                operator[(2).toString()]()
+                break;
+              case 'fire':
+                operator[(1).toString()]()
+                break;
+              case 'light':
+                operator[(4).toString()]()
+                break;
+              case 'metal':
+                operator[(3).toString()]()
+                break;
+              case 'mind':
+                operator[(8).toString()]()
+                break;
+              case 'water':
+                operator[(0).toString()]()
+                break;
+            }
+          }
 
-      // document.getElementById('path').append(<span class="section"></span>)
-      sections.push(<span class="section"></span>)
-      if(counter % 2 == 0){
-        console.log('HELLO?')
-        
-      sections.push(<span class="section forked">
-    <span class="lane"></span>
-    <span class="lane"></span>
-  </span>)
-      }
-      setSections([...sections])
-    }, 2000)
-
-    setInterval(() => {
-      let ran = Math.floor(Math.random() * 6)
-      // ran = path
-      setNode(ran)
-      renderPoints(connections);
-
-      counter++
-      // ran = 5
-      if(counter % 2 == 0){
-        clear()
-
-        console.log('timer')
-
-        switch(ran){
-          case 0:
-            setPlanet(`${direction[2].planet} ↔ ${direction[3].planet}`)
-            setDeity(`${direction[2].deity} ↔ ${direction[3].deity}`)
-            setActivity(`${direction[2].activity} ↔ ${direction[3].activity}`)
-            setLed(0.25)
-            setEarthUnit(
-              <text x="50" y="420" class="small" fill="#ffffff">
-                <animate attributeType="XML" attributeName="fill" values="#ffffff00;#ffffff00;#ffffff00;#000000;#000000;#000000;#000000;#000000;#ffffff00;#ffffff00;" dur="10s" repeatCount="indefinite"/>
-                𓉢 ♁
-              </text>
-            )
-            setMarsUnit(
-              <text x="255" y="420" class="small" fill="#ffffff">
-                <animate attributeType="XML" attributeName="fill" values="#ffffff00;#ffffff00;#ffffff00;#000000;#000000;#000000;#000000;#000000;#ffffff00;#ffffff00;" dur="10s" repeatCount="indefinite"/>
-                𓆣 ♂
-              </text>
-            )
-
-            setEarth('yellow')
-            setEarthCircle('white')
-            setMars('green')
-            setMarsCircle('white')
-
-            setEdge(
-              <rect x="25" y="360" width="290" height="110" style={{fill: "rgb(0,0,0)", strokeWidth:"3", stroke: "rgb(0,0,0)"}} >
-                <animate
-                attributeName="rx"
-                values="0;50;0"
-                dur="10s"
-                repeatCount="indefinite" />
-              </rect>
-              )
-          break;
-          case 1:
-            setPlanet(`${direction[4].planet} ↔ ${direction[5].planet}`)
-            setDeity(`${direction[4].deity} ↔ ${direction[5].deity}`)
-            setActivity(`${direction[4].activity} ↔ ${direction[5].activity}`)
-            setLed(0.8)
-            setMaldekUnit(
-              <text x="155" y="345" class="small" fill="#ffffff">
-                <animate attributeType="XML" attributeName="fill" values="#ffffff00;#ffffff00;#ffffff00;#ffffffff;#ffffffff;#ffffffff;#ffffffff;#ffffffff;#ffffff00;#ffffff00;" dur="10s" repeatCount="indefinite"/>
-                𓊝 ◌
-              </text>
-            )
-            setJupiterUnit(
-              <text x="55" y="300" class="small" fill="#ffffff">
-                <animate attributeType="XML" attributeName="fill" values="#ffffff00;#ffffff00;#ffffff00;#ffffffff;#ffffffff;#ffffffff;#ffffffff;#ffffffff;#ffffff00;#ffffff00;" dur="10s" repeatCount="indefinite"/>
-                𓋘 ♃
-              </text>
-            )
-
-            setMaldek('blue')
-            setMaldekCircle('white')
-            setJupiter('black')
-            setJupiterCircle('white')
-
-            setEdge(
-              <rect x="140" y="185" transform="rotate(25 0 0)" rx="50" width="220" height="100" style={{fill: "rgb(0,0,0)", strokeWidth:"3", stroke: "rgb(0,0,0)"}}>
-              <animate
-                attributeName="rx"
-                values="0;50;0"
-                dur="10s"
-                repeatCount="indefinite" />
-              </rect>
-            )
-          break;
-          case 2:
-            setPlanet(`${direction[0].planet} ↔ ${direction[1].planet}`)
-            setDeity(`${direction[0].deity} ↔ ${direction[1].deity}`)
-            setActivity(`${direction[0].activity} ↔ ${direction[1].activity}`)
-            setLed(0.1)
-
-            setMercuryUnit(
-              <text x="155" y="535" class="small" fill="#ffffff">
-                <animate attributeType="XML" attributeName="fill" values="#ffffff00;#ffffff00;#ffffff00;#000000;#000000;#000000;#000000;#000000;#ffffff00;#ffffff00;" dur="10s" repeatCount="indefinite"/>
-                𓅠 ☿
-              </text>
-            )
-            setVenusUnit(
-              <text x="155" y="445" class="small" fill="#ffffff">
-                <animate attributeType="XML" attributeName="fill" values="#ffffff00;#ffffff00;#ffffff00;#000000;#000000;#000000;#000000;#000000;#ffffff00;#ffffff00;" dur="10s" repeatCount="indefinite"/>
-                𓋟 ♀
-              </text>
-            )
-
-            setMercury('red')
-            setMercuryCircle('white')
-            setVenus('wheat')
-            setVenusCircle('white')
-
-            setEdge(
-              <rect x="115" y="400" width="110" height="180" rx="50" style={{fill: "rgb(0,0,0)", strokeWidth:"3", stroke: "rgb(0,0,0)"}}>
-              <animate
-                attributeName="rx"
-                values="0;50;0"
-                dur="10s"
-                repeatCount="indefinite" />
-              </rect>
-            )
-          break;
-          case 3:
-            setPlanet(`${direction[6].planet} ↔ ${direction[7].planet}`)
-            setDeity(`${direction[6].deity} ↔ ${direction[7].deity}`)
-            setActivity(`${direction[6].activity} ↔ ${direction[7].activity}`)
-            setLed(1)
-
-            setUranusUnit(
-              <text x="155" y="240" class="small" fill="#ffffff">
-                <animate attributeType="XML" attributeName="fill" values="#ffffff00;#ffffff00;#ffffff00;#000000;#000000;#000000;#000000;#000000;#ffffff00;#ffffff00;" dur="10s" repeatCount="indefinite"/>
-                𓆃 ♅
-              </text>
-            )
-            setSaturnUnit(
-              <text x="255" y="295" class="small" fill="#ffffff">
-                <animate attributeType="XML" attributeName="fill" values="#ffffff00;#ffffff00;#ffffff00;#ffffff;#ffffff;#ffffff;#ffffff;#ffffff;#ffffff00;#ffffff00;" dur="10s" repeatCount="indefinite"/>
-                𓇵 ♄
-              </text>
-            )
-
-            setUranus('orange')
-            setUranusCircle('white')
-            setSaturn('purple')
-            setSaturnCircle('white')
-
-            setEdge(
-              <rect x="190" y="100" transform="rotate(25 0 0)" rx="50" width="220" height="100" style={{fill: "rgb(0,0,0)", strokeWidth:"3", stroke: "rgb(0,0,0)"}}>
-              <animate
-                attributeName="rx"
-                values="0;50;0"
-                dur="10s"
-                repeatCount="indefinite" />
-              </rect>
-            )
-          break;
-          case 4:
-            setPlanet(`${direction[8].planet} ↔ ${direction[9].planet}`)
-            setDeity(`${direction[8].deity} ↔ ${direction[9].deity}`)
-            setActivity(`${direction[8].activity} ↔ ${direction[9].activity}`)
-            setLed(1)
-
-            setNeptuneUnit(
-              <text x="55" y="180" class="small" fill="#ffffff">
-                <animate attributeType="XML" attributeName="fill" values="#ffffff00;#ffffff00;#ffffff00;#000000;#000000;#000000;#000000;#000000;#ffffff00;#ffffff00;" dur="10s" repeatCount="indefinite"/>
-                𓏁 ♆
-              </text>
-            )
-            setPlutoUnit(
-              <text x="255" y="180" class="small" fill="#ffffff">
-                <animate attributeType="XML" attributeName="fill" values="#ffffff00;#ffffff00;#ffffff00;#ffffff;#ffffff;#ffffff;#ffffff;#ffffff;#ffffff00;#ffffff00;" dur="10s" repeatCount="indefinite"/>
-                𓉧 ♇
-              </text>
-            )
-
-            setNeptune('lightgrey')
-            setNeptuneCircle('white')
-            setPluto('darkblue')
-            setPlutoCircle('white')
-
-            setEdge(
-              <rect x="25" y="110" width="290" height="110" rx="50" style={{fill: "rgb(0,0,0)", strokeWidth:"3", stroke: "rgb(0,0,0)"}}>
-              <animate
-                attributeName="rx"
-                values="0;50;0"
-                dur="10s"
-                repeatCount="indefinite" />
-              </rect>
-            )
-          break;
-          case 5:
-            setPlanet(`${direction[10].planet} ↔ ${direction[11].planet}`)
-            setDeity(`${direction[10].deity} ↔ ${direction[11].deity}`)
-            setActivity(`${direction[10].activity} ↔ ${direction[11].activity}`)
-            setLed(1)
-            
-            setNibiruUnit(
-              <text x="155" y="55" class="small" fill="#ffffff">
-                <animate attributeType="XML" attributeName="fill" values="#ffffff00;#ffffff00;#ffffff00;#000000;#000000;#000000;#000000;#000000;#ffffff00;#ffffff00;" dur="10s" repeatCount="indefinite"/>
-                𓇽 ☄
-              </text>
-            )
-            setChironUnit(
-              <text x="155" y="145" class="small" fill="#ffffff">
-                <animate attributeType="XML" attributeName="fill" values="#ffffff00;#ffffff00;#ffffff00;#000000;#000000;#000000;#000000;#000000;#ffffff00;#ffffff00;" dur="10s" repeatCount="indefinite"/>
-                𓋇 🗝
-              </text>
-            )
-
-            setChiron('paleturquoise')
-            setChironCircle('white')
-            setNibiru('white')
-            setNibiruCircle('white')
-
-            setEdge(
-              <rect x="115" y="5" width="110" height="180" rx="50" style={{fill: "rgb(0,0,0)", strokeWidth:"3", stroke: "rgb(0,0,0)"}}>
-              <animate
-                attributeName="rx"
-                values="0;50;0"
-                dur="10s"
-                repeatCount="indefinite" />
-              </rect>
-              )
-          break;
+          function findMaxTVLCombination(tvlObject) {
+            let maxCombination = "";
+            let maxValue = -Infinity;
+          
+            const keys = Object.keys(tvlObject);
+          
+            for (let i = 0; i < keys.length; i++) {
+              for (let j = i + 1; j < keys.length; j++) {
+                const key1 = keys[i];
+                const key2 = keys[j];
+                const combinationKeys = [key1, key2].sort(); // Sort keys alphabetically
+                const combinationValue = tvlObject[combinationKeys[0]] + tvlObject[combinationKeys[1]];
+          
+                if (combinationValue > maxValue) {
+                  maxValue = combinationValue;
+                  maxCombination = combinationKeys.join("_");
+                }
+              }
+            }
+          
+            return maxCombination;
+          } 
         }
       }
-    }, COUNTER)
-  }, [])
+    return () => {interval()}
+  }, [init, treeState, led])
 
   return (
-    <div className="App">
-      <Kathara connections={connections}/>
+    <div>
             <br/>
-      <br/>
-      {planet}
-      <br/>
-      {deity}
-      <br/>
-      {activity}
-      <div style={{marginLeft: "437px", width: '70vw', position: 'absolute'}}>
-        <svg x="40" y="0" width="1200" height="600">
+      <div style={{marginLeft: '-8.4vw',width: '10vw', position: 'absolute'}}>
+        <svg x="40" y="0" width="400" height="650">
           {/**/}
           {edge}
 
           {/**/}
           <circle cx="170" cy="50" r="40" stroke={nibiruCircle} strokeWidth="4" fill={nibiru} />
           
-          <circle cx="170" cy="140" r="40" stroke={chironCircle} strokeWidth="4" fill={chiron} />
+          {/* <circle cx="170" cy="140" r="40" stroke={chironC  ircle} strokeWidth="4" fill={chiron} /> */}
           
            <circle cx="70" cy="170" r="40" stroke={neptuneCircle} strokeWidth="4" fill={neptune} />
            <circle cx="270" cy="170" r="40" stroke={plutoCircle} strokeWidth="4" fill={pluto} />
            
-           <circle cx="170" cy="240" r="40" stroke={uranusCircle} strokeWidth="4" fill={uranus} />
+           {/* <circle cx="170" cy="240" r="40" stroke={uranusCircle} strokeWidth="4" fill={uranus} /> */}
            <circle cx="265" cy="290" r="40" stroke={saturnCircle} strokeWidth="4" fill={saturn} />
            
            <circle cx="70" cy="290" r="40" stroke={jupiterCircle} strokeWidth="4" fill={jupiter} />
-           <circle cx="170" cy="340" r="40" stroke={maldekCircle} strokeWidth="4" fill={maldek} />
+           <circle cx="170" cy="345" r="40" stroke={maldekCircle} strokeWidth="4" fill={maldek} />
            
            <circle cx="70" cy="410" r="40" stroke={earthCircle} strokeWidth="4" fill={earth} />
            <circle cx="270" cy="410" r="40" stroke={marsCircle} strokeWidth="4" fill={mars} />
            
            
            <circle cx="170" cy="445" r="40" stroke={venusCircle} strokeWidth="4" fill={venus} />
-          <circle cx="170" cy="535" r="40" stroke={mercuryCircle} strokeWidth="4" fill={mercury} />
+          <circle cx="170" cy="555" r="40" stroke={mercuryCircle} strokeWidth="4" fill={mercury} />
 
           {/**/}
           {mercuryUnit}
@@ -1345,50 +1148,7 @@ function App () {
           {nibiruUnit}
         </svg> 
       </div>
-      <div style={{marginLeft: "637px", width: '70vw', position: 'absolute'}}>
-        <svg x="40" y="0" width="1200" height="600">
-          {/**/}
-          {edge}
 
-          {/**/}
-          <circle cx="170" cy="50" r="40" stroke={nibiruCircle} strokeWidth="4" fill={nibiru} />
-          
-          <circle cx="170" cy="140" r="40" stroke={chironCircle} strokeWidth="4" fill={chiron} />
-          
-           <circle cx="70" cy="170" r="40" stroke={neptuneCircle} strokeWidth="4" fill={neptune} />
-           <circle cx="270" cy="170" r="40" stroke={plutoCircle} strokeWidth="4" fill={pluto} />
-           
-           <circle cx="170" cy="240" r="40" stroke={uranusCircle} strokeWidth="4" fill={uranus} />
-           <circle cx="265" cy="290" r="40" stroke={saturnCircle} strokeWidth="4" fill={saturn} />
-           
-           <circle cx="70" cy="290" r="40" stroke={jupiterCircle} strokeWidth="4" fill={jupiter} />
-           <circle cx="170" cy="340" r="40" stroke={maldekCircle} strokeWidth="4" fill={maldek} />
-           
-           <circle cx="70" cy="410" r="40" stroke={earthCircle} strokeWidth="4" fill={earth} />
-           <circle cx="270" cy="410" r="40" stroke={marsCircle} strokeWidth="4" fill={mars} />
-           
-           
-           <circle cx="170" cy="445" r="40" stroke={venusCircle} strokeWidth="4" fill={venus} />
-          <circle cx="170" cy="535" r="40" stroke={mercuryCircle} strokeWidth="4" fill={mercury} />
-
-          {/**/}
-          {mercuryUnit}
-          {venusUnit}
-          {earthUnit}
-          {marsUnit}
-          {maldekUnit}
-          {jupiterUnit}
-          {saturnUnit}
-          {uranusUnit}
-          {neptuneUnit}
-          {plutoUnit}
-          {chironUnit}
-          {nibiruUnit}
-        </svg> 
-      </div>
-      <br/>
-      <br/>
-      {/*<RD3Component data={node} />*/}
       <br/>
       <br/>
       <br/>
@@ -1398,53 +1158,28 @@ function App () {
       <br/>
       <br/>
       <br/>
+      <br/>      <br/>
       <br/>
       <br/>
+      <br/>      <br/>
       <br/>
       <br/>
+      <br/>      <br/>
       <br/>
       <br/>
+      <br/>      <br/>
       <br/>
       <br/>
+      <br/>      <br/>
+      <br/>
+      <button className='redButton' onClick={() => {
+        treeState = treeState == 'PRISM' ? 'DUAL' : treeState == 'ELEMENTS' ? 'PRISM' : 'ELEMENTS' 
+        setLed(led+1)
+        console.log(treeState)
+      }}>{treeState.toString()}</button>
       <br/>
       <br/>
-      <br/>
-      <br/>
-      <br/>
-      <br/>
-      <br/>
-      <br/>
-      <br/>
-      <br/>
-      <br/>
-      <div class="container">
-      <div class="panel">
-        <div class="exchange-rate">
-          <div class="label">Exchange</div>
-          <div class="conversion-selector">USD - AUD</div>
-          <span class="rate" style={{fontFamily: 'Gothic'}}data-currency="$"></span>
-        </div>
-        <div id="chart">
-        </div>
-      </div>
-      <button id="generate">Generate New Data</button>
-    </div>
-    <svg id="app" viewBox="0 0 1000 1000"></svg>
-    <div class="path" id="path">
-    {sections}
-  <span class="section"></span>
-  <span class="section"></span>
-  <span class="section forked">
-    <span class="lane"></span>
-    <span class="lane"></span>
-  </span>
-  <span class="section"></span>
 </div>
-  <Blueberry led={led} setLed={setLed}/>
-  {/*<Aura/>*/}
-  <article class="luminous animated" role="img" aria-label="Cartoon of lighted candle" style={{marginLeft: '60px'}}></article>
-  <article class="luminous animated-2" role="img" aria-label="Cartoon of lighted candle" style={{marginLeft: '200px'}}></article>
-    </div>
   );
 }
 

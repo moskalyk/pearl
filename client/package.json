@@ -17,6 +17,7 @@
     "@worldcoin/id": "^0.0.2",
     "chart.js": "^3.9.1",
     "customize-cra": "^1.0.0",
+    "d3": "^7.8.5",
     "jquery": "^3.6.0",
     "mobx": "^6.6.2",
     "mobx-react": "^7.5.3",

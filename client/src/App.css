@@ -2637,3 +2637,17 @@ figure img,
   width: 40px;
   margin-top: 0;
 }
+
+.redButton {
+  background-color:black;
+  border-radius:28px;
+  border:1px solid cyan;
+  cursor:pointer;
+  color:#ffffff;
+  font-size:17px;
+  padding:16px 31px;
+  margin: 5px;
+  marker-left: 10px;
+  text-decoration:none;
+  cursor: pointer;
+}
