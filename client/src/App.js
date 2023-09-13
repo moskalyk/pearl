@@ -427,17 +427,17 @@ function App () {
   const [plutoUnit, setPlutoUnit] = useState(null)
   const [chironUnit, setChironUnit] = useState(null)
   const [nibiruUnit, setNibiruUnit] = useState(null)
-
+  let NUM = 16
   let operator = {
     0: () => {
       setEarthUnit(
-        <text x="50" y="420" class="small" fill="#ffffff" >
-          𓉢 ♁
+        <text x="63" y="420" class="small" fill="#000" >
+          ☿
         </text>
       )
       setMarsUnit(
-        <text x="255" y="420" class="small" fill="#ffffff">
-          𓆣 ♂
+        <text x="262" y="420" class="small" fill="#000">
+          ♀
         </text>
       )
 
@@ -453,13 +453,13 @@ function App () {
     },
     1: () => {
       setMaldekUnit(
-        <text x="155" y="345" class="small" fill="#ffffff">
-          𓊝 ◌
+        <text x="163" y="351" class="small" fill="#ffffff">
+          ☉
         </text>
       )
       setJupiterUnit(
-        <text x="55" y="300" class="small" fill="#ffffff">
-          𓋘 ♃
+        <text x="65" y="297" class="small" fill="#ffffff">
+          ♂
         </text>
       )
 
@@ -475,13 +475,13 @@ function App () {
     },
     2: () => {
       setMercuryUnit(
-        <text x="155" y="555" class="small" fill="#000">
-          𓅠 ☿
+        <text x="162" y="561" class="small" fill="#000">
+          🜃
         </text>
       )
       setVenusUnit(
-        <text x="155" y="445" class="small" fill="#000">
-          𓋟 ♀
+        <text x="159" y="451" class="small" fill="#000">
+          ☽
         </text>
       )
 
@@ -497,13 +497,13 @@ function App () {
     },
     3: () => {
       setVenusUnit(
-        <text x="155" y="445" class="small" fill="#000">
-          𓋟 ♀
+        <text x="159" y="451" class="small" fill="#000">
+          ☽
         </text>
       )
       setMarsUnit(
-        <text x="255" y="420" class="small" fill="#000">
-          𓆣 ♂
+        <text x="264" y="416" class="small" fill="#000">
+          ♀
         </text>
       )
 
@@ -520,13 +520,13 @@ function App () {
     4: () => {
 
       setNeptuneUnit(
-        <text x="55" y="180" class="small" fill="#ffffff">
-          𓏁 ♆
+        <text x="62" y="180" class="small" fill="#ffffff">
+          ♄
         </text>
       )
       setPlutoUnit(
-        <text x="255" y="180" class="small" fill="#ffffff">
-          𓉧 ♇
+        <text x="263" y="180" class="small" fill="#ffffff">
+          ♅
         </text>
       )
 
@@ -543,18 +543,18 @@ function App () {
     5: () => {
       
       setNibiruUnit(
-        <text x="155" y="55" class="small" fill="#00000">
-          𓇽 ☄
+        <text x="163" y="55" class="small" fill="#00000">
+          🜁
         </text>
       )
       setChironUnit(
-        <text x="155" y="345" class="small" fill="#000000">
-          𓋇 🗝
+        <text x="163" y="353" class="small" fill="#fff">
+          ☉
         </text>
       )
 
-      setChiron('turquoise')
-      setChironCircle('white')
+      setMaldek('blue')
+      setMaldekCircle('white')
       setNibiru('white')
       setNibiruCircle('white')
 
@@ -565,13 +565,13 @@ function App () {
     },
     6: () => {
       setUranusUnit(
-        <text x="58" y="416" class="small" fill="#000">
-          test
+        <text x="65" y="416" class="small" fill="#000">
+          ☿
         </text>
       )
       setSaturnUnit(
         <text x="161" y="450" class="small" fill="#000">
-          test
+          ☽
         </text>
       )
 
@@ -587,13 +587,13 @@ function App () {
     },
     7: () => {
       setNibiruUnit(
-        <text x="160" y="50" class="small" fill="#000">
-          test
+        <text x="163" y="55" class="small" fill="#00000">
+          🜁
         </text>
       )
-      setChironUnit(
-        <text x="262" y="180" class="small" fill="#FFF">
-          test
+      setPlutoUnit(
+        <text x="263" y="180" class="small" fill="#ffffff">
+          ♅
         </text>
       )
 
@@ -608,14 +608,14 @@ function App () {
         )
     },
     8: () => {
-      setNibiruUnit(
-        <text x="255" y="297" class="small" fill="#FFFFFF">
-          test
+      setSaturnUnit(
+        <text x="258" y="297" class="small" fill="#FFFFFF">
+          ♃
         </text>
       )
-      setChironUnit(
-        <text x="255" y="175" class="small" fill="#FFFFFF">
-          test
+      setPlutoUnit(
+        <text x="263" y="180" class="small" fill="#ffffff">
+          ♅
         </text>
       )
 
@@ -631,14 +631,14 @@ function App () {
     
     },
     9: () => {
-      setNibiruUnit(
-        <text x="255" y="297" class="small" fill="#FFFFFF">
-          test
+      setSaturnUnit(
+        <text x="262" y="297" class="small" fill="#FFFFFF">
+          ♃
         </text>
       )
-      setChironUnit(
-        <text x="259.99" y="416" class="small" fill="#FFFFFF">
-          test
+      setMarsUnit(
+        <text x="262" y="416" class="small" fill="#FFFFFF">
+          ♀
         </text>
       )
 
@@ -654,13 +654,13 @@ function App () {
     },
     10: () => {
       setMarsUnit(
-        <text x="255" y="420" class="small" fill="#ffffff">
-          𓆣 ♂
+        <text x="262" y="416" class="small" fill="#FFFFFF">
+          ♀
         </text>
       )
-      setMaldekUnit(
-        <text x="155" y="555" class="small" fill="#ffffff">
-          𓊝 ◌
+      setMercuryUnit(
+        <text x="162" y="562" class="small" fill="#ffffff">
+          🜃
         </text>
       )
 
@@ -675,15 +675,15 @@ function App () {
         )
     },
     11: () => {
-      setNibiruUnit(
-        <text x="160" y="560" class="small" fill="#000">
-          test
+      setMercuryUnit(
+        <text x="162" y="562" class="small" fill="#ffffff">
+          🜃
         </text>
       )
 
-      setChironUnit(
-        <text x="60" y="410" class="small" fill="#000">
-          test
+      setEarthUnit(
+        <text x="65" y="416" class="small" fill="#000">
+          ☿
         </text>
       )
 
@@ -698,14 +698,14 @@ function App () {
         )
     },
     12: () => {
-      setNibiruUnit(
-        <text x="60" y="297" class="small" fill="#FFFFFF">
-          test
+      setJupiterUnit(
+        <text x="65" y="297" class="small" fill="#FFFFFF">
+          ♂
         </text>
       )
-      setChironUnit(
-        <text x="60" y="416" class="small" fill="#000000">
-          test
+      setEarthUnit(
+        <text x="65" y="416" class="small" fill="#000">
+          ☿
         </text>
       )
 
@@ -720,14 +720,14 @@ function App () {
         )
     },
     13: () => {
-      setNibiruUnit(
-        <text x="60" y="297" class="small" fill="#FFFFFF">
-          test
+      setJupiterUnit(
+        <text x="65" y="297" class="small" fill="#FFFFFF">
+          ♂
         </text>
       )
-      setChironUnit(
+      setNeptuneUnit(
         <text x="60" y="175" class="small" fill="#000000">
-          test
+          ♄
         </text>
       )
 
@@ -743,20 +743,20 @@ function App () {
     },
     14: () => {
       setNibiruUnit(
-        <text x="160" y="55" class="small" fill="#00000">
-          test
+        <text x="163" y="55" class="small" fill="#00000">
+          🜁
         </text>
       )
-      setChironUnit(
+      setNeptuneUnit(
         <text x="60" y="175" class="small" fill="#000000">
-          test
+          ♄
         </text>
       )
 
       setNeptune('lightgrey')
       setNeptuneCircle('white')
       setNibiru('white')
-      setNibiruCircle('lightgrey')
+      setNibiruCircle('white')
 
       setEdge(
         <rect x="110" y="-110" width="110" transform="rotate(38 0 0)" height="250" rx="50" style={{fill: "rgb(0,0,0)", strokeWidth:"3", stroke: "rgb(0,0,0)"}}>
@@ -764,14 +764,14 @@ function App () {
         )
     },
     15: () => {
-      setMaldekUnit(
-        <text x="155" y="345" class="small" fill="#ffffff">
-          𓊝 ◌
+      setChironUnit(
+        <text x="163" y="353" class="small" fill="#fff">
+          ☉
         </text>
       )
       setVenusUnit(
-        <text x="155" y="445" class="small" fill="#000">
-          𓋟 ♀
+        <text x="159" y="451" class="small" fill="#000">
+          ☽
         </text>
       )
 
@@ -786,14 +786,14 @@ function App () {
         )
     },
     17: () => {
-      setMaldekUnit(
-        <text x="155" y="345" class="small" fill="#ffffff">
-          𓊝 ◌
+      setChironUnit(
+        <text x="163" y="353" class="small" fill="#fff">
+          ☉
         </text>
       )
       setMarsUnit(
-        <text x="255" y="420" class="small" fill="#ffffff">
-          𓆣 ♂
+        <text x="262" y="420" class="small" fill="#ffffff">
+          ♀
         </text>
       )
 
@@ -808,14 +808,14 @@ function App () {
       )
     },
     18: () => {
-      setNeptuneUnit(
-        <text x="55" y="295" class="small" fill="#ffffff">
-          𓏁 ♆
+      setJupiterUnit(
+        <text x="65" y="297" class="small" fill="#FFFFFF">
+          ♂
         </text>
       )
-      setPlutoUnit(
-        <text x="255" y="295" class="small" fill="#ffffff">
-          𓉧 ♇
+      setSaturnUnit(
+        <text x="262" y="295" class="small" fill="#ffffff">
+          ♃
         </text>
       )
 
@@ -831,13 +831,13 @@ function App () {
     },
     19: () => {
       setSaturnUnit(
-        <text x="257" y="290" class="small" fill="#000">
-          test
+        <text x="262" y="298" class="small" fill="#000">
+          ♃
         </text>
       )
-      setMaldekUnit(
-        <text x="155" y="345" class="small" fill="#ffffff">
-          𓊝 ◌
+      setChironUnit(
+        <text x="163" y="353" class="small" fill="#000">
+          ☉
         </text>
       )
 
@@ -853,13 +853,13 @@ function App () {
     },
     20: () => {
       setEarthUnit(
-        <text x="50" y="420" class="small" fill="#000" >
-          𓉢 ♁
+        <text x="65" y="416" class="small" fill="#000">
+          ☿
         </text>
       )
-      setMaldekUnit(
-        <text x="155" y="345" class="small" fill="#ffffff">
-          𓊝 ◌
+      setChironUnit(
+        <text x="163" y="353" class="small" fill="#fff">
+          ☉
         </text>
       )
 
@@ -875,13 +875,13 @@ function App () {
     },
     21: () => {
       setNeptuneUnit(
-        <text x="55" y="180" class="small" fill="#ffffff">
-          𓏁 ♆
+        <text x="63" y="180" class="small" fill="#000">
+          ♄
         </text>
       )
-      setMaldekUnit(
-        <text x="155" y="345" class="small" fill="#ffffff">
-          𓊝 ◌
+      setChironUnit(
+        <text x="163" y="353" class="small" fill="#fff">
+          ☉
         </text>
       )
 
@@ -896,13 +896,13 @@ function App () {
     },
     16: () => {
       setPlutoUnit(
-        <text x="255" y="180" class="small" fill="#ffffff">
-          𓉧 ♇
+        <text x="263" y="180" class="small" fill="#ffffff">
+          ♅
         </text>
       )
-      setMaldekUnit(
-        <text x="155" y="355" class="small" fill="#ffffff">
-          𓊝 ◌
+      setChironUnit(
+        <text x="163" y="353" class="small" fill="#fff">
+          ☉
         </text>
       )
 
@@ -969,8 +969,8 @@ function App () {
     // ran = 5
       clear()
       console.log('timer', counter)
-      const res = await fetch(`${'http://0.0.0.0:4000'}/live`)
-      // const res = await fetch(`${'http://216.128.185.237:4000'}/live`)
+      // const res = await fetch(`${'http://0.0.0.0:4000'}/live`)
+      const res = await fetch(`${'http://216.128.185.237:4000'}/live`)
       const json = await res.json()
       const tvls = Object.values(json.tvl).sort().filter((el) => el > 0)
       // Sort the object by values
@@ -983,6 +983,9 @@ function App () {
 
       console.log(sortedObject);
       const topKey = Object.keys(sortedObject)[0]
+
+      // for testing
+      // operator[(NUM).toString()]()
       
       if(treeState == 'PRISM'){
         switch(topKey){
@@ -1121,7 +1124,7 @@ function App () {
            <circle cx="270" cy="170" r="40" stroke={plutoCircle} strokeWidth="4" fill={pluto} />
            
            {/* <circle cx="170" cy="240" r="40" stroke={uranusCircle} strokeWidth="4" fill={uranus} /> */}
-           <circle cx="265" cy="290" r="40" stroke={saturnCircle} strokeWidth="4" fill={saturn} />
+           <circle cx="270" cy="290" r="40" stroke={saturnCircle} strokeWidth="4" fill={saturn} />
            
            <circle cx="70" cy="290" r="40" stroke={jupiterCircle} strokeWidth="4" fill={jupiter} />
            <circle cx="170" cy="345" r="40" stroke={maldekCircle} strokeWidth="4" fill={maldek} />
