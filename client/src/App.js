@@ -969,12 +969,12 @@ function App () {
     // ran = 5
       clear()
       console.log('timer', counter)
-      // const res = await fetch(`${'http://0.0.0.0:4000'}/live`)
-      const res = await fetch(`${'http://216.128.185.237:4000'}/live`)
+      const res = await fetch(`${'http://0.0.0.0:4000'}/live`)
+      // const res = await fetch(`${'http://216.128.185.237:4000'}/live`)
       const json = await res.json()
       // const tvls = Object.values(json.tvl).sort().filter((el) => el > 0)
       // Sort the object by values
-      json.tvl.str = -0.05
+      // json.tvl.str = -0.05
       const sortedObject = Object.fromEntries(
         Object.entries(json.tvl)
           .filter(([key, value]) => value !== 0) // Remove elements with a value of 0
@@ -1039,34 +1039,34 @@ function App () {
         if(maxCombination){
           switch(maxCombination){
             case 'agi_str':
-              operator[(13).toString()]()
+              operator[(13).toString()](true)
               break;
             case 'wis_str':
-              operator[(19).toString()]()
+              operator[(19).toString()](true)
               break;
             case 'hrt_str':
-              operator[(7).toString()]()
+              operator[(7).toString()](true)
               break;
             case 'int_str':
-              operator[(14).toString()]()
+              operator[(14).toString()](true)
               break;
             case 'agi_wis':
-              operator[(20).toString()]()
+              operator[(20).toString()](true)
               break;
             case 'agi_hrt':
-              operator[(17).toString()]()
+              operator[(17).toString()](true)
               break;
             case 'agi_int':
-              operator[(11).toString()]()
+              operator[(11).toString()](true)
               break;
             case 'hrt_wis':
-              operator[(6).toString()]()
+              operator[(6).toString()](true)
               break;
             case 'int_wis':
-              operator[(10).toString()]()
+              operator[(10).toString()](true)
               break;
             case 'hrt_int':
-              operator[(15).toString()]()
+              operator[(15).toString()](true)
               break;
           }
         }else {
