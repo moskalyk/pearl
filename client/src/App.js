@@ -429,7 +429,7 @@ function App () {
   const [nibiruUnit, setNibiruUnit] = useState(null)
   let NUM = 16
   let operator = {
-    0: () => {
+    0: (isGrowing) => {
       setEarthUnit(
         <text x="63" y="420" class="small" fill="#000" >
           ☿
@@ -447,11 +447,11 @@ function App () {
       setMarsCircle('white')
 
       setEdge(
-        <rect x="25" y="360" rx="50" width="290" height="110" style={{fill: "rgb(0,0,0)", strokeWidth:"3", stroke: "rgb(0,0,0)"}} >
+        <rect x="25" y="360" rx="50" width="290" height="110" style={{fill: isGrowing ? "rgb(0,0,0)" : 'red', strokeWidth:"3", stroke: "rgb(0,0,0)"}} >
         </rect>
         )
     },
-    1: () => {
+    1: (isGrowing) => {
       setMaldekUnit(
         <text x="163" y="351" class="small" fill="#ffffff">
           ☉
@@ -469,11 +469,11 @@ function App () {
       setJupiterCircle('white')
 
       setEdge(
-        <rect x="140" y="185" transform="rotate(25 0 0)" rx="50" width="220" height="100" style={{fill: "rgb(0,0,0)", strokeWidth:"3", stroke: "rgb(0,0,0)"}}>
+        <rect x="140" y="185" transform="rotate(25 0 0)" rx="50" width="220" height="100" style={{fill: isGrowing ? "rgb(0,0,0)" : 'red', strokeWidth:"3", stroke: "rgb(0,0,0)"}}>
         </rect>
       )
     },
-    2: () => {
+    2: (isGrowing) => {
       setMercuryUnit(
         <text x="162" y="561" class="small" fill="#000">
           🜃
@@ -491,11 +491,11 @@ function App () {
       setVenusCircle('white')
 
       setEdge(
-        <rect x="115" y="400" width="110" height="200" rx="50" style={{fill: "rgb(0,0,0)", strokeWidth:"3", stroke: "rgb(0,0,0)"}}>
+        <rect x="115" y="400" width="110" height="200" rx="50" style={{fill: isGrowing ? "rgb(0,0,0)" : 'red', strokeWidth:"3", stroke: "rgb(0,0,0)"}}>
         </rect>
       )
     },
-    3: () => {
+    3: (isGrowing) => {
       setVenusUnit(
         <text x="159" y="451" class="small" fill="#000">
           ☽
@@ -513,11 +513,11 @@ function App () {
       setVenusCircle('white')
 
       setEdge(
-        <rect x="425" y="-149" width="110" transform="rotate(67 0 0)" height="220" rx="50" style={{fill: "rgb(0,0,0)", strokeWidth:"3", stroke: "rgb(0,0,0)"}}>
+        <rect x="425" y="-149" width="110" transform="rotate(67 0 0)" height="220" rx="50" style={{fill: isGrowing ? "rgb(0,0,0)" : 'red', strokeWidth:"3", stroke: "rgb(0,0,0)"}}>
         </rect>
         )
     },
-    4: () => {
+    4: (isGrowing) => {
 
       setNeptuneUnit(
         <text x="62" y="180" class="small" fill="#ffffff">
@@ -536,11 +536,11 @@ function App () {
       setPlutoCircle('white')
 
       setEdge(
-        <rect x="25" y="110" width="290" height="110" rx="50" style={{fill: "rgb(0,0,0)", strokeWidth:"3", stroke: "rgb(0,0,0)"}}>
+        <rect x="25" y="110" width="290" height="110" rx="50" style={{fill: isGrowing ? "rgb(0,0,0)" : 'red', strokeWidth:"3", stroke: "rgb(0,0,0)"}}>
         </rect>
       )
     },
-    5: () => {
+    5: (isGrowing) => {
       
       setNibiruUnit(
         <text x="163" y="55" class="small" fill="#00000">
@@ -559,11 +559,11 @@ function App () {
       setNibiruCircle('white')
 
       setEdge(
-        <rect x="115" y="5" width="110" height="390" rx="50" style={{fill: "rgb(0,0,0)", strokeWidth:"3", stroke: "rgb(0,0,0)"}}>
+        <rect x="115" y="5" width="110" height="390" rx="50" style={{fill: isGrowing ? "rgb(0,0,0)" : 'red', strokeWidth:"3", stroke: "rgb(0,0,0)"}}>
         </rect>
         )
     },
-    6: () => {
+    6: (isGrowing) => {
       setUranusUnit(
         <text x="65" y="416" class="small" fill="#000">
           ☿
@@ -581,11 +581,11 @@ function App () {
       setEarthCircle('white')
 
       setEdge(
-        <rect x="180" y="287" transform="rotate(25 0 0)" rx="50" width="220" height="100" style={{fill: "rgb(0,0,0)", strokeWidth:"3", stroke: "rgb(0,0,0)"}}>
+        <rect x="180" y="287" transform="rotate(25 0 0)" rx="50" width="220" height="100" style={{fill: isGrowing ? "rgb(0,0,0)" : 'red', strokeWidth:"3", stroke: "rgb(0,0,0)"}}>
         </rect>
       )
     },
-    7: () => {
+    7: (isGrowing) => {
       setNibiruUnit(
         <text x="163" y="55" class="small" fill="#00000">
           🜁
@@ -603,11 +603,11 @@ function App () {
       setPlutoCircle('white')
 
       setEdge(
-        <rect x="48" y="100" width="110" height="250" rx="50" transform="rotate(-38 0 0)" style={{fill: "rgb(0,0,0)", strokeWidth:"3", stroke: "rgb(0,0,0)"}}>
+        <rect x="48" y="100" width="110" height="250" rx="50" transform="rotate(-38 0 0)" style={{fill: isGrowing ? "rgb(0,0,0)" : 'red', strokeWidth:"3", stroke: "rgb(0,0,0)"}}>
         </rect>
         )
     },
-    8: () => {
+    8: (isGrowing) => {
       setSaturnUnit(
         <text x="258" y="297" class="small" fill="#FFFFFF">
           ♃
@@ -625,12 +625,12 @@ function App () {
       setPlutoCircle('white')
 
       setEdge(
-        <rect x="215" y="115" width="110" height="230" rx="50" style={{fill: "rgb(0,0,0)", strokeWidth:"3", stroke: "rgb(0,0,0)"}}>
+        <rect x="215" y="115" width="110" height="230" rx="50" style={{fill: isGrowing ? "rgb(0,0,0)" : 'red', strokeWidth:"3", stroke: "rgb(0,0,0)"}}>
         </rect>
         )
     
     },
-    9: () => {
+    9: (isGrowing) => {
       setSaturnUnit(
         <text x="262" y="297" class="small" fill="#FFFFFF">
           ♃
@@ -648,11 +648,11 @@ function App () {
       setMarsCircle('white')
 
       setEdge(
-        <rect x="215" y="235" width="110" height="230" rx="50" style={{fill: "rgb(0,0,0)", strokeWidth:"3", stroke: "rgb(0,0,0)"}}>
+        <rect x="215" y="235" width="110" height="230" rx="50" style={{fill: isGrowing ? "rgb(0,0,0)" : 'red', strokeWidth:"3", stroke: "rgb(0,0,0)"}}>
         </rect>
         )
     },
-    10: () => {
+    10: (isGrowing) => {
       setMarsUnit(
         <text x="262" y="416" class="small" fill="#FFFFFF">
           ♀
@@ -670,11 +670,11 @@ function App () {
       setMercuryCircle('white')
 
       setEdge(
-        <rect x="390" y="150" width="110" transform="rotate(33 0 0)" height="270" rx="50" style={{fill: "rgb(0,0,0)", strokeWidth:"3", stroke: "rgb(0,0,0)"}}>
+        <rect x="390" y="150" width="110" transform="rotate(33 0 0)" height="270" rx="50" style={{fill: isGrowing ? "rgb(0,0,0)" : 'red', strokeWidth:"3", stroke: "rgb(0,0,0)"}}>
         </rect>
         )
     },
-    11: () => {
+    11: (isGrowing) => {
       setMercuryUnit(
         <text x="162" y="562" class="small" fill="#ffffff">
           🜃
@@ -693,11 +693,11 @@ function App () {
       setMercuryCircle('white')
 
       setEdge(
-        <rect x="-258" y="320" width="110" height="270" rx="50" transform="rotate(-38 0 0)" style={{fill: "rgb(0,0,0)", strokeWidth:"3", stroke: "rgb(0,0,0)"}}>
+        <rect x="-258" y="320" width="110" height="270" rx="50" transform="rotate(-38 0 0)" style={{fill: isGrowing ? "rgb(0,0,0)" : 'red', strokeWidth:"3", stroke: "rgb(0,0,0)"}}>
         </rect>
         )
     },
-    12: () => {
+    12: (isGrowing) => {
       setJupiterUnit(
         <text x="65" y="297" class="small" fill="#FFFFFF">
           ♂
@@ -715,11 +715,11 @@ function App () {
       setEarthCircle('white')
 
       setEdge(
-        <rect x="15" y="235" width="110" height="230" rx="50" style={{fill: "rgb(0,0,0)", strokeWidth:"3", stroke: "rgb(0,0,0)"}}>
+        <rect x="15" y="235" width="110" height="230" rx="50" style={{fill: isGrowing ? "rgb(0,0,0)" : 'red', strokeWidth:"3", stroke: "rgb(0,0,0)"}}>
         </rect>
         )
     },
-    13: () => {
+    13: (isGrowing) => {
       setJupiterUnit(
         <text x="65" y="297" class="small" fill="#FFFFFF">
           ♂
@@ -737,11 +737,11 @@ function App () {
       setJupiterCircle('white')
 
       setEdge(
-        <rect x="15" y="115" width="110" height="230" rx="50" style={{fill: "rgb(0,0,0)", strokeWidth:"3", stroke: "rgb(0,0,0)"}}>
+        <rect x="15" y="115" width="110" height="230" rx="50" style={{fill: isGrowing ? "rgb(0,0,0)" : 'red', strokeWidth:"3", stroke: "rgb(0,0,0)"}}>
         </rect>
         )
     },
-    14: () => {
+    14: (isGrowing) => {
       setNibiruUnit(
         <text x="163" y="55" class="small" fill="#00000">
           🜁
@@ -759,11 +759,11 @@ function App () {
       setNibiruCircle('white')
 
       setEdge(
-        <rect x="110" y="-110" width="110" transform="rotate(38 0 0)" height="250" rx="50" style={{fill: "rgb(0,0,0)", strokeWidth:"3", stroke: "rgb(0,0,0)"}}>
+        <rect x="110" y="-110" width="110" transform="rotate(38 0 0)" height="250" rx="50" style={{fill: isGrowing ? "rgb(0,0,0)" : 'red', strokeWidth:"3", stroke: "rgb(0,0,0)"}}>
         </rect>
         )
     },
-    15: () => {
+    15: (isGrowing) => {
       setChironUnit(
         <text x="163" y="353" class="small" fill="#fff">
           ☉
@@ -785,7 +785,7 @@ function App () {
         </rect>
         )
     },
-    17: () => {
+    17: (isGrowing) => {
       setChironUnit(
         <text x="163" y="353" class="small" fill="#fff">
           ☉
@@ -803,11 +803,11 @@ function App () {
       setMaldekCircle('white')
 
       setEdge(
-        <rect x="270" y="163" transform="rotate(31 0 0)" rx="50" width="220" height="100" style={{fill: "rgb(0,0,0)", strokeWidth:"3", stroke: "rgb(0,0,0)"}}>
+        <rect x="270" y="163" transform="rotate(31 0 0)" rx="50" width="220" height="100" style={{fill: isGrowing ? "rgb(0,0,0)" : 'red', strokeWidth:"3", stroke: "rgb(0,0,0)"}}>
         </rect>
       )
     },
-    18: () => {
+    18: (isGrowing) => {
       setJupiterUnit(
         <text x="65" y="297" class="small" fill="#FFFFFF">
           ♂
@@ -825,11 +825,11 @@ function App () {
       setSaturnCircle('white')
 
       setEdge(
-        <rect x="25" y="235" width="290" height="110" rx="50" style={{fill: "rgb(0,0,0)", strokeWidth:"3", stroke: "rgb(0,0,0)"}}>
+        <rect x="25" y="235" width="290" height="110" rx="50" style={{fill: isGrowing ? "rgb(0,0,0)" : 'red', strokeWidth:"3", stroke: "rgb(0,0,0)"}}>
         </rect>
       )
     },
-    19: () => {
+    19: (isGrowing) => {
       setSaturnUnit(
         <text x="262" y="298" class="small" fill="#000">
           ♃
@@ -847,11 +847,11 @@ function App () {
       setMaldekCircle('white')
 
       setEdge(
-        <rect x="335" y="-79" width="110" transform="rotate(51 0 0)" height="220" rx="50" style={{fill: "rgb(0,0,0)", strokeWidth:"3", stroke: "rgb(0,0,0)"}}>
+        <rect x="335" y="-79" width="110" transform="rotate(51 0 0)" height="220" rx="50" style={{fill: isGrowing ? "rgb(0,0,0)" : 'red', strokeWidth:"3", stroke: "rgb(0,0,0)"}}>
         </rect>
         )
     },
-    20: () => {
+    20: (isGrowing) => {
       setEarthUnit(
         <text x="65" y="416" class="small" fill="#000">
           ☿
@@ -869,11 +869,11 @@ function App () {
       setMaldekCircle('white')
 
       setEdge(
-        <rect x="315" y="34" width="110" transform="rotate(51 0 0)" height="220" rx="50" style={{fill: "rgb(0,0,0)", strokeWidth:"3", stroke: "rgb(0,0,0)"}}>
+        <rect x="315" y="34" width="110" transform="rotate(51 0 0)" height="220" rx="50" style={{fill: isGrowing ? "rgb(0,0,0)" : 'red', strokeWidth:"3", stroke: "rgb(0,0,0)"}}>
         </rect>
         )
     },
-    21: () => {
+    21: (isGrowing) => {
       setNeptuneUnit(
         <text x="63" y="180" class="small" fill="#000">
           ♄
@@ -890,11 +890,11 @@ function App () {
       setMaldek('blue')
       setMaldekCircle('white')
       setEdge(
-        <rect x="134" y="-19" transform="rotate(59 0 0)" rx="50" width="310" height="100" style={{fill: "rgb(0,0,0)", strokeWidth:"3", stroke: "rgb(0,0,0)"}}>
+        <rect x="134" y="-19" transform="rotate(59 0 0)" rx="50" width="310" height="100" style={{fill: isGrowing ? "rgb(0,0,0)" : 'red', strokeWidth:"3", stroke: "rgb(0,0,0)"}}>
         </rect>
       )
     },
-    16: () => {
+    16: (isGrowing) => {
       setPlutoUnit(
         <text x="263" y="180" class="small" fill="#ffffff">
           ♅
@@ -912,7 +912,7 @@ function App () {
       setPlutoCircle('white')
 
       setEdge(
-        <rect x="270" y="-55" width="110" transform="rotate(33 0 0)" height="300" rx="50" style={{fill: "rgb(0,0,0)", strokeWidth:"3", stroke: "rgb(0,0,0)"}}>
+        <rect x="270" y="-55" width="110" transform="rotate(33 0 0)" height="300" rx="50" style={{fill: isGrowing ? "rgb(0,0,0)" : 'red', strokeWidth:"3", stroke: "rgb(0,0,0)"}}>
         </rect>
         )
     },
@@ -972,8 +972,9 @@ function App () {
       // const res = await fetch(`${'http://0.0.0.0:4000'}/live`)
       const res = await fetch(`${'http://216.128.185.237:4000'}/live`)
       const json = await res.json()
-      const tvls = Object.values(json.tvl).sort().filter((el) => el > 0)
+      // const tvls = Object.values(json.tvl).sort().filter((el) => el > 0)
       // Sort the object by values
+      json.tvl.str = -0.05
       const sortedObject = Object.fromEntries(
         Object.entries(json.tvl)
           .filter(([key, value]) => value !== 0) // Remove elements with a value of 0
@@ -987,58 +988,127 @@ function App () {
       // for testing
       // operator[(NUM).toString()]()
       
+      
       if(treeState == 'PRISM'){
-        switch(topKey){
-          case 'str':
-            operator[(18).toString()]()
-            break;
-          case 'agi':
-            operator[(9).toString()]()
-            break;
-          case 'wis':
-            operator[(12).toString()]()
-            break;
-          case 'hrt':
-            operator[(21).toString()]()
-            break;
-          case 'int':
-            operator[(5).toString()]()
-            break;
+        if(topKey){
+          switch(topKey){
+            case 'str':
+              operator[(18).toString()](true)
+              break;
+            case 'agi':
+              operator[(9).toString()](true)
+              break;
+            case 'wis':
+              operator[(12).toString()](true)
+              break;
+            case 'hrt':
+              operator[(21).toString()](true)
+              break;
+            case 'int':
+              operator[(5).toString()](true)
+              break;
+          }
+        }else {
+          const sortedObject = Object.fromEntries(
+            Object.entries(json.tvl)
+              .filter(([key, value]) => value !== 0) // Remove elements with a value of 0
+              .sort((a, b) => a[1] - b[1]) // Sort in descending order of values
+          );
+          const topKey = Object.keys(sortedObject)[0]
+          console.log(topKey)
+          switch(topKey){
+            case 'str':
+              operator[(18).toString()](false)
+              break;
+            case 'agi':
+              operator[(9).toString()](false)
+              break;
+            case 'wis':
+              operator[(12).toString()](false)
+              break;
+            case 'hrt':
+              operator[(21).toString()](false)
+              break;
+            case 'int':
+              operator[(5).toString()](false)
+              break;
+          }
         }
       } else if(treeState == 'DUAL') {
         const maxCombination = findMaxTVLCombination(sortedObject);
-        console.log(maxCombination); // Output: "int_hrt"
-        switch(maxCombination){
-          case 'agi_str':
-            operator[(13).toString()]()
-            break;
-          case 'wis_str':
-            operator[(19).toString()]()
-            break;
-          case 'hrt_str':
-            operator[(7).toString()]()
-            break;
-          case 'int_str':
-            operator[(14).toString()]()
-            break;
-          case 'agi_wis':
-            operator[(20).toString()]()
-            break;
-          case 'agi_hrt':
-            operator[(17).toString()]()
-            break;
-          case 'agi_int':
-            operator[(11).toString()]()
-            break;
-          case 'hrt_wis':
-            operator[(6).toString()]()
-            break;
-          case 'int_wis':
-            operator[(10).toString()]()
-            break;
-          case 'hrt_int':
-            operator[(15).toString()]()
-            break;
+        if(maxCombination){
+          switch(maxCombination){
+            case 'agi_str':
+              operator[(13).toString()]()
+              break;
+            case 'wis_str':
+              operator[(19).toString()]()
+              break;
+            case 'hrt_str':
+              operator[(7).toString()]()
+              break;
+            case 'int_str':
+              operator[(14).toString()]()
+              break;
+            case 'agi_wis':
+              operator[(20).toString()]()
+              break;
+            case 'agi_hrt':
+              operator[(17).toString()]()
+              break;
+            case 'agi_int':
+              operator[(11).toString()]()
+              break;
+            case 'hrt_wis':
+              operator[(6).toString()]()
+              break;
+            case 'int_wis':
+              operator[(10).toString()]()
+              break;
+            case 'hrt_int':
+              operator[(15).toString()]()
+              break;
+          }
+        }else {
+          const sortedObject = Object.fromEntries(
+            Object.entries(json.tvl)
+              .filter(([key, value]) => value !== 0) // Remove elements with a value of 0
+              .sort((a, b) => a[1] - b[1]) // Sort in descending order of values
+          );
+          const topKey = Object.keys(sortedObject)[0]
+          const minCombination = findMaxTVLCombination(sortedObject);
+          switch(minCombination){
+            case 'agi_str':
+              operator[(13).toString()](false)
+              break;
+            case 'wis_str':
+              operator[(19).toString()](false)
+              break;
+            case 'hrt_str':
+              operator[(7).toString()](false)
+              break;
+            case 'int_str':
+              operator[(14).toString()](false)
+              break;
+            case 'agi_wis':
+              operator[(20).toString()](false)
+              break;
+            case 'agi_hrt':
+              operator[(17).toString()](false)
+              break;
+            case 'agi_int':
+              operator[(11).toString()](false)
+              break;
+            case 'hrt_wis':
+              operator[(6).toString()](false)
+              break;
+            case 'int_wis':
+              operator[(10).toString()](false)
+              break;
+            case 'hrt_int':
+              operator[(15).toString()](false)
+              break;
+          }
         }
       } else {
         const sortedObject = Object.fromEntries(
@@ -1051,32 +1121,70 @@ function App () {
         const topKey = Object.keys(sortedObject)[0]
         console.log(topKey)
         console.log(json.tvl_elements)
-        switch(topKey){
-          case 'air':
-            operator[(1).toString()]()
-            break;
-          case 'dark':
-            operator[(16).toString()]()
-            break;
-          case 'earth':
-            operator[(2).toString()]()
-            break;
-          case 'fire':
-            operator[(1).toString()]()
-            break;
-          case 'light':
-            operator[(4).toString()]()
-            break;
-          case 'metal':
-            operator[(3).toString()]()
-            break;
-          case 'mind':
-            operator[(8).toString()]()
-            break;
-          case 'water':
-            operator[(0).toString()]()
-            break;
+        if(topKey){
+          switch(topKey){
+            case 'air':
+              operator[(1).toString()](true)
+              break;
+            case 'dark':
+              operator[(16).toString()](true)
+              break;
+            case 'earth':
+              operator[(2).toString()](true)
+              break;
+            case 'fire':
+              operator[(1).toString()](true)
+              break;
+            case 'light':
+              operator[(4).toString()](true)
+              break;
+            case 'metal':
+              operator[(3).toString()](true)
+              break;
+            case 'mind':
+              operator[(8).toString()](true)
+              break;
+            case 'water':
+              operator[(0).toString()](true)
+              break;
+          }
+        } else {
+          const sortedObject = Object.fromEntries(
+            Object.entries(json.tvl_elements)
+              .filter(([key, value]) => value !== 0) // Remove elements with a value of 0
+              .sort((a, b) => a[1] - b[1]) // Sort in descending order of values
+          );
+
+          const topKey = Object.keys(sortedObject)[0]
+          switch(topKey){
+            case 'air':
+              operator[(1).toString()](false)
+              break;
+            case 'dark':
+              operator[(16).toString()](false)
+              break;
+            case 'earth':
+              operator[(2).toString()](false)
+              break;
+            case 'fire':
+              operator[(1).toString()](false)
+              break;
+            case 'light':
+              operator[(4).toString()](false)
+              break;
+            case 'metal':
+              operator[(3).toString()](false)
+              break;
+            case 'mind':
+              operator[(8).toString()](false)
+              break;
+            case 'water':
+              operator[(0).toString()](false)
+              break;
+          }
         }
+
+
       }
 
       function findMaxTVLCombination(tvlObject) {
