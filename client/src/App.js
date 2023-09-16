@@ -969,8 +969,8 @@ function App () {
     // ran = 5
       clear()
       console.log('timer', counter)
-      const res = await fetch(`${'http://0.0.0.0:4000'}/live`)
-      // const res = await fetch(`${'http://216.128.185.237:4000'}/live`)
+      // const res = await fetch(`${'http://0.0.0.0:4000'}/live`)
+      const res = await fetch(`${'http://216.128.185.237:4000'}/live`)
       const json = await res.json()
       // const tvls = Object.values(json.tvl).sort().filter((el) => el > 0)
       // Sort the object by values
