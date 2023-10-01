@@ -553,13 +553,13 @@ function App () {
         </text>
       )
 
-      setMaldek('blue')
-      setMaldekCircle('white')
+      setChiron('grey')
+      setChironCircle('white')
       setNibiru('white')
       setNibiruCircle('white')
 
       setEdge(
-        <rect x="115" y="5" width="110" height="390" rx="50" style={{fill: isGrowing ? "rgb(0,0,0)" : 'red', strokeWidth:"3", stroke: "rgb(0,0,0)"}}>
+        <rect x="115" y="5" width="110" height="190" rx="50" style={{fill: isGrowing ? "rgb(0,0,0)" : 'red', strokeWidth:"3", stroke: "rgb(0,0,0)"}}>
         </rect>
         )
     },
@@ -603,7 +603,7 @@ function App () {
       setPlutoCircle('white')
 
       setEdge(
-        <rect x="48" y="100" width="110" height="250" rx="50" transform="rotate(-38 0 0)" style={{fill: isGrowing ? "rgb(0,0,0)" : 'red', strokeWidth:"3", stroke: "rgb(0,0,0)"}}>
+        <rect x="48" y="97" width="110" height="250" rx="50" transform="rotate(-38 0 0)" style={{fill: isGrowing ? "rgb(0,0,0)" : 'red', strokeWidth:"3", stroke: "rgb(0,0,0)"}}>
         </rect>
         )
     },
@@ -777,6 +777,7 @@ function App () {
 
       setVenus('wheat')
       setVenusCircle('white')
+      
       setMaldek('blue')
       setMaldekCircle('white')
 
@@ -879,20 +880,28 @@ function App () {
           ♄
         </text>
       )
+
       setChironUnit(
-        <text x="163" y="353" class="small" fill="#fff">
-          ☉
+        <text x="163" y="153" class="small" fill="#fff">
+          {/* ☉ */}
         </text>
       )
 
       setNeptune('lightgrey')
       setNeptuneCircle('white')
-      setMaldek('blue')
-      setMaldekCircle('white')
+
+      setChiron('grey')
+      setChironCircle('white')
+      
       setEdge(
-        <rect x="134" y="-19" transform="rotate(59 0 0)" rx="50" width="310" height="100" style={{fill: isGrowing ? "rgb(0,0,0)" : 'red', strokeWidth:"3", stroke: "rgb(0,0,0)"}}>
+        <rect x="140" y="-135" width="110" transform="rotate(65 0 0)" height="190" rx="50" style={{fill: isGrowing ? "rgb(0,0,0)" : 'red', strokeWidth:"3", stroke: "rgb(0,0,0)"}}>
         </rect>
-      )
+        )
+
+      // setEdge(
+      //   <rect x="134" y="-19" transform="rotate(59 0 0)" rx="50" width="310" height="100" style={{fill: isGrowing ? "rgb(0,0,0)" : 'red', strokeWidth:"3", stroke: "rgb(0,0,0)"}}>
+      //   </rect>
+      // )
     },
     16: (isGrowing) => {
       setPlutoUnit(
@@ -906,16 +915,186 @@ function App () {
         </text>
       )
 
-      setMaldek('blue')
-      setMaldekCircle('white')
+      
+      setChiron('grey')
+      setChironCircle('white')
       setPluto('navy')
       setPlutoCircle('white')
 
       setEdge(
-        <rect x="270" y="-55" width="110" transform="rotate(33 0 0)" height="300" rx="50" style={{fill: isGrowing ? "rgb(0,0,0)" : 'red', strokeWidth:"3", stroke: "rgb(0,0,0)"}}>
+        <rect x="-128" y="160" width="110" height="210" rx="50" transform="rotate(-70 0 0)" style={{fill: isGrowing ? "rgb(0,0,0)" : 'red', strokeWidth:"3", stroke: "rgb(0,0,0)"}}>
         </rect>
         )
     },
+    22: (isGrowing) => {
+      setNibiruUnit(
+        <text x="163" y="55" class="small" fill="#00000">
+          {/* 🜁 */}
+        </text>
+      )
+      setChironUnit(
+        <text x="163" y="353" class="small" fill="#fff">
+          ☉
+        </text>
+      )
+
+      setChiron('grey')
+      setChironCircle('white')
+      setUranus ('orange')
+      setUranusCircle('white')
+
+      setEdge(
+        <rect x="115" y="100" width="110" height="190" rx="50" style={{fill: isGrowing ? "rgb(0,0,0)" : 'red', strokeWidth:"3", stroke: "rgb(0,0,0)"}}>
+        </rect>
+        )
+    },
+    23: (isGrowing) => {
+      setNibiruUnit(
+        <text x="163" y="55" class="small" fill="#00000">
+          {/* 🜁 */}
+        </text>
+      )
+      setChironUnit(
+        <text x="163" y="353" class="small" fill="#fff">
+          ☉
+        </text>
+      )
+
+      setMaldek('blue')
+      setMaldekCircle('white')
+      setUranus ('orange')
+      setUranusCircle('white')
+
+      setEdge(
+        <rect x="115" y="198" width="110" height="190" rx="50" style={{fill: isGrowing ? "rgb(0,0,0)" : 'red', strokeWidth:"3", stroke: "rgb(0,0,0)"}}>
+        </rect>
+        )
+    },
+    24: (isGrowing) => {
+      // setNeptuneUnit(
+      //   <text x="63" y="180" class="small" fill="#000">
+      //     ♄
+      //   </text>
+      // )
+
+      // setChironUnit(
+      //   <text x="163" y="153" class="small" fill="#fff">
+      //     {/* ☉ */}
+      //   </text>
+      // )
+
+      setJupiterUnit(
+        <text x="65" y="297" class="small" fill="#FFFFFF">
+          ♂
+        </text>
+      )
+
+      // setNeptuneUnit(
+      //   <text x="60" y="175" class="small" fill="#000000">
+      //     ♄
+      //   </text>
+      // )
+
+      setUranusCircle('white')
+      setUranus('orange')
+      setJupiter('black')
+      setJupiterCircle('white')
+
+      // setNeptune('lightgrey')
+      // setNeptuneCircle('white')
+
+      // setChiron('grey')
+      // setChironCircle('white')
+      
+      setEdge(
+        <rect x="240" y="-97" width="110" transform="rotate(65 0 0)" height="200" rx="50" style={{fill: isGrowing ? "rgb(0,0,0)" : 'red', strokeWidth:"3", stroke: "rgb(0,0,0)"}}>
+        </rect>
+        )
+    }, 
+    25: (isGrowing) => {
+
+      setNeptuneUnit(
+        <text x="60" y="175" class="small" fill="#000000">
+          ♄
+        </text>
+      )
+
+      setUranus('orange')
+      setUranusCircle('white')
+      setNeptune('grey')
+      setNeptuneCircle('white')
+
+      setEdge(
+        <rect x="-153" y="111" width="110" height="210" rx="50" transform="rotate(-55 0 0)" style={{fill: isGrowing ? "rgb(0,0,0)" : 'red', strokeWidth:"3", stroke: "rgb(0,0,0)"}}>
+        </rect>
+        )
+
+    }, 
+    26: (isGrowing) => {
+      setPlutoUnit(
+        <text x="263" y="180" class="small" fill="#ffffff">
+          ♅
+        </text>
+      )
+      
+      // setNeptuneUnit(
+      //   <text x="63" y="180" class="small" fill="#000">
+      //     ♄
+      //   </text>
+      // )
+
+      // setChironUnit(
+      //   <text x="163" y="153" class="small" fill="#fff">
+      //     {/* ☉ */}
+      //   </text>
+      // )
+
+      setJupiterUnit(
+        <text x="65" y="297" class="small" fill="#FFFFFF">
+          ♂
+        </text>
+      )
+
+      // setNeptuneUnit(
+      //   <text x="60" y="175" class="small" fill="#000000">
+      //     ♄
+      //   </text>
+      // )
+
+      setUranusCircle('white')
+      setUranus('orange')
+      setPluto('navy')
+      setPlutoCircle('white')
+
+      // setNeptune('lightgrey')
+      // setNeptuneCircle('white')
+
+      // setChiron('grey')
+      // setChironCircle('white')
+      
+      setEdge(
+        <rect x="240" y="-157" width="110" transform="rotate(53 0 0)" height="210" rx="50" style={{fill: isGrowing ? "rgb(0,0,0)" : 'red', strokeWidth:"3", stroke: "rgb(0,0,0)"}}>
+        </rect>
+        )
+    }, 
+    27: (isGrowing) => {
+
+      setSaturnUnit(
+        <text x="258" y="297" class="small" fill="#FFFFFF">
+          ♃
+        </text>
+      )
+
+      setUranus('orange')
+      setUranusCircle('white')
+      setSaturn('purple')
+      setSaturn('purple')
+
+      setEdge(
+        <rect x="-173" y="221" width="110" height="210" rx="50" transform="rotate(-60 0 0)" style={{fill: isGrowing ? "rgb(0,0,0)" : 'red', strokeWidth:"3", stroke: "rgb(0,0,0)"}}>
+        </rect>
+        )
+    }
   }
 
   function clear() {
@@ -965,233 +1144,254 @@ function App () {
   const COUNTER = 1000
   const interval = async () => {
     console.log(treeState)
-    NUM++
     // ran = 5
       clear()
       console.log('timer', counter)
-      // const res = await fetch(`${'http://216.128.185.237:4000'}/live`)
-      // const json = await res.json()
+      const res = await fetch(`${'http://216.128.185.237:4000'}/live`)
+      // const res = await fetch(`${'http://localhost:4000'}/live`)
+      const json = await res.json()
 
-      // const sortedObject = Object.fromEntries(
-      //   Object.entries(json.tvl)
-      //     .filter(([key, value]) => value !== 0) // Remove elements with a value of 0
-      //     .filter(([key, value]) => value > 0)
-      //     .sort((a, b) => b[1] - a[1]) // Sort in descending order of values
-      // );
+      const sortedObject = Object.fromEntries(
+        Object.entries(json.tvl)
+          .filter(([key, value]) => value !== 0) // Remove elements with a value of 0
+          .filter(([key, value]) => value > 0)
+          .sort((a, b) => b[1] - a[1]) // Sort in descending order of values
+      );
 
-      // console.log(sortedObject);
-      // const topKey = Object.keys(sortedObject)[0]
+      console.log(sortedObject);
+      const topKey = Object.keys(sortedObject)[0]
 
       // for testing
-      operator[(21).toString()](true)
+      // setInterval(() => {
+      //   NUM++
+      //   operator[(NUM).toString()](true)
+      // }, 3000)
       
-      // if(treeState == 'PRISM'){
-      //   if(topKey){
-      //     switch(topKey){
-      //       case 'str':
-      //         operator[(18).toString()](true)
-      //         break;
-      //       case 'agi':
-      //         operator[(9).toString()](true)
-      //         break;
-      //       case 'wis':
-      //         operator[(12).toString()](true)
-      //         break;
-      //       case 'hrt':
-      //         operator[(21).toString()](true)
-      //         break;
-      //       case 'int':
-      //         operator[(5).toString()](true)
-      //         break;
-      //     }
-      //   }else {
-      //     const sortedObject = Object.fromEntries(
-      //       Object.entries(json.tvl)
-      //         .filter(([key, value]) => value !== 0) // Remove elements with a value of 0
-      //         .sort((a, b) => a[1] - b[1]) // Sort in descending order of values
-      //     );
-      //     const topKey = Object.keys(sortedObject)[0]
-      //     console.log(topKey)
-      //     switch(topKey){
-      //       case 'str':
-      //         operator[(18).toString()](false)
-      //         break;
-      //       case 'agi':
-      //         operator[(9).toString()](false)
-      //         break;
-      //       case 'wis':
-      //         operator[(12).toString()](false)
-      //         break;
-      //       case 'hrt':
-      //         operator[(21).toString()](false)
-      //         break;
-      //       case 'int':
-      //         operator[(5).toString()](false)
-      //         break;
-      //     }
-      //   }
-      // } else if(treeState == 'DUAL') {
-      //   const maxCombination = findMaxTVLCombination(sortedObject);
-      //   if(maxCombination){
-      //     switch(maxCombination){
-      //       case 'agi_str':
-      //         operator[(13).toString()](true)
-      //         break;
-      //       case 'str_wis':
-      //         operator[(19).toString()](true)
-      //         break;
-      //       case 'hrt_str':
-      //         operator[(7).toString()](true)
-      //         break;
-      //       case 'int_str':
-      //         operator[(14).toString()](true)
-      //         break;
-      //       case 'agi_wis':
-      //         operator[(20).toString()](true)
-      //         break;
-      //       case 'agi_hrt':
-      //         operator[(17).toString()](true)
-      //         break;
-      //       case 'agi_int':
-      //         operator[(11).toString()](true)
-      //         break;
-      //       case 'hrt_wis':
-      //         operator[(6).toString()](true)
-      //         break;
-      //       case 'int_wis':
-      //         operator[(10).toString()](true)
-      //         break;
-      //       case 'hrt_int':
-      //         operator[(15).toString()](true)
-      //         break;
-      //     }
-      //   }else {
-      //     const sortedObject = Object.fromEntries(
-      //       Object.entries(json.tvl)
-      //         .filter(([key, value]) => value !== 0) // Remove elements with a value of 0
-      //         .sort((a, b) => a[1] - b[1]) // Sort in descending order of values
-      //     );
-      //     const topKey = Object.keys(sortedObject)[0]
-      //     const minCombination = findMaxTVLCombination(sortedObject);
-      //     switch(minCombination){
-      //       case 'agi_str':
-      //         operator[(13).toString()](false)
-      //         break;
-      //       case 'wis_str':
-      //         operator[(19).toString()](false)
-      //         break;
-      //       case 'hrt_str':
-      //         operator[(7).toString()](false)
-      //         break;
-      //       case 'int_str':
-      //         operator[(14).toString()](false)
-      //         break;
-      //       case 'agi_wis':
-      //         operator[(20).toString()](false)
-      //         break;
-      //       case 'agi_hrt':
-      //         operator[(17).toString()](false)
-      //         break;
-      //       case 'agi_int':
-      //         operator[(11).toString()](false)
-      //         break;
-      //       case 'hrt_wis':
-      //         operator[(6).toString()](false)
-      //         break;
-      //       case 'int_wis':
-      //         operator[(10).toString()](false)
-      //         break;
-      //       case 'hrt_int':
-      //         operator[(15).toString()](false)
-      //         break;
-      //     }
-      //   }
-      // } else {
-      //   const sortedObject = Object.fromEntries(
-      //     Object.entries(json.tvl_elements)
-      //       .filter(([key, value]) => value !== 0) // Remove elements with a value of 0
-      //       .filter(([key, value]) => value > 0)
-      //       .sort((a, b) => b[1] - a[1]) // Sort in descending order of values
-      //   );
+      if(treeState == 'PRISM'){
+        if(topKey){
+          switch(topKey){
+            case 'str':
+              operator[(18).toString()](true)
+              break;
+            case 'agi':
+              operator[(9).toString()](true)
+              break;
+            case 'wis':
+              operator[(12).toString()](true)
+              break;
+            case 'hrt':
+              operator[(21).toString()](true)
+              break;
+            case 'int':
+              operator[(5).toString()](true)
+              break;
+          }
+        }else {
+          const sortedObject = Object.fromEntries(
+            Object.entries(json.tvl)
+              .filter(([key, value]) => value !== 0) // Remove elements with a value of 0
+              .sort((a, b) => a[1] - b[1]) // Sort in descending order of values
+          );
+          const topKey = Object.keys(sortedObject)[0]
+          console.log(topKey)
+          switch(topKey){
+            case 'str':
+              operator[(18).toString()](false)
+              break;
+            case 'agi':
+              operator[(9).toString()](false)
+              break;
+            case 'wis':
+              operator[(12).toString()](false)
+              break;
+            case 'hrt':
+              operator[(21).toString()](false)
+              break;
+            case 'int':
+              operator[(5).toString()](false)
+              break;
+          }
+        }
+      } else if(treeState == 'DUAL') {
+        const maxCombination = findMaxTVLCombination(sortedObject);
+        if(maxCombination){
+          switch(maxCombination){
+            case 'agi_str':
+              operator[(13).toString()](true)
+              break;
+            case 'str_wis':
+              operator[(19).toString()](true)
+              break;
+            case 'hrt_str':
+              operator[(7).toString()](true)
+              break;
+            case 'int_str':
+              operator[(14).toString()](true)
+              break;
+            case 'agi_wis':
+              operator[(20).toString()](true)
+              break;
+            case 'agi_hrt':
+              operator[(17).toString()](true)
+              break;
+            case 'agi_int':
+              operator[(11).toString()](true)
+              break;
+            case 'hrt_wis':
+              operator[(6).toString()](true)
+              break;
+            case 'int_wis':
+              operator[(10).toString()](true)
+              break;
+            case 'hrt_int':
+              operator[(15).toString()](true)
+              break;
+          }
+        }else {
+          const sortedObject = Object.fromEntries(
+            Object.entries(json.tvl)
+              .filter(([key, value]) => value !== 0) // Remove elements with a value of 0
+              .sort((a, b) => a[1] - b[1]) // Sort in descending order of values
+          );
+          const topKey = Object.keys(sortedObject)[0]
+          const minCombination = findMaxTVLCombination(sortedObject);
+          switch(minCombination){
+            case 'agi_str':
+              operator[(13).toString()](false)
+              break;
+            case 'wis_str':
+              operator[(19).toString()](false)
+              break;
+            case 'hrt_str':
+              operator[(7).toString()](false)
+              break;
+            case 'int_str':
+              operator[(14).toString()](false)
+              break;
+            case 'agi_wis':
+              operator[(20).toString()](false)
+              break;
+            case 'agi_hrt':
+              operator[(17).toString()](false)
+              break;
+            case 'agi_int':
+              operator[(11).toString()](false)
+              break;
+            case 'hrt_wis':
+              operator[(6).toString()](false)
+              break;
+            case 'int_wis':
+              operator[(10).toString()](false)
+              break;
+            case 'hrt_int':
+              operator[(15).toString()](false)
+              break;
+          }
+        }
+      } else {
+        const sortedObject = Object.fromEntries(
+          Object.entries(json.tvl_elements)
+            .filter(([key, value]) => value !== 0) // Remove elements with a value of 0
+            .filter(([key, value]) => value > 0)
+            .sort((a, b) => b[1] - a[1]) // Sort in descending order of values
+        );
 
-      //   const topKey = Object.keys(sortedObject)[0]
-      //   console.log(topKey)
-      //   console.log(json.tvl_elements)
+        const topKey = Object.keys(sortedObject)[0]
+        console.log(topKey)
+        console.log(json.tvl_elements)
 
-      //   // if(topKey == 'fire') {
-      //   if(false) {
+        if(topKey == 'fire') {
+        // if(true) {
+          // call second api
+          const res = await fetch(`${'http://216.128.185.237.0:4000'}/day`)
+          // const res = await fetch(`${'http://0.0.0.0:4000'}/day`)
+          switch(res.fire_state){
+            case 0:
+              operator[(23).toString()](true)
+              break;
+            case 1:
+              operator[(24).toString()](true)
+              break;
+            case 2:
+              operator[(25).toString()](true)
+              break;
+            case 3:
+              operator[(22).toString()](true)
+              break;
+            case 4:
+              operator[(26).toString()](true)
+              break;
+            case 5:
+              operator[(27).toString()](true)
+              break;
+          }
+        } else {
+          if(topKey){
+            switch(topKey){
+              case 'air':
+                operator[(1).toString()](true)
+                break;
+              case 'dark':
+                operator[(16).toString()](true)
+                break;
+              case 'earth':
+                operator[(2).toString()](true)
+                break;
+              case 'fire':
+                operator[(1).toString()](true)
+                break;
+              case 'light':
+                operator[(4).toString()](true)
+                break;
+              case 'metal':
+                operator[(3).toString()](true)
+                break;
+              case 'mind':
+                operator[(8).toString()](true)
+                break;
+              case 'water':
+                operator[(0).toString()](true)
+                break;
+            }
+          } else {
 
-      //     // call second api
-      //     const res = await fetch(`${'http://0.0.0.0:4000'}/day`)
-      //     console.log(res)
-
-      //   } else {
-      //     if(topKey){
-      //       switch(topKey){
-      //         case 'air':
-      //           operator[(1).toString()](true)
-      //           break;
-      //         case 'dark':
-      //           operator[(16).toString()](true)
-      //           break;
-      //         case 'earth':
-      //           operator[(2).toString()](true)
-      //           break;
-      //         case 'fire':
-      //           operator[(1).toString()](true)
-      //           break;
-      //         case 'light':
-      //           operator[(4).toString()](true)
-      //           break;
-      //         case 'metal':
-      //           operator[(3).toString()](true)
-      //           break;
-      //         case 'mind':
-      //           operator[(8).toString()](true)
-      //           break;
-      //         case 'water':
-      //           operator[(0).toString()](true)
-      //           break;
-      //       }
-      //     } else {
-
-      //       const sortedObject = Object.fromEntries(
-      //         Object.entries(json.tvl_elements)
-      //           .filter(([key, value]) => value !== 0) // Remove elements with a value of 0
-      //           .sort((a, b) => a[1] - b[1]) // Sort in descending order of values
-      //       );
+            const sortedObject = Object.fromEntries(
+              Object.entries(json.tvl_elements)
+                .filter(([key, value]) => value !== 0) // Remove elements with a value of 0
+                .sort((a, b) => a[1] - b[1]) // Sort in descending order of values
+            );
   
-      //       const topKey = Object.keys(sortedObject)[0]
-      //       switch(topKey){
-      //         case 'air':
-      //           operator[(1).toString()](false)
-      //           break;
-      //         case 'dark':
-      //           operator[(16).toString()](false)
-      //           break;
-      //         case 'earth':
-      //           operator[(2).toString()](false)
-      //           break;
-      //         case 'fire':
-      //           operator[(1).toString()](false)
-      //           break;
-      //         case 'light':
-      //           operator[(4).toString()](false)
-      //           break;
-      //         case 'metal':
-      //           operator[(3).toString()](false)
-      //           break;
-      //         case 'mind':
-      //           operator[(8).toString()](false)
-      //           break;
-      //         case 'water':
-      //           operator[(0).toString()](false)
-      //           break;
-      //       }
-      //     }
+            const topKey = Object.keys(sortedObject)[0]
+            switch(topKey){
+              case 'air':
+                operator[(1).toString()](false)
+                break;
+              case 'dark':
+                operator[(16).toString()](false)
+                break;
+              case 'earth':
+                operator[(2).toString()](false)
+                break;
+              case 'fire':
+                operator[(1).toString()](false)
+                break;
+              case 'light':
+                operator[(4).toString()](false)
+                break;
+              case 'metal':
+                operator[(3).toString()](false)
+                break;
+              case 'mind':
+                operator[(8).toString()](false)
+                break;
+              case 'water':
+                operator[(0).toString()](false)
+                break;
+            }
+          }
 
-      //   }
-      // }
+        }
+      }
 
       function findMaxTVLCombination(tvlObject) {
         let maxCombination = "";
@@ -1230,14 +1430,14 @@ function App () {
           {edge}
 
           {/**/}
-          <circle cx="170" cy="50" r="40" stroke={nibiruCircle} strokeWidth="4" fill={nibiru} />
+          <circle cx="170" cy="45" r="40" stroke={nibiruCircle} strokeWidth="4" fill={nibiru} />
           
-          {/* <circle cx="170" cy="140" r="40" stroke={chironC  ircle} strokeWidth="4" fill={chiron} /> */}
+          <circle cx="170" cy="140" r="40" stroke={chironCircle} strokeWidth="4" fill={chiron} />
           
            <circle cx="70" cy="170" r="40" stroke={neptuneCircle} strokeWidth="4" fill={neptune} />
            <circle cx="270" cy="170" r="40" stroke={plutoCircle} strokeWidth="4" fill={pluto} />
            
-           {/* <circle cx="170" cy="240" r="40" stroke={uranusCircle} strokeWidth="4" fill={uranus} /> */}
+           <circle cx="170" cy="240" r="40" stroke={uranusCircle} strokeWidth="4" fill={uranus} />
            <circle cx="270" cy="290" r="40" stroke={saturnCircle} strokeWidth="4" fill={saturn} />
            
            <circle cx="70" cy="290" r="40" stroke={jupiterCircle} strokeWidth="4" fill={jupiter} />
@@ -1248,7 +1448,7 @@ function App () {
            
            
            <circle cx="170" cy="445" r="40" stroke={venusCircle} strokeWidth="4" fill={venus} />
-          <circle cx="170" cy="555" r="40" stroke={mercuryCircle} strokeWidth="4" fill={mercury} />
+          <circle cx="170" cy="540" r="40" stroke={mercuryCircle} strokeWidth="4" fill={mercury} />
 
           {/**/}
           {mercuryUnit}
